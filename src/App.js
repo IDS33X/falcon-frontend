@@ -1,12 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Container } from '@material-ui/core'
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import TestPage from './pages/TestPage/TestPage';
+// import AuthPage from './pages/common/AuthPage/AuthPage';
+import { ThemeProvider } from '@material-ui/core';
+import theme from './theme';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      
-    </div>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <Container maxWidth="lg">
+          <Switch>
+            <Route path="/" exact component={TestPage} />
+          </Switch>
+        </Container>
+      </ThemeProvider>
+
+    </BrowserRouter>
+
   );
-}
+};
 
 export default App;
