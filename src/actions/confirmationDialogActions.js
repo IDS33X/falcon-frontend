@@ -1,6 +1,4 @@
-export const OPEN_CONFIRMATION_DIALOG = 'OPEN_CONFIRMATION_DIALOG';
-export const CLOSE_CONFIRMATION_DIALOG = 'CLOSE_CONFIRMATION_DIALOG';
-
+import {OPEN_CONFIRMATION_DIALOG, CLOSE_CONFIRMATION_DIALOG} from '../constants/actionTypes' 
 export function openConfirmationDialog(payload) {
   return {
     type: OPEN_CONFIRMATION_DIALOG,

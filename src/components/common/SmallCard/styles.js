@@ -2,18 +2,18 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        maxWidth: 345,
+        maxWidth: 300,
 
     },
     media: {
         height: 140,
     },
-    title:{
+    title: {
         textAlign: 'center',
     },
     cardBottom: {
         backgroundColor: '#023E7D',
-        height: 20,
+        height: 40,
         justifyContent: 'flex-end',
     },
     bottomBtn: {

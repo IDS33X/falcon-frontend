@@ -4,13 +4,13 @@ import CircularButton from '../../components/common/CircularButton/CircularButto
 import AddButton from '../../components/common/AddButton/AddButton';
 import SmallCard from '../../components/common/SmallCard/SmallCard';
 import { useDispatch } from 'react-redux';
-import { openConfirmationDialog } from '../../constants/actionTypes/confirmationDialogActions';
-import { openSuccessDialog } from '../../constants/actionTypes/successDialogActions';
-import { openEditCardDialog } from '../../constants/actionTypes/editCardDialogActions';
+import { openConfirmationDialog } from '../../actions/confirmationDialogActions';
+import { openSuccessDialog } from '../../actions/successDialogActions';
+import { openEditCardDialog } from '../../actions/editCardDialogActions';
 
 import SearchBarComponent from '../../components/common/SearchBar/SearchBar';
 import TableChartIcon from '@material-ui/icons/TableChart';
-//import BackupTableIcon from '@material-ui/icons/BackupTable';
+import BackupTableIcon from '@material-ui/icons/BackupTable';
 import EditCardDialog from '../../components/common/EditCardDialog/EditCardDialog';
 
 const TestPage = () => {
@@ -36,7 +36,7 @@ const TestPage = () => {
     }
     const btnMatrizTrat = {
         title: "Matriz de tratamiento",
-        //Icon: BackupTableIcon,
+        Icon: BackupTableIcon,
         onClick: openSuccess
 
     }
@@ -44,8 +44,8 @@ const TestPage = () => {
 
     return (
         <>
-            {/*<SmallCard onEditClick={() => dispatch(openEditCardDialog())} title="Titulo" description={description}
-                bottomActions={[btnMatrizPrinc, btnMatrizTrat]}></SmallCard>*/}
+            <SmallCard onEditClick={() => dispatch(openEditCardDialog())} title="Titulo" description={description}
+                bottomActions={[btnMatrizPrinc, btnMatrizTrat]}></SmallCard>
 
             <AddButton></AddButton>
 
