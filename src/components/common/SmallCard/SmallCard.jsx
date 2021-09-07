@@ -8,9 +8,9 @@ import EditIcon from '@material-ui/icons/Edit';
 import Tooltip from '@material-ui/core/Tooltip';
 
 // This is a general component that will render the cards shown in different lists. 
-const SmallCard = ({ bottomActions, onEditClick, title, description, manager }) => {
+const SmallCard = ({ bottomActions, onEditClick, title, description }) => {
   const classes = useStyles();
-  
+
   return (
     <Card className={classes.root}>
 
@@ -21,7 +21,7 @@ const SmallCard = ({ bottomActions, onEditClick, title, description, manager }) 
           </IconButton>
         </Tooltip>
 
-        <Typography gutterBottom variant="h5" component="h2" className={classes.title}> 
+        <Typography gutterBottom variant="h5" component="h2" className={classes.title}>
           {title && title}
         </Typography>
         <Typography variant="body2" justify color="textSecondary" component="p">
