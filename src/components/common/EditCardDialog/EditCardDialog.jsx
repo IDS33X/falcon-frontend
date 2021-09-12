@@ -2,7 +2,7 @@ import DialogWrapper from "../Dialog/DialogWrapper";
 import useStyles from './styles';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from "react-redux"
-import { closeEditCardDialog } from '../../../constants/actionTypes/editCardDialogActions'
+import { closeEditCardDialog } from '../../../actions/editCardDialogActions'
 import { Form, Formik } from "formik";
 import InputFormik from "../FormikInput/InputFormik";
 import formValidationSchema from "../../../validations/cardFormValidations";
@@ -19,7 +19,7 @@ const EditCardDialog = ({ onYesAction, title, entity }) => {
         name: '',
         description: ''
     }
-    
+
     // This function will send the data to the API 
 
     function handleSubmit(values, setSubmitting) {

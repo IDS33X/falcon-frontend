@@ -1,5 +1,4 @@
-export const OPEN_EDIT_CARD_DIALOG = 'OPEN_EDIT_CARD_DIALOG';
-export const CLOSE_EDIT_CARD_DIALOG = 'CLOSE_EDIT_CARD_DIALOG';
+import {OPEN_EDIT_CARD_DIALOG, CLOSE_EDIT_CARD_DIALOG} from '../constants/actionTypes' 
 
 export function openEditCardDialog(payload) {
   return {

@@ -1,4 +1,4 @@
-import { OPEN_CONFIRMATION_DIALOG, CLOSE_CONFIRMATION_DIALOG } from '../constants/actionTypes/confirmationDialogActions';
+import { OPEN_CONFIRMATION_DIALOG, CLOSE_CONFIRMATION_DIALOG } from '../constants/actionTypes';
 
 const initialState = {
   showConfirmationDialog: false
