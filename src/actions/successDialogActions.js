@@ -1,5 +1,4 @@
-export const OPEN_SUCCESS_DIALOG = 'OPEN_SUCCESS_DIALOG';
-export const CLOSE_SUCCESS_DIALOG = 'CLOSE_SUCCESS_DIALOG';
+import {OPEN_SUCCESS_DIALOG, CLOSE_SUCCESS_DIALOG} from '../constants/actionTypes' 
 
 export function openSuccessDialog(payload) {
   return {
