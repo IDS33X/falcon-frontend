@@ -8,7 +8,13 @@ import App from './App';
 import {reducers} from './reducers';
 import './index.css';
 
-const store = createStore(reducers, compose(applyMiddleware(thunk)));
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+// ComposewithDevTools is an extension that allows devs to see the states in Redux store. 
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
+
+
+
 
 ReactDOM.render(
     <Provider store = {store}>

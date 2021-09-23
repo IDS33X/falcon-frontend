@@ -1,89 +1,92 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { GetUsers } from '../../actions/users'
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { GetUsers, AddUser, GetById, UpdateProfile } from '../../actions/users'
 import TableGrid from '../../components/common/TableGrid/TableGrid'
 import AddButton from '../../components/common/AddButton/AddButton';
-import { deleteButton, editButton } from '../../buttons/buttons'
+import { editButton } from '../../buttons/buttons';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Box from '@material-ui/core/Box';
+import SearchBar from '../../components/common/SearchBar/SearchBar';
+import UserForm from '../../components/Users/UserForm/UserForm';
+import { openUserFormDialog } from '../../actions/userFormDialog'
 
-const UsersPage = ({ userData, GetUsers, rows = [] }) => {
+const UsersPage = ({ match }) => {
+
+    const dispatch = useDispatch();
+    const departmentId = match ? match.params.departmentId : null;
+    let { users, loading, error, amountOfPages } = useSelector(state => state.users.users)
+    let user = useSelector(state => state.users.user)
 
     useEffect(() => {
-        GetUsers();
-    }, [])
 
-    // The data of the rows in the grid a 
-    if (userData.users.employees) {
-        rows = userData.users.employees.map((employee) => ({ id: employee.employeeId, name: employee.name, lastName: employee.lastName, role: employee.employeeRol.name, department: employee.departmentId }))
+        (async () => {
+            await dispatch(GetUsers({ departmentId: departmentId, page: 1, itemsPerPage: 100 })); // page and itemsPerPage will be obtained from grid component
+        })()
+    }, [departmentId, GetUsers]);
+
+
+    // Headers of the grid
+    const headers = [
+        { field: 'id', headerName: 'Id', flex: 0.5, hide: true },
+        { field: 'code', headerName: 'Codigo', flex: 2 },
+        { field: 'name', headerName: 'Nombre', flex: 2 },
+        { field: 'lastName', headerName: 'Apellido', flex: 2 },
+        { field: 'role', headerName: 'Rol', flex: 2 },
+
+    ]
+
+    // The data of the rows is mapped to an object that will be passed to the grid component
+    let rows;
+    if (users) {
+        rows = users.map((user) => ({ id: user.id, name: user.name, lastName: user.lastName, role: user.role.title, code: user.code }))
+    }
+    const onSearchClick = (e) => {
+        dispatch(GetUsers({ divisionId: departmentId, page: 1, itemsPerPage: 10 }));
     }
 
-    // If the data is stil being fetched the screen shows a loading message, otherwise the component is shown
+    // Gets user data when a registry is selected on grid component 
+    const onRowSelection = (id) => {
+        if (id) {
+            dispatch(GetById(id))
+        }
+    }
+    const onEditClick = () => {
 
-    // TODO: This need a decent loading screen 
-    return userData.loading ? (
-        <h2>Loading</h2>
-    ) : userData.error ? (
-        <h2>{userData.error}</h2>
+        dispatch(openUserFormDialog());
+    }
+
+
+    editButton.onClick = onEditClick;
+    const gridActions = [editButton]
+
+    return loading ? (
+        <Box textAlign='center'>
+            <CircularProgress />
+        </Box>
+    ) : error ? (
+        <h2>{error}</h2>
     ) : (
         <>
-            <AddButton title="usuario"></AddButton>
+            <SearchBar onSearchClick={onSearchClick} />
+            <Box textAlign='right' mr={10}>
+                <AddButton title="usuario" onClick={openUserFormDialog}></AddButton>
+            </Box>
             {
-                // The child component is rendered only when data is fetched from database, this is to avoid 'undefined rows' error.
-                userData.users.employees && (
-                    <TableGrid headers={headers} rows={rows} actions={gridActions} ></TableGrid>
+                // Renders grid component only when data is fetched from database, this is in order to avoid 'undefined rows' error.
+                users && (
+                    <TableGrid headers={headers} rows={rows} actions={gridActions}
+                        amountOfPages={amountOfPages}
+                        onPageChange={GetUsers({ departmentId: departmentId })}
+                        onRowSelection={onRowSelection} />
                 )
             }
+
+            <UserForm departmentId={departmentId} title={`${user ? "Editar" : "Crear"} usuario`} saveUser={user ? AddUser : UpdateProfile} />
+
 
         </>
 
     )
 }
 
-const headers = [
-    { field: 'id', headerName: 'Id', width: 140 },
-    {
-        field: 'name',
-        headerName: 'Nombre',
-        width: 200,
-
-    },
-    {
-        field: 'lastName',
-        headerName: 'Apellido',
-        width: 200,
-    },
-
-    {
-        field: 'role',
-        headerName: 'Rol',
-        width: 200,
-    },
-
-    {
-        field: 'department',
-        headerName: 'Departamento',
-        width: 200,
-
-    }
-]
-
-editButton.onClick = 'hi'; // TODO define action that will e dispatch 
-deleteButton.onClick = 'delete';
-
-const gridActions = [editButton, deleteButton]
-
-const mapStateToProps = state => {
-    return {
-        userData: state.users
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        GetUsers: () => dispatch(GetUsers({ departmentId: 1, page: 1, itemsPerPage: 2 }))
-    }
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(UsersPage)
+export default UsersPage;
