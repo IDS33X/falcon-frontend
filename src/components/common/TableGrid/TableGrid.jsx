@@ -87,8 +87,8 @@ const TableGrid = ({ headers, actions, data, amountOfRows, onPageChange, onRowSe
                 page={currentPage}
                 pageSize={pageSize}
                 pagination
-                components={{Toolbar: GridToolbar}}
-                paginationMode="server"                       
+                components={{ Toolbar: GridToolbar }}
+                paginationMode="server"
                 onPageChange={(newpage) => handleChangePage(newpage)}
                 loading={loading}
                 rowsPerPageOptions={[5, 10, 15]}

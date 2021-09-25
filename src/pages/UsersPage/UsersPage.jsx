@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { GetUsers, AddUser, GetById, UpdateProfile } from '../../actions/users'
+import { GetUsers, AddUser, GetById, UpdateProfile, SearchUsersByDepartment } from '../../actions/users'
 import TableGrid from '../../components/common/TableGrid/TableGrid'
 import AddButton from '../../components/common/AddButton/AddButton';
 import { editButton } from '../../buttons/buttons';
@@ -20,7 +20,7 @@ const UsersPage = ({ match }) => {
 
     useEffect(() => {
         (async () => {
-            await dispatch(GetUsers({ departmentId: departmentId, page: 1, itemsPerPage: 10 })); 
+            getAllUsers();
         })()
     }, [departmentId]);
 
@@ -34,7 +34,7 @@ const UsersPage = ({ match }) => {
 
     // Table headers
     const headers = [
-        { field: 'id', headerName: 'Id', flex: 0.5, hide: true }, 
+        { field: 'id', headerName: 'Id', flex: 0.5, hide: true },
         { field: 'code', headerName: 'Codigo', flex: 2 },
         { field: 'name', headerName: 'Nombre', flex: 2 },
         { field: 'lastName', headerName: 'Apellido', flex: 2 },
@@ -42,8 +42,17 @@ const UsersPage = ({ match }) => {
     ]
 
 
-    const onSearchClick = (e) => {
-        dispatch(GetUsers({ divisionId: departmentId, page: 1, itemsPerPage: 10 }));
+    const getAllUsers = () => {
+        dispatch(GetUsers({ departmentId: departmentId, page: 1, itemsPerPage: 10 }));
+    }
+
+    const onSearch = (filter) => {
+        if (filter) {
+            dispatch(SearchUsersByDepartment({ departmentId: departmentId, page: 1, itemsPerPage: 10, filter: filter }));
+        }
+        else {
+            getAllUsers();
+        }
     }
 
     // Gets user data when a registry is selected on grid component 
@@ -52,7 +61,7 @@ const UsersPage = ({ match }) => {
             dispatch(GetById(id))
         }
     }
-   
+
     const onGridPageChange = (page, itemsPerPage) => {
         dispatch(GetUsers({ departmentId: departmentId, page: page + 1, itemsPerPage: itemsPerPage }))
     }
@@ -72,7 +81,7 @@ const UsersPage = ({ match }) => {
         <h2>{error}</h2>
     ) : (
         <>
-            <SearchBar onSearchClick={onSearchClick} />
+            <SearchBar onSearch={onSearch} onCancel={getAllUsers} />
             <Box textAlign='right' mr={10}>
                 <AddButton title="usuario" onClick={openUserFormDialog}></AddButton>
             </Box>
@@ -80,7 +89,7 @@ const UsersPage = ({ match }) => {
                 // Renders grid component only when data is fetched from database, this is in order to avoid 'undefined rows' error.
                 users && (
                     <TableGrid headers={headers} actions={[editButton]}
-                        amountOfPages={amountOfPages} optionalParams={{ departmentId: departmentId }} onPageChange={onGridPageChange}
+                        amountOfPages={amountOfPages} onPageChange={onGridPageChange}
                         data={rowsDataGrid} amountOfRows={24}
                         onRowSelection={onRowSelection} />
                 )
