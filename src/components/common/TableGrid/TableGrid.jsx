@@ -1,21 +1,19 @@
 import useStyles from './styles';
-import { DataGrid } from '@material-ui/data-grid';
-import TableChartIcon from '@material-ui/icons/TableChart';
+import { DataGrid, GridToolbar } from '@material-ui/data-grid';
 import RowMenuCell from './RowMenuCell';
-import { useDispatch } from 'react-redux';
 import React, { useState } from 'react';
 
 
 // Generic componet that renders a grid with dynamic  headers and data
 
 
-const TableGrid = ({ headers, rows, actions, amountOfPages, onRowSelection }) => {
+const TableGrid = ({ headers, actions, data, amountOfRows, onPageChange, onRowSelection }) => {
 
     const classes = useStyles();
-    const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(0);
     const [loading, setLoading] = useState(false);
-    const [fetchedRows, setRows] = React.useState(rows);
+    const [rows, setRows] = React.useState([]);
+    const [pageSize, setPageSize] = React.useState(10);
 
 
     // Component used to pass all the parameters received from the parent to MenuCell component before using it with renderCell (it cannot be done directly)
@@ -25,6 +23,32 @@ const TableGrid = ({ headers, rows, actions, amountOfPages, onRowSelection }) =>
         )
     }
 
+    React.useEffect(() => {
+        // The data is fetched every time the current page changes
+        let active = true;
+
+        (async () => {
+            setLoading(true);
+
+            onPageChange(currentPage, pageSize);
+            if (!active) {
+                return;
+            }
+            setLoading(false);
+        })();
+
+        return () => {
+            active = false;
+
+        };
+
+    }, [currentPage, pageSize]);
+
+
+    React.useEffect(() => {
+        setRows(data);
+
+    }, [data]);
 
     const columns = [
         {
@@ -38,35 +62,38 @@ const TableGrid = ({ headers, rows, actions, amountOfPages, onRowSelection }) =>
             align: 'center',
             disableColumnMenu: true,
             disableReorder: true,
+
         },
         ...headers // Add all the other headers to the grid
     ];
 
-
-
     const handleChangePage = (page) => {
         setLoading(true);
         setCurrentPage(page);
+    };
 
-        //dispatch(onPageChange({ page: currentPage + 1, itemsPerPage: 10 }));
-        //setRows(newRows);
-        setLoading(false);
+    const handleChangePageSize = (pageSize) => {
+        setPageSize(pageSize);
+        setCurrentPage(0);
     };
 
 
     return (
         <div className={classes.tableGrid}>
             <DataGrid
-                page={currentPage}
-                rows={fetchedRows}
-                //rowCount={amountOfPages}
+                rows={rows}
+                rowCount={amountOfRows} // Total of registries in database
                 columns={columns}
-                pageSize={10}
+                page={currentPage}
+                pageSize={pageSize}
                 pagination
-                //paginationMode="server"
+                components={{Toolbar: GridToolbar}}
+                paginationMode="server"                       
                 onPageChange={(newpage) => handleChangePage(newpage)}
                 loading={loading}
-                onSelectionModelChange={(rowId) => onRowSelection(rowId[0])}
+                rowsPerPageOptions={[5, 10, 15]}
+                onPageSizeChange={(size) => handleChangePageSize(size)}
+                onSelectionModelChange={(rowId) => onRowSelection(rowId[0])} // When a row is selected the data of that registry will be updated in store
             />
         </div>
     );

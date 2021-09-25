@@ -16,30 +16,32 @@ const UsersPage = ({ match }) => {
     const departmentId = match ? match.params.departmentId : null;
     let { users, loading, error, amountOfPages } = useSelector(state => state.users.users)
     let user = useSelector(state => state.users.user)
+    const [rowsDataGrid, setRows] = React.useState([]);
 
     useEffect(() => {
-
         (async () => {
-            await dispatch(GetUsers({ departmentId: departmentId, page: 1, itemsPerPage: 100 })); // page and itemsPerPage will be obtained from grid component
+            await dispatch(GetUsers({ departmentId: departmentId, page: 1, itemsPerPage: 10 })); 
         })()
-    }, [departmentId, GetUsers]);
+    }, [departmentId]);
+
+    // The data of the rows is mapped to an object that will be passed to table component
+    useEffect(() => {
+        if (users) {
+            setRows(users.map((user) => ({ id: user.id, name: user.name, lastName: user.lastName, role: user.role.title, code: user.code })));
+        }
+    }, [users]);
 
 
-    // Headers of the grid
+    // Table headers
     const headers = [
-        { field: 'id', headerName: 'Id', flex: 0.5, hide: true },
+        { field: 'id', headerName: 'Id', flex: 0.5, hide: true }, 
         { field: 'code', headerName: 'Codigo', flex: 2 },
         { field: 'name', headerName: 'Nombre', flex: 2 },
         { field: 'lastName', headerName: 'Apellido', flex: 2 },
         { field: 'role', headerName: 'Rol', flex: 2 },
-
     ]
 
-    // The data of the rows is mapped to an object that will be passed to the grid component
-    let rows;
-    if (users) {
-        rows = users.map((user) => ({ id: user.id, name: user.name, lastName: user.lastName, role: user.role.title, code: user.code }))
-    }
+
     const onSearchClick = (e) => {
         dispatch(GetUsers({ divisionId: departmentId, page: 1, itemsPerPage: 10 }));
     }
@@ -50,14 +52,17 @@ const UsersPage = ({ match }) => {
             dispatch(GetById(id))
         }
     }
-    const onEditClick = () => {
-
-        dispatch(openUserFormDialog());
+   
+    const onGridPageChange = (page, itemsPerPage) => {
+        dispatch(GetUsers({ departmentId: departmentId, page: page + 1, itemsPerPage: itemsPerPage }))
     }
 
 
+    const onEditClick = () => {
+        dispatch(openUserFormDialog());
+    }
+
     editButton.onClick = onEditClick;
-    const gridActions = [editButton]
 
     return loading ? (
         <Box textAlign='center'>
@@ -74,16 +79,14 @@ const UsersPage = ({ match }) => {
             {
                 // Renders grid component only when data is fetched from database, this is in order to avoid 'undefined rows' error.
                 users && (
-                    <TableGrid headers={headers} rows={rows} actions={gridActions}
-                        amountOfPages={amountOfPages}
-                        onPageChange={GetUsers({ departmentId: departmentId })}
+                    <TableGrid headers={headers} actions={[editButton]}
+                        amountOfPages={amountOfPages} optionalParams={{ departmentId: departmentId }} onPageChange={onGridPageChange}
+                        data={rowsDataGrid} amountOfRows={24}
                         onRowSelection={onRowSelection} />
                 )
             }
 
-            <UserForm departmentId={departmentId} title={`${user ? "Editar" : "Crear"} usuario`} saveUser={user ? AddUser : UpdateProfile} />
-
-
+            <UserForm departmentId={departmentId} title={`${user ? "Editar" : "Crear"} usuario`} saveUser={user ? UpdateProfile : AddUser} />
         </>
 
     )

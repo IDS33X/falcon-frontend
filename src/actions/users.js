@@ -78,6 +78,21 @@ export const GetUsers = ({ departmentId, page, itemsPerPage }) => {
     }
 }
 
+export const SearchUsersByDepartment = ({ departmentId, page, filter, itemsPerPage }) => {
+    return async function (dispatch) {
+        dispatch(GetUsersRequest())
+        await axios
+            .get(`https://localhost:44382/api/User/SearchUsersByDepartment?DepartmentId=${departmentId}&Filter=${filter}&Page=${page}&ItemsPerPage=${itemsPerPage}`)
+            .then(response => {
+                const users = response.data
+                dispatch(GetUsersSuccess(users))
+            })
+            .catch(error => {
+                dispatch(GetUsersFailure(error.message))
+            })
+    }
+}
+
 
 export const GetById = (id) => {
     return async function (dispatch) {

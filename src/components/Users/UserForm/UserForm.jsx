@@ -15,7 +15,7 @@ const UserForm = ({ saveUser, title, departmentId }) => {
     const classes = useStyles();
 
     const dispatch = useDispatch();
-    const formRef = useRef(); // Allows to access the properties and methods of the form outside   
+    const formRef = useRef(); // Allows to access properties and methods of the formik form from outside   
     const { showUserFormDialog } = useSelector(state => state.userFormDialog);
     const user = useSelector(state => state.users.user);
 
@@ -51,11 +51,11 @@ const UserForm = ({ saveUser, title, departmentId }) => {
 
 
     // Saves the user data and fetch all the users 
-    function handleSubmit(values, setSubmitting) {
+    async function handleSubmit(values, setSubmitting) {
         setSubmitting(true);
         values.departmentId = departmentId;
         Object.assign(userForm.user, values);
-        dispatch(saveUser(JSON.stringify(userForm)));
+        await dispatch(saveUser(JSON.stringify(userForm)));
         dispatch(GetUsers({ departmentId: departmentId, page: 1, itemsPerPage: 15 }));
         closeForm(); // formik function that reset the state of the form (all the errors and data will be deleted)
 
@@ -85,7 +85,7 @@ const UserForm = ({ saveUser, title, departmentId }) => {
 
                         <InputFormik name="name" label="Nombre" id="name" />
                         <InputFormik name="lastName" label="Apellido" id="lastName" />
-                        <SelectFormik name="roleId" label="Rol" id="roleId" options={[{ id: 3, name: "Analista de riesgo" }]} />
+                        <SelectFormik name="roleId" label="Rol" id="roleId" options={[{ id: 2, name: "Administrador" }, { id: 3, name: "Analista de riesgo" }]} disabled />
 
                         <InputFormik name="username" label="Usuario" id="password" />
 
