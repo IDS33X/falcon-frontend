@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
     tableGrid: {
-        height: '400px',
+        height: '550px',
         width: '100%'
     }
 

@@ -35,7 +35,7 @@ const App = () => {
             */}
 
               <AuthRoute path="/" exact type={!user ? 'notLogged' : user.employee.rol} setUser={setUser} /> {/*Its here too because other components need it for redirect in case of a restricted route.*/}
-              <PrivateRoute path="/users" exact roleWithAccess='admin' component={UsersPage} />
+              <PrivateRoute path="/areas/:areaId/divisions/:departmentId/users" exact roleWithAccess='admin' component={UsersPage} />
               <PrivateRoute path="/areas" exact roleWithAccess='admin' component={AreasPage} />
               <PrivateRoute path="/riskcategories" exact roleWithAccess='analyst' component={RiskCategoriesPage} />
               <PrivateRoute path="/deviationmatrix" exact roleWithAccess='internalcontrol' component={DeviationMatrixPage} />

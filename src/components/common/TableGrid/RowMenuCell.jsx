@@ -5,6 +5,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 // Component that contains the buttons that will be shown in the actions section of a table
 const RowMenuCell = (props) => {
 
+
     const { api, id, actions } = props;
 
     return (
@@ -15,7 +16,7 @@ const RowMenuCell = (props) => {
                         color="inherit"
                         size="small"
                         aria-label={action.title}
-                        onClick={action.onClick}>
+                        onClick={() => action.onClick()}>
                         <action.icon fontSize="small" />
                     </IconButton>
 

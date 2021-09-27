@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import { openConfirmationDialog } from '../../actions/confirmationDialogActions';
 import { openSuccessDialog } from '../../actions/successDialogActions';
 import { openEditCardDialog } from '../../actions/editCardDialogActions';
-
 import SearchBarComponent from '../../components/common/SearchBar/SearchBar';
 import TableChartIcon from '@material-ui/icons/TableChart';
 //import BackupTableIcon from '@material-ui/icons/BackupTable';
@@ -105,17 +104,17 @@ const TestPage = () => {
             <SmallCard onEditClick={openEditCard} title="Titulo" description={description}
                 bottomActions={[btnMatrizPrinc]}></SmallCard>
 
-            <AddButton></AddButton>
+            <AddButton ></AddButton>
 
             <TableGrid rows={rows} actions={[deleteButton, editButton]} headers={headers}></TableGrid>
 
             <SearchBarComponent onSearchClick={() => dispatch(openConfirmationDialog())}></SearchBarComponent>
 
-            <CircularButton variant="contained" color="primary" onClick={() => dispatch(openConfirmationDialog())}>Open confirmation modal</CircularButton>
+            <CircularButton variant="contained" color="primary" onClick={openConfirmationDialog}>Open confirmation modal</CircularButton>
 
             <ConfirmationDialog></ConfirmationDialog>
 
-            <CircularButton variant="contained" color="primary" onClick={() => dispatch(openSuccessDialog())}>Open success modal</CircularButton>
+            <CircularButton variant="contained" color="primary" onClick={openSuccessDialog}>Open success modal</CircularButton>
 
             <SuccessDialog mensaje="Los datos fueron enviados"></SuccessDialog>
 
