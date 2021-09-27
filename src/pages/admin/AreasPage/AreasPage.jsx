@@ -1,46 +1,67 @@
-import React, { useState } from 'react';
-import { Typography, Card, CardContent, CardActions, Container, Grow, Grid, AppBar, TextField, Button, Paper } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { Grow, Grid, Paper } from '@material-ui/core';
 import Areas from '../../../components/Areas/Areas';
+import { useHistory, useLocation } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 
 import useStyles from './styles';
-import Layout from '../../../components/common/Layout/Layout';
+import Pagination from '../../../components/common/Pagination/Pagination';
+import { itemsPerPage } from '../../../components/common/Pagination/Pagination';
+import SearchBarComponent from '../../../components/common/SearchBar/SearchBar';
+import { getAreas, getAreasBySearch } from '../../../actions/areas';
 
+const useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+}
 
-const AreasPage = () => {
+const AreasPage = ({match}) => {
     const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
-    const search = 'hola';
+    const query = useQuery();
+    const page = query.get('page') || 1;
+    const searchQuery = query.get('searchQuery');
+    const mainRouteName = 'areas';
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const stateSource = useSelector((state) => state.areas);
+    const [search, setSearch] = useState('');
+    const [currentAreaId, setCurrentAreaId] = useState(1);
+
+    // const bull = <span className={classes.bullet}>•</span>;
+    // const search = 'hola';
+    //search.trim() false/true
+    const searchArea = () => {
+        if (search.trim()){
+            dispatch(getAreasBySearch({search, page, itemsPerPage}));
+            history.push(`/areas/search?searchQuery=${search || 'none'}`);
+        }else{
+            history.push('/');
+        }
+    }
+
+    const onDispatch = () => {
+        dispatch(getAreas(page, itemsPerPage));
+    }
 
     return (
-        <Grid className={classes.container} container alignItems="stretch" spacing={3}>
-            <Grid item xs={12} sm={12} md={6} lg={3}>
-                <AppBar className={classes.appBarSearch} position="static" color="inherit">
-                <TextField onKeyDown={() => {}} name="search" variant="outlined" label="Search Memories" fullWidth value={search} onChange={() => {}} />
-                <Button onClick={() => {}} className={classes.searchButton} variant="contained" color="primary">Search</Button>
-                </AppBar>
-                <Card className={classes.root}>
-                    <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        Word of the Day
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                        be{bull}nev{bull}o{bull}lent
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                        adjective
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                        well meaning and kindly.
-                        <br />
-                        {'"a benevolent smile"'}
-                    </Typography>
-                    </CardContent>
-                    <CardActions>
-                    <Button size="small">Learn More</Button>
-                    </CardActions>
-                </Card>
+      <Grow in>
+            <Grid container justify="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
+                <Grid item xs={12} sm={6} md={9}>
+                    <SearchBarComponent onSearchClick={searchArea} search={search} setSearch={setSearch} history={history}/>
+                </Grid>
+                <Grid>
+                    {!searchQuery && (
+                        <Paper className={classes.pagination} elevation={6}>
+                            <Pagination page={page} stateSource={stateSource} onDispatch={onDispatch} mainRouteName={mainRouteName} />
+                        </Paper>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={6} md={12}>
+                    <Areas currentAreaId={currentAreaId} setCurrentAreaId={setCurrentAreaId}/>
+                </Grid>
             </Grid>
-        </Grid>
+      </Grow>
     );
 };
 

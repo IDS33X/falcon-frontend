@@ -1,6 +1,8 @@
+// Auth 
 export const AUTH = 'AUTH';
 export const LOGOUT = 'LOGOUT';
 
+// Dialogs
 export const OPEN_CONFIRMATION_DIALOG = 'OPEN_CONFIRMATION_DIALOG';
 export const CLOSE_CONFIRMATION_DIALOG = 'CLOSE_CONFIRMATION_DIALOG';
 
@@ -10,6 +12,16 @@ export const CLOSE_EDIT_CARD_DIALOG = 'CLOSE_EDIT_CARD_DIALOG';
 export const OPEN_SUCCESS_DIALOG = 'OPEN_SUCCESS_DIALOG';
 export const CLOSE_SUCCESS_DIALOG = 'CLOSE_SUCCESS_DIALOG';
 
-export const GET_USERS_REQUEST = 'GET_USERS_REQUEST'
-export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS'
-export const GET_USERS_FAILURE = 'GET_USERS_FAILURE'
+// Users
+export const GET_USERS_REQUEST = 'GET_USERS_REQUEST';
+export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
+export const GET_USERS_FAILURE = 'GET_USERS_FAILURE';
+
+// Generic
+export const FETCH_ALL = 'FECTCH_ALL';
+export const FETCH_BY_SEARCH = 'FETCH_BY_SEARCH';
+export const FETCH_ONE = 'FETCH_ONE';
+export const CREATE = 'CREATE';
+export const UPDATE = 'UPDATE';
+export const START_LOADING = 'START_LOADING';
+export const END_LOADING = 'END_LOADING';
