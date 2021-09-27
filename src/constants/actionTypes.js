@@ -1,6 +1,8 @@
+// Auth 
 export const AUTH = 'AUTH';
 export const LOGOUT = 'LOGOUT';
 
+// Dialogs
 export const OPEN_CONFIRMATION_DIALOG = 'OPEN_CONFIRMATION_DIALOG';
 export const CLOSE_CONFIRMATION_DIALOG = 'CLOSE_CONFIRMATION_DIALOG';
 
@@ -10,6 +12,15 @@ export const CLOSE_EDIT_CARD_DIALOG = 'CLOSE_EDIT_CARD_DIALOG';
 export const OPEN_SUCCESS_DIALOG = 'OPEN_SUCCESS_DIALOG';
 export const CLOSE_SUCCESS_DIALOG = 'CLOSE_SUCCESS_DIALOG';
 
+// Generic
+export const FETCH_ALL = 'FECTCH_ALL';
+export const FETCH_BY_SEARCH = 'FETCH_BY_SEARCH';
+export const FETCH_ONE = 'FETCH_ONE';
+export const CREATE = 'CREATE';
+export const UPDATE = 'UPDATE';
+export const START_LOADING = 'START_LOADING';
+export const END_LOADING = 'END_LOADING';
+
 // Users page actions 
 export const GET_USERS_REQUEST = 'GET_USERS_REQUEST'
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS'
@@ -18,13 +29,11 @@ export const OPEN_USER_FORM_DIALOG = 'OPEN_USER_FORM_DIALOG';
 export const CLOSE_USER_FORM_DIALOG = 'CLOSE_USER_FORM_DIALOG';
 export const SET_NULL_USER = 'SET_NULL_USER';
 
-
-
 export const SEND_REQUEST = 'SEND_REQUEST'
 export const SUCCESSFUL_REQUEST = 'SUCCESSFUL_REQUEST'
 export const FAILED_REQUEST = 'FAILED_REQUEST'
 
-export const UPDATE = 'UPDATE'
+
 export const GET = 'GET'
 export const DELETE = 'DELETE'
 export const ADD = 'ADD'
