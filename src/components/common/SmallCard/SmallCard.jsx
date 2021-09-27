@@ -6,46 +6,74 @@ import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import Tooltip from '@material-ui/core/Tooltip';
+import { ButtonBase, CardActionArea, Button} from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom'
 
 // This is a general component that will render the cards shown in different lists. 
-const SmallCard = ({ bottomActions, onEditClick, title, description }) => {
+const SmallCard = ({ bottomActions, editButton, title, description, onClickCard }) => {
   const classes = useStyles();
 
+  /* <CardActionArea classsName = {classes.cardAction} component={RouterLink} to="/questions"> */
   return (
-    <Card className={classes.root}>
+    <ButtonBase
+        component="span"
+        name="test"
+        className={classes.cardAction}
+        onClick={onClickCard}
+      >
+      <Card className={classes.card} raised elevation = {6}>
+              <div>
+              <div className={classes.topActions}>
+                  <Tooltip title={editButton.title} placement="right-start">
+                      <IconButton
+                        onClick={(e) => {
+                        e.stopPropagation(); // This avoid to open the father component when clicking the button, this is how we say to the dom to stop the event propagation for calling parent events.
+                          editButton.onClick();
+                        }}
+                        style={{ color: editButton.color }}
+                        size="small"
+                      >
+                        <editButton.Icon className = {classes.editButton} fontSize="default" />
+                      </IconButton>
 
-      <CardContent>
-        <Tooltip title="Editar" placement="right-start">
-          <IconButton onClick={onEditClick} aria-label="editar" size="small" >
-            <EditIcon fontSize="small" />
-          </IconButton>
-        </Tooltip>
+                      {/* <IconButton className = {classes.overlay2} onClick={(e) => { 
+                        e.stopPropagation();
+                        onEditClick.onClick()}} aria-label={onEditClick.title} size="small" >
+                        <onEditClick.Icon fontSize="small" />
+                      </IconButton> */}
+                  </Tooltip>
+              </div>
+              <div className={classes.cardText}>
+                  <Tooltip title={title} placement="top-start">
+                    <Typography gutterBottom variant="h6" component="h2" noWrap className={classes.title}>
+                      {title && title}
+                    </Typography>
+                  </Tooltip>
+                  <Typography variant="subtitle1" justify noWrap color="textSecondary" component="p">
+                    {description && description}
+                  </Typography>
+              </div>
+              </div>
 
-        <Typography gutterBottom variant="h5" component="h2" className={classes.title}>
-          {title && title}
-        </Typography>
-        <Typography variant="body2" justify color="textSecondary" component="p">
-          {description && description}
-        </Typography>
-      </CardContent>
-
-      <CardActions className={classes.cardBottom}>
-        {
-          bottomActions &&
-          bottomActions.map((button) =>
-            <Tooltip title={button.title} placement="bottom">
-              <IconButton onClick={() => button.onClick()} aria-label={button.title} size="small" >
-                <button.Icon className={classes.bottomBtn} fontSize="small" />
-              </IconButton>
-            </Tooltip>
-
-          )
-        }
-
-      </CardActions>
-
-    </Card>
-
+            <CardActions className={classes.cardBottom}>
+              {
+                bottomActions &&
+                bottomActions.map((button) =>
+                <Tooltip title={button.title} placement="bottom">
+                    <IconButton onClick={(e) => { 
+                      e.stopPropagation();
+                      button.onClick()
+                    }} 
+                    aria-label={button.title}
+                    size="small">
+                      <button.Icon className={classes.bottomButtons} fontSize="small" />
+                    </IconButton>
+                </Tooltip>
+              )
+            }
+            </CardActions>
+      </Card>
+    </ButtonBase>
   );
 }
 
