@@ -1,13 +1,18 @@
 import {
   GET_USERS_REQUEST,
   GET_USERS_SUCCESS,
-  GET_USERS_FAILURE
+  GET_USERS_FAILURE,
+  SEND_REQUEST,
+  SUCCESSFUL_REQUEST,
+  FAILED_REQUEST,
+  SET_NULL_USER
 } from '../constants/actionTypes'
 
 const initialState = {
-  loading: false, 
+  loading: false,
   users: [],
-  error: ''
+  error: '',
+  user: null,
 };
 
 const Users = (state = initialState, action) => {
@@ -29,6 +34,34 @@ const Users = (state = initialState, action) => {
         users: [],
         error: action.payload
       }
+
+    case SEND_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+    case SUCCESSFUL_REQUEST:
+      return {
+        ...state,
+        loading: false,
+        user: action.payload,
+        error: ''
+
+      }
+    case FAILED_REQUEST:
+      return {
+        ...state,
+        loading: false,
+        user: null,
+        error: action.payload
+      }
+    case SET_NULL_USER:
+      return {
+        ...state,
+        user: null,
+      }
+
+
     default: return state
   }
 }

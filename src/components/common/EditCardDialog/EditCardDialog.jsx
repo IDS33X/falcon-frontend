@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from "react-redux"
 import { closeEditCardDialog } from '../../../actions/editCardDialogActions'
 import { Form, Formik } from "formik";
-import InputFormik from "../FormikInput/InputFormik";
+import InputFormik from "../Formik/InputFormik";
 import formValidationSchema from "../../../validations/cardFormValidations";
 import { useFormik } from 'formik';
 

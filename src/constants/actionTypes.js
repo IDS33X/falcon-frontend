@@ -12,11 +12,6 @@ export const CLOSE_EDIT_CARD_DIALOG = 'CLOSE_EDIT_CARD_DIALOG';
 export const OPEN_SUCCESS_DIALOG = 'OPEN_SUCCESS_DIALOG';
 export const CLOSE_SUCCESS_DIALOG = 'CLOSE_SUCCESS_DIALOG';
 
-// Users
-export const GET_USERS_REQUEST = 'GET_USERS_REQUEST';
-export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
-export const GET_USERS_FAILURE = 'GET_USERS_FAILURE';
-
 // Generic
 export const FETCH_ALL = 'FECTCH_ALL';
 export const FETCH_BY_SEARCH = 'FETCH_BY_SEARCH';
@@ -25,3 +20,20 @@ export const CREATE = 'CREATE';
 export const UPDATE = 'UPDATE';
 export const START_LOADING = 'START_LOADING';
 export const END_LOADING = 'END_LOADING';
+
+// Users page actions 
+export const GET_USERS_REQUEST = 'GET_USERS_REQUEST'
+export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS'
+export const GET_USERS_FAILURE = 'GET_USERS_FAILURE'
+export const OPEN_USER_FORM_DIALOG = 'OPEN_USER_FORM_DIALOG';
+export const CLOSE_USER_FORM_DIALOG = 'CLOSE_USER_FORM_DIALOG';
+export const SET_NULL_USER = 'SET_NULL_USER';
+
+export const SEND_REQUEST = 'SEND_REQUEST'
+export const SUCCESSFUL_REQUEST = 'SUCCESSFUL_REQUEST'
+export const FAILED_REQUEST = 'FAILED_REQUEST'
+
+
+export const GET = 'GET'
+export const DELETE = 'DELETE'
+export const ADD = 'ADD'

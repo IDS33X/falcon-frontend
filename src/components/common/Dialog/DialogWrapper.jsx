@@ -6,11 +6,12 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 
 // Base component for all the dialogs in the application (the title and the size of the dialog will be sent as parameters)
-export default function DialogWrapper({ children, fullWidth, title, open, close }) {
+export default function DialogWrapper({ children, fullWidth, title, open, close, ...props }) {
 
   return (
 
     <Dialog
+      {...props}
       open={open}
       fullWidth={fullWidth}
       maxWidth={fullWidth}
