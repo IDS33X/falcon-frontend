@@ -81,7 +81,7 @@ const UsersPage = ({ match }) => {
         <h2>{error}</h2>
     ) : (
         <>
-            <SearchBar onSearch={onSearch} onCancel={getAllUsers} />
+            {/* <SearchBar onSearch={onSearch} onCancel={getAllUsers} /> */}
             <Box textAlign='right' mr={10}>
                 <AddButton title="usuario" onClick={openUserFormDialog}></AddButton>
             </Box>
