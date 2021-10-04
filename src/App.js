@@ -10,7 +10,7 @@ import theme from './theme';
 import AuthPage from './pages/common/AuthPage/AuthPage';
 import AuthRoute from './pages/common/AuthPage/AuthRoute';
 import AreasPage from './pages/admin/AreasPage/AreasPage';
-import UsersPage from './pages/UsersPage/UsersPage';
+import UsersPage from './pages/admin/UsersPage/UsersPage';
 import RiskCategoriesPage from './pages/riskanalyst/RiskCategoriesPage/RiskCategoriesPage';
 import DeviationMatrixPage from './pages/internalcontrol/DeviationMatrixPage/DeviationMatrixPage';
 import MyControlsPage from './pages/employee/MyControlsPage/MyControlsPage';
@@ -35,7 +35,9 @@ const App = () => {
             */}
 
               <AuthRoute path="/" exact type={!user ? 'notLogged' : user.employee.rol} setUser={setUser} /> {/*Its here too because other components need it for redirect in case of a restricted route.*/}
-              <PrivateRoute path="/areas/:areaId/divisions/:departmentId/users" exact roleWithAccess='admin' component={UsersPage} />
+              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/users" exact roleWithAccess='admin' component={UsersPage} />
+              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/users/edit" exact roleWithAccess='admin' component={UsersPage} />
+
               <PrivateRoute path="/areas" exact roleWithAccess='admin' component={AreasPage} />
               <PrivateRoute path="/areas/search" exact roleWithAccess='admin' component={AreasPage} />
               <PrivateRoute path="/riskcategories" exact roleWithAccess='analyst' component={RiskCategoriesPage} />
