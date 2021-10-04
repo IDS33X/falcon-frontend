@@ -7,7 +7,7 @@ import {
     FAILED_REQUEST,
     FETCH_ALL,
     FETCH_ONE,
-    RESET_USER, CREATE, UPDATE
+    RESET_USER, CREATE
 } from '../constants/actionTypes'
 
 // Generic Action creators
@@ -41,11 +41,10 @@ export const GetUsers = (departmentId, page, itemsPerPage) => async (dispatch) =
 
 };
 
-export const SearchUsersByDepartment = ({ departmentId, page, filter, itemsPerPage }) => {
+export const SearchUsersByDepartment = ( departmentId, page, filter, itemsPerPage ) => {
     return async function (dispatch) {
-        //dispatch(GetUsersRequest())
-        await axios
-            .get(`https://localhost:44382/api/User/SearchUsersByDepartment?DepartmentId=${departmentId}&Filter=${filter}&Page=${page}&ItemsPerPage=${itemsPerPage}`)
+        dispatch({ type: START_LOADING })
+        await api.fetchUsersBySearch(departmentId, page, filter, itemsPerPage)
             .then(response => {
                 const users = response.data
                 dispatch({
@@ -107,7 +106,7 @@ export const UpdateProfile = (user) => {
                 const user = response.data
                 console.log('UPDATE USER SUCCESS  ', response.data);
                 dispatch({
-                    type: UPDATE,
+                    type: CREATE,
                     payload: user
                 })
             })

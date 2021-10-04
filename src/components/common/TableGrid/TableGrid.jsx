@@ -72,7 +72,6 @@ const TableGrid = ({ headers, actions, data, amountOfRows, onRowSelection, page,
                 loading={loading}
                 rowsPerPageOptions={[5, 10, 15]}
                 onPageSizeChange={(size) => handleChangePageSize(size)}
-                onSelectionModelChange={(rowId) => onRowSelection(rowId[0])} // When a row is selected the data of that registry will be updated in store
             />
         </div>
     );

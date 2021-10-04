@@ -6,17 +6,13 @@ const SearchBarComponent = ({ onSearchClick, search, setSearch, history }) => {
   //const [searchItem, setSearchItem] = useState("");
   const classes = useStyles();
 
-  function handle(e) {
-    onSearchClick();
-    console.log(e);
-  }
 
   return (
     <SearchBar
-      onRequestSearch={(e) => onSearchClick()}
+      onRequestSearch={(e) => onSearchClick(e)}
       value={search}
       onChange={value => { setSearch(value); }}
-      onCancelSearch={() => { setSearch(""); history.push('/'); }}
+      onCancelSearch={(e) => { setSearch(""); onSearchClick(e); }} //history.push('/');
       placeholder="Buscar..."
       className={classes.searchBar} />
   );

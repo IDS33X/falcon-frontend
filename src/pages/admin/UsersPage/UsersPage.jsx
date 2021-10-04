@@ -10,6 +10,8 @@ import SearchBarComponent from '../../../components/common/SearchBar/SearchBar';
 import UserForm from '../../../components/Users/UserForm/UserForm';
 import { openUserFormDialog } from '../../../actions/userFormDialog'
 import { useHistory, useLocation } from 'react-router';
+import { Grid, Paper } from '@material-ui/core';
+import useStyles from './styles';
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -20,10 +22,12 @@ const UsersPage = ({ match }) => {
     const departmentId = match ? match.params.departmentId : null;
     const selectedUser = useSelector(state => state.users.user);
     const { users, loading, error, amountOfPages } = useSelector(state => state.users);
+    const classes = useStyles();
     const dispatch = useDispatch();
     const query = useQuery();
     const history = useHistory();
     const userQuery = query.get('user');
+    const searchQuery = query.get('searchQuery');
 
     const [search, setSearch] = useState('');
     const [rowsDataGrid, setRows] = useState([]);
@@ -47,19 +51,25 @@ const UsersPage = ({ match }) => {
         if (userQuery) {
             dispatch(GetById(userQuery))
             dispatch(openUserFormDialog());
+            dispatch(GetUsers(departmentId, currentPage + 1, pageSize));
 
+        }
+        else if (searchQuery) {
+            setSearch(searchQuery);
+            searchUser(searchQuery);
         }
         else {
             history.push(`${mainRouteName}?page=${currentPage + 1}& rowsPerPage=${pageSize}`);
+            dispatch(GetUsers(departmentId, currentPage + 1, pageSize));
+
         }
-        dispatch(GetUsers(departmentId, currentPage + 1, pageSize));
 
     }, [currentPage, pageSize]);
 
     // The data of the rows is mapped to an object with the same fields of the headers
     useEffect(() => {
         if (users) {
-            setRows(users.map((user) => ({ id: user.id, name: user.name, lastName: user.lastName, role: user.role.title, code: user.code })));
+            setRows(users?.map((user) => ({ id: user.id, name: user.name, lastName: user.lastName, role: user.role.title, code: user.code })));
         }
     }, [users]);
 
@@ -72,14 +82,15 @@ const UsersPage = ({ match }) => {
     }
 
 
-    const searchUser = () => {
-        if (search.trim()) {
-            dispatch(SearchUsersByDepartment({ departmentId: departmentId, page: 1, itemsPerPage: 10, filter: search }));
+    const searchUser = (search) => {
+        if (search?.trim()) {
+            dispatch(SearchUsersByDepartment(departmentId, 1, search, pageSize));
 
-            history.push(`/users/search?searchQuery=${search || 'none'}`);
+            history.push(`${mainRouteName}/search?&searchQuery=${search || 'none'}`);
         }
         else {
-            history.push(`${mainRouteName}?page=${currentPage + 1}`);
+            dispatch(GetUsers(departmentId, currentPage + 1, pageSize));
+            resetRoute();
 
         }
     }
@@ -99,17 +110,28 @@ const UsersPage = ({ match }) => {
         <>
             {/* <SearchBar onSearch={onSearch} onCancel={getAllUsers} /> */}
 
-            <SearchBarComponent onSearchClick={searchUser} search={search} setSearch={setSearch} history={history} />
-            <Box textAlign='right' mr={5}>
-                <AddButton title="usuario" onClick={openUserFormDialog}></AddButton>
-            </Box>
+            <Grid container justify="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
+                {/* className={classes.gridContainer} */}
+                <Grid item xs={12} sm={6} md={9}>
+                    <SearchBarComponent onSearchClick={searchUser} search={search} setSearch={setSearch} history={history} />
+                </Grid>
+                <Grid>
+                    <AddButton title="usuario" onClick={openUserFormDialog}></AddButton>
+                </Grid>
+
+
+            </Grid>
+
+
+
+
             {
                 // Renders grid component only when data is fetched from database, this is in order to avoid 'undefined rows' error.
                 rowsDataGrid && (
                     <TableGrid headers={headers} actions={[editButton]}
                         amountOfPages={amountOfPages} editRoute={`${mainRouteName}/edit?user=`}
                         data={rowsDataGrid} amountOfRows={24} page={currentPage} setPage={setPage}
-                        pageSize={pageSize} setPageSize={setPageSize}/>
+                        pageSize={pageSize} setPageSize={setPageSize} />
 
                 )
             }

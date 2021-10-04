@@ -42,8 +42,10 @@ const Users = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        users: payload,
-        user: null,
+        error: '',
+        currentPage: payload.currentPage,
+        amountOfPages: payload.amountOfPages,
+        users: payload.users,
 
       }
 
