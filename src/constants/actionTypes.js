@@ -20,13 +20,17 @@ export const CREATE = 'CREATE';
 export const UPDATE = 'UPDATE';
 export const START_LOADING = 'START_LOADING';
 export const END_LOADING = 'END_LOADING';
+export const OPEN_FORM = 'OPEN_FORM';
+export const CLOSE_FORM = 'CLOSE_FORM';
 
 // Users page actions 
 
 export const GET_USERS_FAILURE = 'GET_USERS_FAILURE'
 export const OPEN_USER_FORM_DIALOG = 'OPEN_USER_FORM_DIALOG';
 export const CLOSE_USER_FORM_DIALOG = 'CLOSE_USER_FORM_DIALOG';
-export const RESET_USER = 'SET_NULL_USER';
+export const SET_OBJECT_NULL = 'SET_OBJECT_NULL';
+export const SET_ONE = 'SET_ONE';
+
 
 export const SEND_REQUEST = 'SEND_REQUEST'
 export const SUCCESSFUL_REQUEST = 'SUCCESSFUL_REQUEST'

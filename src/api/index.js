@@ -27,7 +27,7 @@ export const fetchArea = (id) => API.get(`/posts/${id}`);
 
 // Users
 
-export const fetchUsers = (departmentId, page, itemsPerPage) => API.get(`/User/GetUsersByDepartment?DepartmentId=${departmentId}&Page=${page}&ItemsPerPage=${itemsPerPage}`).then()
+export const fetchUsers = (departmentId, page, itemsPerPage) => API.get(`/User/GetUsersByDepartment?DepartmentId=${departmentId}&Page=${page}&ItemsPerPage=${itemsPerPage}`)
 
 export const fetchUsersBySearch = (departmentId, page, filter, itemsPerPage) => API.get(`User/SearchUsersByDepartment?DepartmentId=${departmentId}&Filter=${filter}&Page=${page}&ItemsPerPage=${itemsPerPage}`)
 
@@ -36,3 +36,21 @@ export const fetchUser = (id) => API.get(`/User/GetById?id=${id}`);
 export const addUser = (user) => API.post(`/User/Add`, user, { "headers": options.headers });
 
 export const updateUser = (user) => API.put(`/User/UpdateProfile`, user, { "headers": options.headers });
+
+
+
+// Risks Impacts
+
+export const fetchRiskImpacts = () => API.get(`/RiskImpact/GetAll`)
+
+// Risks
+
+export const fetchRiskByCategory = (riskCategoryId, page, itemsPerPage) => API.get(`/Risk/GetRiskByCategory?RiskCategoryId=${riskCategoryId}&Page=${page}&ItemsPerPage=${itemsPerPage}`)
+
+export const searchRiskByCode = (riskCategoryId, page, itemsPerPage, filter) => API.get(`/Risk/GetRiskByCategoryAndCode?RiskCategoryId=${riskCategoryId}&Filter=${filter}&Page=${page}&ItemsPerPage=${itemsPerPage}`)
+
+export const searchRiskByDescription = (riskCategoryId, page, filter, itemsPerPage) => API.get(`/Risk/GetRiskByCategoryAndDescription?RiskCategoryId=${riskCategoryId}&Filter=${filter}&Page=${page}&ItemsPerPage=${itemsPerPage}`)
+
+export const addRisk = (risk) => API.post(`/Risk/Add`, risk, { "headers": options.headers });
+
+export const updateRisk = (risk) => API.put(`/Risk/Update`, risk, { "headers": options.headers });

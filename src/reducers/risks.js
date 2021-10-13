@@ -7,20 +7,23 @@ import {
   FAILED_REQUEST,
   SET_OBJECT_NULL,
   UPDATE,
-  CREATE
+  CREATE,
+  SET_ONE,
+  CLOSE_FORM,
+  OPEN_FORM
 } from '../constants/actionTypes'
 
 const initialState = {
   loading: false,
-  users: [],
+  risks: [],
   error: '',
-  user: null,
+  risk: null,
   currentPage: 0,
-  amountOfPages: 0
-
+  amountOfPages: 0,
+  showRiskFormDialog: false,
 };
 
-const Users = (state = initialState, { type, payload }) => {
+const risks = (state = initialState, { type, payload }) => {
   switch (type) {
 
     case FETCH_ALL:
@@ -30,7 +33,7 @@ const Users = (state = initialState, { type, payload }) => {
         error: '',
         currentPage: payload.currentPage,
         amountOfPages: payload.amountOfPages,
-        users: payload.users,
+        risks: payload.risks,
       }
     case START_LOADING:
       return {
@@ -45,7 +48,7 @@ const Users = (state = initialState, { type, payload }) => {
         error: '',
         currentPage: payload.currentPage,
         amountOfPages: payload.amountOfPages,
-        users: payload.users,
+        risks: payload.risks,
 
       }
 
@@ -54,19 +57,23 @@ const Users = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        user: payload,
         error: '',
-        users: [...state.users, payload]
-
+        risks: [...state.risks, payload]
       }
 
     case FETCH_ONE:
-      return { ...state, loading: false, user: payload };
+      return { ...state, loading: false, risk: payload };
+
+    case SET_ONE:
+      return {
+        ...state,
+        risk: payload
+      };
 
     case UPDATE:
       return {
         ...state,
-        users: [...state.users.filter(user => user.id !== payload.id), payload]
+        risks: [...state.riks.filter(risk => risk.id !== payload.id), payload]
 
       };
     //state.users.map((user) => (user._id === action.payload.id ? action.payload : user))
@@ -80,14 +87,27 @@ const Users = (state = initialState, { type, payload }) => {
     case SET_OBJECT_NULL:
       return {
         ...state,
-        user: null,
+        risk: null,
       }
+
+    case OPEN_FORM:
+      return {
+        ...state,
+        showRiskFormDialog: true
+      }
+
+    case CLOSE_FORM:
+      return {
+        ...state,
+        showRiskFormDialog: false
+      }
+
 
 
     default: return state
   }
 }
 
-export default Users
+export default risks
 
 

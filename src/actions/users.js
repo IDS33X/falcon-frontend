@@ -7,7 +7,7 @@ import {
     FAILED_REQUEST,
     FETCH_ALL,
     FETCH_ONE,
-    RESET_USER, CREATE
+    SET_OBJECT_NULL, CREATE
 } from '../constants/actionTypes'
 
 // Generic Action creators
@@ -21,7 +21,7 @@ export const FailedRequest = error => {
 
 
 // Set user to null 
-export const ResetUser = () => ({ type: RESET_USER });
+export const ResetUser = () => ({ type: SET_OBJECT_NULL });
 
 export const GetUsers = (departmentId, page, itemsPerPage) => async (dispatch) => {
 
@@ -41,7 +41,7 @@ export const GetUsers = (departmentId, page, itemsPerPage) => async (dispatch) =
 
 };
 
-export const SearchUsersByDepartment = ( departmentId, page, filter, itemsPerPage ) => {
+export const SearchUsersByDepartment = (departmentId, page, filter, itemsPerPage) => {
     return async function (dispatch) {
         dispatch({ type: START_LOADING })
         await api.fetchUsersBySearch(departmentId, page, filter, itemsPerPage)
