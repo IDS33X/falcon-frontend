@@ -21,7 +21,7 @@ const UsersPage = ({ match }) => {
 
     const departmentId = match ? match.params.departmentId : null;
     const selectedUser = useSelector(state => state.users.user);
-    const { users, loading, error, amountOfPages } = useSelector(state => state.users);
+    const { users, loading, error, amountOfPages, totalOfItems } = useSelector(state => state.users);
     const classes = useStyles();
     const dispatch = useDispatch();
     const query = useQuery();
@@ -69,7 +69,7 @@ const UsersPage = ({ match }) => {
     // The data of the rows is mapped to an object with the same fields of the headers
     useEffect(() => {
         if (users) {
-            setRows(users?.map((user) => ({ id: user.id, name: user.name, lastName: user.lastName, role: user.role.title, code: user.code })));
+            setRows(users?.map((user) => ({ id: user?.id, name: user?.name, lastName: user?.lastName, role: user.role?.title, code: user?.code })));
         }
     }, [users]);
 
@@ -130,7 +130,7 @@ const UsersPage = ({ match }) => {
                 rowsDataGrid && (
                     <TableGrid headers={headers} actions={[editButton]}
                         amountOfPages={amountOfPages} editRoute={`${mainRouteName}/edit?user=`}
-                        data={rowsDataGrid} amountOfRows={24} page={currentPage} setPage={setPage}
+                                data={rowsDataGrid} amountOfRows={totalOfItems} page={currentPage} setPage={setPage}
                         pageSize={pageSize} setPageSize={setPageSize} />
 
                 )

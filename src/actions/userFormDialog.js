@@ -1,4 +1,6 @@
-import { OPEN_USER_FORM_DIALOG, CLOSE_USER_FORM_DIALOG } from '../constants/actionTypes'
+import {
+  OPEN_USER_FORM_DIALOG,
+  CLOSE_USER_FORM_DIALOG } from '../constants/actionTypes'
 
 export function openUserFormDialog(payload) {
   return {
