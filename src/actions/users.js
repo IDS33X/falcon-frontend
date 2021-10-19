@@ -2,14 +2,7 @@
 import * as api from '../api/index.js';
 
 import {
-<<<<<<< Updated upstream
-    FETCH_BY_SEARCH,
-    START_LOADING,
-    FAILED_REQUEST,
-    FETCH_ALL,
-    FETCH_ONE,
-    RESET_USER, CREATE
-=======
+
     FAILED_USER_REQUEST,
 
     SET_USER,
@@ -19,8 +12,6 @@ import {
     CREATE_USER,
     UPDATE_USER,
     START_LOADING_USER
-
->>>>>>> Stashed changes
 } from '../constants/actionTypes'
 
 // Generic Action creators
@@ -34,11 +25,8 @@ export const FailedRequest = error => {
 
 
 // Set user to null 
-<<<<<<< Updated upstream
-export const ResetUser = () => ({ type: RESET_USER });
-=======
+
 export const ResetUser = () => ({ type: SET_USER, payload: null });
->>>>>>> Stashed changes
 
 export const GetUsers = (departmentId, page, itemsPerPage) => async (dispatch) => {
 
@@ -58,7 +46,7 @@ export const GetUsers = (departmentId, page, itemsPerPage) => async (dispatch) =
 
 };
 
-export const SearchUsersByDepartment = ( departmentId, page, filter, itemsPerPage ) => {
+export const SearchUsersByDepartment = (departmentId, page, filter, itemsPerPage) => {
     return async function (dispatch) {
         dispatch({ type: START_LOADING_USER })
         await api.fetchUsersBySearch(departmentId, page, filter, itemsPerPage)
@@ -118,10 +106,9 @@ export const AddUser = (user) => {
 export const UpdateProfile = (user) => {
     return async function (dispatch) {
         dispatch({ type: START_LOADING_USER })
-        api.updateUser(user)
+        api.updateProfile(user)
             .then(response => {
                 const user = response.data
-                console.log('UPDATE USER SUCCESS  ', response.data);
                 dispatch({
                     type: UPDATE_USER,
                     payload: user
@@ -130,6 +117,18 @@ export const UpdateProfile = (user) => {
             .catch(error => {
                 dispatch(FailedRequest(error.message))
             })
+
+        // api.updateLogin(user)
+        //     .then(response => {
+        //         const user = response.data
+        //         dispatch({
+        //             type: UPDATE_USER,
+        //             payload: user
+        //         })
+        //     })
+        //     .catch(error => {
+        //         dispatch(FailedRequest(error.message))
+        //     })
     }
 }
 

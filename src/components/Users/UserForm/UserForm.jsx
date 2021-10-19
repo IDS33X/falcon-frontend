@@ -55,6 +55,9 @@ const UserForm = ({ saveUser, resetRoute, title, user, departmentId }) => {
         setSubmitting(true);
         values.departmentId = departmentId;
         Object.assign(userForm.user, values);
+        if(user){
+            userForm.user.id = user.id;
+        }
         await dispatch(saveUser(JSON.stringify(userForm)));
         closeForm();
     }

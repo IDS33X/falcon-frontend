@@ -10,7 +10,7 @@ import SearchBarComponent from '../../../components/common/SearchBar/SearchBar';
 import UserForm from '../../../components/Users/UserForm/UserForm';
 import { openUserFormDialog } from '../../../actions/userFormDialog'
 import { useHistory, useLocation } from 'react-router';
-import { Grid, Paper } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import useStyles from './styles';
 
 const useQuery = () => {
@@ -110,6 +110,17 @@ const UsersPage = ({ match }) => {
         <>
             {/* <SearchBar onSearch={onSearch} onCancel={getAllUsers} /> */}
 
+            <Grid container alignItems="stretch" className={classes.gridContainer}>
+                {/* className={classes.gridContainer} */}
+                <Grid item xs={12} sm={6} md={9}>
+                    <h1>
+                        Gestionar usuarios
+                    </h1>
+                </Grid>
+
+
+
+            </Grid>
             <Grid container justify="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
                 {/* className={classes.gridContainer} */}
                 <Grid item xs={12} sm={6} md={9}>
@@ -130,7 +141,7 @@ const UsersPage = ({ match }) => {
                 rowsDataGrid && (
                     <TableGrid headers={headers} actions={[editButton]}
                         amountOfPages={amountOfPages} editRoute={`${mainRouteName}/edit?user=`}
-                                data={rowsDataGrid} amountOfRows={totalOfItems} page={currentPage} setPage={setPage}
+                        data={rowsDataGrid} amountOfRows={totalOfItems} page={currentPage} setPage={setPage}
                         pageSize={pageSize} setPageSize={setPageSize} />
 
                 )

@@ -60,6 +60,7 @@ const TableGrid = ({ headers, actions, data, amountOfRows, onRowSelection, page,
     return (
         <div className={classes.tableGrid}>
             <DataGrid
+                className={classes.tableGrid}
                 rows={rows}
                 rowCount={amountOfRows} // Total of registries in database
                 columns={columns}

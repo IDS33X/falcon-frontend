@@ -1,15 +1,5 @@
 import {
 
-<<<<<<< Updated upstream
-  FETCH_BY_SEARCH,
-  START_LOADING,
-  FETCH_ONE,
-  FETCH_ALL,
-  FAILED_REQUEST,
-  RESET_USER,
-  UPDATE,
-  CREATE
-=======
   FAILED_USER_REQUEST,
   FETCH_USERS,
   SEARCH_USERS,
@@ -18,7 +8,6 @@ import {
   UPDATE_USER,
   START_LOADING_USER,
   SET_USER
->>>>>>> Stashed changes
 } from '../constants/actionTypes'
 
 const initialState = {
@@ -72,7 +61,7 @@ const Users = (state = initialState, { type, payload }) => {
         user: payload,
         error: '',
         users: [...state.users, payload.user],
-        totalOfItems: state.totalOfItems+1,
+        totalOfItems: state.totalOfItems + 1,
 
 
       }
@@ -80,10 +69,22 @@ const Users = (state = initialState, { type, payload }) => {
     case FETCH_USER:
       return { ...state, loading: false, user: payload };
 
+    // case UPDATE_USER:
+    //   return {
+    //     ...state,
+    //     users: [state.users?.filter(user => user.id !== payload.id), payload]
+
+    //   };
+
     case UPDATE_USER:
+      let index = state.users.findIndex(user => user.id === payload.user.id);
+      const newArray = [...state.users]; //making a new array
+      newArray[index] = { ...payload.user }//changing value in the new array
+
       return {
         ...state,
-        users: [state.users?.filter(user => user.id !== payload.id), payload]
+        users: newArray,
+        loading: false,
 
       };
 
@@ -93,11 +94,8 @@ const Users = (state = initialState, { type, payload }) => {
         loading: false,
         error: payload
       }
-<<<<<<< Updated upstream
-    case RESET_USER:
-=======
+
     case SET_USER:
->>>>>>> Stashed changes
       return {
         ...state,
         user: null,
