@@ -1,7 +1,7 @@
 // Maps the fetched risks to a format that can be read by the grid 
 export const getGridRows = (risks) => {
 
-    return risks?.map((risk) => {
+    return risks.map((risk) => {
 
         if (risk) risk.creationDate = formatDate(risk.creationDate);
         return {
@@ -38,7 +38,6 @@ export const headers = [
 
 // Maps the fetched risks to a format that can be read by the grid 
 export const getFormState = (risk, categoryId, userId) => {
-    if (risk) risk.creationDate = formatDate(risk.creationDate);
     let objectToReturn = {
         risk: {
             userId: risk?.user.id ?? 5,
@@ -48,27 +47,33 @@ export const getFormState = (risk, categoryId, userId) => {
             inherentRiskId: risk?.inherentRisk.id ?? 0,
             controlledRiskId: risk?.controlledRisk.id ?? 0,
             rootCause: risk?.rootCause ?? '',
-            creationDate: risk?.creationDate ?? '',
 
         }
     }
     if (risk) {
-        objectToReturn = {
-            ...objectToReturn,
+        objectToReturn.risk = {
+            ...objectToReturn.risk,
             id: risk?.id ?? 0,
             creator: `${risk?.user.name} ${risk?.user.lastName}` ?? '',
-        
+            creationDate: risk?.creationDate ?? '',
+
+
         }
 
     }
     return objectToReturn;
-        
+
 }
 
+// Transforms date object to a readable format
 const formatDate = (date) => {
-    date = new Date(date);
-    const formattedDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+    let formattedDate = new Date(date);
 
-    return formattedDate;
+    if (!isNaN(formattedDate)) {
+        formattedDate = formattedDate.getDate() + "/" + (formattedDate.getMonth() + 1) + "/" + formattedDate.getFullYear();
+        return formattedDate;
+
+    }
+    return date;
 
 }

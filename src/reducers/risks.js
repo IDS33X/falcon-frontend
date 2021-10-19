@@ -1,16 +1,14 @@
 import {
 
-  FETCH_BY_SEARCH,
-  START_LOADING,
-  FETCH_ONE,
-  FETCH_ALL,
-  FAILED_REQUEST,
-  SET_OBJECT_NULL,
-  UPDATE,
-  CREATE,
-  SET_ONE,
-  CLOSE_FORM,
-  OPEN_FORM
+  FETCH_RISKS,
+  SEARCH_RISKS,
+  CREATE_RISK,
+  UPDATE_RISK,
+  START_LOADING_RISK,
+  FAILED_RISK_REQUEST,
+  SET_RISK,
+  CLOSE_RISK_FORM_DIALOG,
+  OPEN_RISK_FORM_DIALOG
 } from '../constants/actionTypes'
 
 const initialState = {
@@ -26,7 +24,7 @@ const initialState = {
 const risks = (state = initialState, { type, payload }) => {
   switch (type) {
 
-    case FETCH_ALL:
+    case FETCH_RISKS:
       return {
         ...state,
         loading: false,
@@ -35,13 +33,13 @@ const risks = (state = initialState, { type, payload }) => {
         amountOfPages: payload.amountOfPages,
         risks: payload.risks,
       }
-    case START_LOADING:
+    case START_LOADING_RISK:
       return {
         ...state,
         loading: true
       }
 
-    case FETCH_BY_SEARCH:
+    case SEARCH_RISKS:
       return {
         ...state,
         loading: false,
@@ -53,50 +51,50 @@ const risks = (state = initialState, { type, payload }) => {
       }
 
 
-    case CREATE:
+    case CREATE_RISK:
       return {
         ...state,
         loading: false,
         error: '',
-        risks: [...state.risks, payload]
+        risks: [...state.risks, payload.risk]
       }
 
-    case FETCH_ONE:
-      return { ...state, loading: false, risk: payload };
 
-    case SET_ONE:
+
+    case SET_RISK:
       return {
         ...state,
         risk: payload
       };
 
-    case UPDATE:
+    case UPDATE_RISK:
+      let index = state.risks.findIndex(risk => risk.id === payload.risk.id);
+      const newArray = [...state.risks]; //making a new array
+      newArray[index] = {...payload.risk}//changing value in the new array
+      
       return {
         ...state,
-        risks: [...state.riks.filter(risk => risk.id !== payload.id), payload]
+        risks: newArray,
+        loading: false,
 
       };
-    //state.users.map((user) => (user._id === action.payload.id ? action.payload : user))
+      
 
-    case FAILED_REQUEST:
+    case FAILED_RISK_REQUEST:
       return {
         ...state,
         loading: false,
         error: payload
       }
-    case SET_OBJECT_NULL:
-      return {
-        ...state,
-        risk: null,
-      }
 
-    case OPEN_FORM:
+
+    case OPEN_RISK_FORM_DIALOG:
       return {
         ...state,
         showRiskFormDialog: true
       }
 
-    case CLOSE_FORM:
+    case CLOSE_RISK_FORM_DIALOG:
       return {
         ...state,
         showRiskFormDialog: false

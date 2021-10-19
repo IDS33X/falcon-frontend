@@ -10,7 +10,7 @@ import RiskForm from '../../../components/Risks/RiskForm/RiskForm';
 import { useHistory, useLocation } from 'react-router';
 import { Grid } from '@material-ui/core';
 import useStyles from './styles';
-import { ResetRisk, SetRisk, GetRisksByCategory, SearchRiskByCode, AddRisk, UpdateRisk } from '../../../actions/risks'
+import { SetRisk, GetRisksByCategory, SearchRiskByCode, AddRisk, UpdateRisk } from '../../../actions/risks'
 import { headers, getGridRows } from '../../../helpers/risksHelper'
 import { openFormDialog } from '../../../actions/risks'
 
@@ -37,15 +37,14 @@ const RisksPage = ({ match }) => {
     const mainRouteName = `/areas/${match.params.areaId}/divisions/${match.params.divisionId}/departments/${match.params.departmentId}/categories/${match.params.categoryId}/risks`;
 
 
-
-
     useEffect(() => {
 
         // If there's a risks param in the url, data of said risk will be dispatched to the store.
         if (riskQuery) {
-            dispatch(SetRisk(risks.find(risk => risk.id == riskQuery)))
-            dispatch(openFormDialog());
+
             dispatch(GetRisksByCategory(categoryId, currentPage + 1, pageSize));
+            const riskk = risks.find(risk => risk.id === riskQuery);
+            dispatch(SetRisk(riskk))
 
         }
         else if (searchQuery) {
@@ -65,23 +64,28 @@ const RisksPage = ({ match }) => {
         if (risks) {
             setRows(getGridRows(risks));
         }
-
-
     }, [risks]);
 
+    useEffect(() => {
+        if (riskQuery && selectedRisk) {
+            dispatch(openFormDialog());
+        }
+
+    }, [rowsDataGrid, selectedRisk, dispatch]);
 
 
+    // When edit button is clicked this actions are fired
     editButton.onClick = async (rowId) => {
         history.push(`${mainRouteName}/edit?risk=${rowId}`);
-        await dispatch(SetRisk(risks.find(risk => risk.id === riskQuery)))
-        //dispatch(openFormDialog());
+        await dispatch(SetRisk(risks.find(risk => risk.id === rowId)))
+        dispatch(openFormDialog());
     }
 
 
     const searchRisk = (search) => {
+        // Filter users by search only if there's something written on search bar
         if (search?.trim()) {
             dispatch(SearchRiskByCode(categoryId, 1, pageSize, search));
-
             history.push(`${mainRouteName}/search?&searchQuery=${search || 'none'}`);
         }
         else {
@@ -104,7 +108,6 @@ const RisksPage = ({ match }) => {
         <h2>{error}</h2>
     ) : (
         <>
-
 
             <Grid container justify="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
                 {/* className={classes.gridContainer} */}

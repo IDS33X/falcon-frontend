@@ -14,7 +14,6 @@ import { closeFormDialog } from '../../../actions/risks'
 const RiskForm = ({ saveRisk, resetRoute, title, risk, categoryId }) => {
 
     const classes = useStyles();
-
     const dispatch = useDispatch();
     const formRef = useRef(); // Allows to access properties and methods of the formik form from outside   
     const { showRiskFormDialog } = useSelector(state => state.risks);
@@ -26,7 +25,7 @@ const RiskForm = ({ saveRisk, resetRoute, title, risk, categoryId }) => {
     useEffect(() => {
         setRiskForm(getFormState(risk, categoryId))
 
-    }, [risk]);
+    }, [risk, categoryId]);
 
     // Form validations are executed when the values change (this way the save button is disabled or not) 
     useEffect(() => {

@@ -1,41 +1,42 @@
 import * as api from '../api/index.js';
 
 import {
-    FETCH_BY_SEARCH,
-    START_LOADING,
-    FAILED_REQUEST,
-    FETCH_ALL,
-    SET_ONE,
-    SET_OBJECT_NULL,
-    CREATE,
-    OPEN_FORM,
-    CLOSE_FORM,
+    FETCH_RISKS,
+    SEARCH_RISKS,
+    CREATE_RISK,
+    UPDATE_RISK,
+    START_LOADING_RISK,
+    FAILED_RISK_REQUEST,
+    SET_RISK,
+    CLOSE_RISK_FORM_DIALOG,
+    OPEN_RISK_FORM_DIALOG
+
 } from '../constants/actionTypes'
 
 // Generic Action creators
 
 export const FailedRequest = error => {
     return {
-        type: FAILED_REQUEST,
+        type: FAILED_RISK_REQUEST,
         payload: error
     }
 }
 
 
 // Set user to null 
-export const ResetRisk = () => ({ type: SET_OBJECT_NULL });
+export const ResetRisk = () => ({ type: SET_RISK, payload: null });
 
 export const SetRisk = (risk) => ({
-    type: SET_ONE, payload: risk
+    type: SET_RISK, payload: risk
 });
 
 export const GetRisksByCategory = (riskCategoryId, page, itemsPerPage) => async (dispatch) => {
 
-    dispatch({ type: START_LOADING })
+    dispatch({ type: START_LOADING_RISK })
     await api.fetchRiskByCategory(riskCategoryId, page, itemsPerPage)
         .then(response => {
             const { risks, currentPage, amountOfPages } = response.data
-            dispatch({ type: FETCH_ALL, payload: { risks, currentPage, amountOfPages } })
+            dispatch({ type: FETCH_RISKS, payload: { risks, currentPage, amountOfPages } })
 
         })
         .catch(error => {
@@ -47,13 +48,13 @@ export const GetRisksByCategory = (riskCategoryId, page, itemsPerPage) => async 
 
 export const SearchRiskByCode = (riskCategoryId, page, itemsPerPage, filter) => {
     return async function (dispatch) {
-        dispatch({ type: START_LOADING })
+        dispatch({ type: START_LOADING_RISK })
         await api.searchRiskByCode(riskCategoryId, page, itemsPerPage, filter)
             .then(response => {
                 const { risks, currentPage, amountOfPages } = response.data
 
                 dispatch({
-                    type: FETCH_BY_SEARCH,
+                    type: SEARCH_RISKS,
                     payload: { risks, currentPage, amountOfPages }
                 })
             })
@@ -67,12 +68,12 @@ export const SearchRiskByCode = (riskCategoryId, page, itemsPerPage, filter) => 
 // CREATE  
 export const AddRisk = (risk) => {
     return async function (dispatch) {
-        dispatch({ type: START_LOADING })
+        dispatch({ type: START_LOADING_RISK })
         await api.addRisk(risk)
             .then(response => {
                 const risk = response.data
                 dispatch({
-                    type: CREATE,
+                    type: CREATE_RISK,
                     payload: risk
                 })
             })
@@ -85,12 +86,12 @@ export const AddRisk = (risk) => {
 // UPDATE  
 export const UpdateRisk = (risk) => {
     return async function (dispatch) {
-        dispatch({ type: START_LOADING })
+        dispatch({ type: START_LOADING_RISK })
         api.updateRisk(risk)
             .then(response => {
                 const risk = response.data
                 dispatch({
-                    type: CREATE,
+                    type: UPDATE_RISK,
                     payload: risk
                 })
             })
@@ -102,14 +103,14 @@ export const UpdateRisk = (risk) => {
 
 export function openFormDialog() {
     return {
-        type: OPEN_FORM
+        type: OPEN_RISK_FORM_DIALOG
     }
 
 }
 
 export function closeFormDialog() {
     return {
-        type: CLOSE_FORM
+        type: CLOSE_RISK_FORM_DIALOG
 
     }
 }
