@@ -1,4 +1,4 @@
-import { OPEN_EDIT_CARD_DIALOG, CLOSE_EDIT_CARD_DIALOG } from '../constants/actionTypes/editCardDialogActions';
+import { OPEN_EDIT_CARD_DIALOG, CLOSE_EDIT_CARD_DIALOG } from '../constants/actionTypes';
 
 const initialState = {
   showEditCardDialog: false

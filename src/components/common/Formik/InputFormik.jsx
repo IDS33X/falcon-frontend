@@ -10,7 +10,7 @@ export default function InputFormik({ label, ...props }) {
       {...props}
       label={label}
       value={meta.value}
-      error={meta.touched && Boolean(meta.error)}
+      error={meta.touched && Boolean(meta.error)} // It will display an error if the field has been touched
       margin="dense"
       variant="outlined"
       helperText={(meta.error && meta.touched) && meta.error}

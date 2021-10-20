@@ -1,4 +1,4 @@
-import { OPEN_SUCCESS_DIALOG, CLOSE_SUCCESS_DIALOG } from '../constants/actionTypes/successDialogActions';
+import { OPEN_SUCCESS_DIALOG, CLOSE_SUCCESS_DIALOG } from '../constants/actionTypes';
 
 const initialState = {
   showSuccessDialog: false

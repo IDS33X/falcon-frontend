@@ -1,4 +1,13 @@
 # Falcon Controls Risk Management System
 
+## Description 
 
-## Hola fix small card.
+## Dependencies 
+
+## Branch strategy 
+# Features  
+
+
+
+
+
