@@ -1,6 +1,13 @@
 # Falcon Controls Risk Management System
 
+## Description 
 
-## Hola fix small card.
+## Dependencies 
 
-# login Gmail
+## Branch strategy 
+# Features  
+
+
+
+
+

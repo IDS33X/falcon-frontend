@@ -7,42 +7,18 @@ import React, { useState } from 'react';
 // Generic componet that renders a grid with dynamic  headers and data
 
 
-const TableGrid = ({ headers, actions, data, amountOfRows, onPageChange, onRowSelection }) => {
+const TableGrid = ({ headers, actions, data, amountOfRows, onRowSelection, page, setPage, pageSize, setPageSize }) => {
 
     const classes = useStyles();
-    const [currentPage, setCurrentPage] = useState(0);
     const [loading, setLoading] = useState(false);
     const [rows, setRows] = React.useState([]);
-    const [pageSize, setPageSize] = React.useState(10);
-
 
     // Component used to pass all the parameters received from the parent to MenuCell component before using it with renderCell (it cannot be done directly)
-    const RenderOptions = () => {
+    const RenderOptions = (idRow) => {
         return (
-            <RowMenuCell actions={actions} />
+            <RowMenuCell idRow={idRow} actions={actions} />
         )
     }
-
-    React.useEffect(() => {
-        // The data is fetched every time the current page changes
-        let active = true;
-
-        (async () => {
-            setLoading(true);
-
-            onPageChange(currentPage, pageSize);
-            if (!active) {
-                return;
-            }
-            setLoading(false);
-        })();
-
-        return () => {
-            active = false;
-
-        };
-
-    }, [currentPage, pageSize]);
 
 
     React.useEffect(() => {
@@ -54,7 +30,7 @@ const TableGrid = ({ headers, actions, data, amountOfRows, onPageChange, onRowSe
         {
             field: 'actions',
             headerName: 'Acciones',
-            renderCell: RenderOptions, // Add the action buttons to this column (so the grid wont try to look up for a property called "actions" in the rows)
+            renderCell: ({ id }) => (RenderOptions(id)), // Add the action buttons to this column (so the grid wont try to look up for a property called "actions" in the rows)
             sortable: false,
             width: 120,
             headerAlign: 'center',
@@ -62,29 +38,33 @@ const TableGrid = ({ headers, actions, data, amountOfRows, onPageChange, onRowSe
             align: 'center',
             disableColumnMenu: true,
             disableReorder: true,
+            disableClickEventBubbling: true,
+
 
         },
         ...headers // Add all the other headers to the grid
     ];
 
-    const handleChangePage = (page) => {
+    const handleChangePage = (newPage) => {
         setLoading(true);
-        setCurrentPage(page);
+        setPage(newPage);
+
     };
 
-    const handleChangePageSize = (pageSize) => {
-        setPageSize(pageSize);
-        setCurrentPage(0);
+    const handleChangePageSize = (newPageSize) => {
+        setPageSize(newPageSize);
+        setPage(0);
     };
 
 
     return (
         <div className={classes.tableGrid}>
             <DataGrid
+                className={classes.tableGrid}
                 rows={rows}
                 rowCount={amountOfRows} // Total of registries in database
                 columns={columns}
-                page={currentPage}
+                page={page}
                 pageSize={pageSize}
                 pagination
                 components={{ Toolbar: GridToolbar }}
@@ -93,7 +73,6 @@ const TableGrid = ({ headers, actions, data, amountOfRows, onPageChange, onRowSe
                 loading={loading}
                 rowsPerPageOptions={[5, 10, 15]}
                 onPageSizeChange={(size) => handleChangePageSize(size)}
-                onSelectionModelChange={(rowId) => onRowSelection(rowId[0])} // When a row is selected the data of that registry will be updated in store
             />
         </div>
     );

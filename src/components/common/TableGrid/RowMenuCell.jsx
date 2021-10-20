@@ -6,7 +6,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 const RowMenuCell = (props) => {
 
 
-    const { api, id, actions } = props;
+    const { actions, idRow } = props;
 
     return (
         <div >
@@ -16,7 +16,7 @@ const RowMenuCell = (props) => {
                         color="inherit"
                         size="small"
                         aria-label={action.title}
-                        onClick={() => action.onClick()}>
+                        onClick={() => action.onClick(idRow)}>
                         <action.icon fontSize="small" />
                     </IconButton>
 
