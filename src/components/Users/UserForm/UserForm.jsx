@@ -71,6 +71,8 @@ const UserForm = ({ saveUser, resetRoute, title, user, departmentId }) => {
 
     };
 
+    const handleShowPassword = () => setShowPassword(!showPassword);
+
 
     return (
         <DialogWrapper fullWidth="md" open={showUserFormDialog} title={title} close={() => closeForm()}>
@@ -92,7 +94,7 @@ const UserForm = ({ saveUser, resetRoute, title, user, departmentId }) => {
 
                         <InputFormik name="username" label="Usuario" />
 
-                        <InputFormik name="password" type="password" label="Contraseña" />
+                        <InputFormik name="password" type="password" label="Contraseña" type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
 
                         <Button variant="contained" color="secondary" onClick={closeForm}
                             className={classes.button}>Cancelar</Button>
