@@ -8,7 +8,8 @@ import {
   FAILED_RISK_REQUEST,
   SET_RISK,
   CLOSE_RISK_FORM_DIALOG,
-  OPEN_RISK_FORM_DIALOG
+  OPEN_RISK_FORM_DIALOG,
+  FETCH_RISKS_IMPACTS
 } from '../constants/actionTypes'
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
   currentPage: 0,
   amountOfPages: 0,
   showRiskFormDialog: false,
+  riskImpacts: []
 };
 
 const risks = (state = initialState, { type, payload }) => {
@@ -32,6 +34,12 @@ const risks = (state = initialState, { type, payload }) => {
         currentPage: payload.currentPage,
         amountOfPages: payload.amountOfPages,
         risks: payload.risks,
+      }
+
+    case FETCH_RISKS_IMPACTS:
+      return {
+        ...state,
+        riskImpacts: payload,
       }
     case START_LOADING_RISK:
       return {

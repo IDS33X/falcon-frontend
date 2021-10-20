@@ -16,10 +16,9 @@ const RiskForm = ({ saveRisk, resetRoute, title, risk, categoryId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const formRef = useRef(); // Allows to access properties and methods of the formik form from outside   
-    const { showRiskFormDialog } = useSelector(state => state.risks);
-
-    // State management of the form
+    const { showRiskFormDialog, riskImpacts } = useSelector(state => state.risks);
     const [riskForm, setRiskForm] = useState({ risk: {} });
+    let riskImpactOptions = riskImpacts?.map(impact => ({ id: impact.id, name: impact.title }));
 
     // When the user is fetched the values of the form are updated
     useEffect(() => {
@@ -84,9 +83,10 @@ const RiskForm = ({ saveRisk, resetRoute, title, risk, categoryId }) => {
                         <InputFormik name="description" label="Descripción" multiline rows={2} />
 
 
-                        <SelectFormik name="inherentRiskId" id="inherentRiskId" label="Riesgo inherente" options={[{ id: 1, name: "Impacto X" }, { id: 2, name: "Impacto Y" }]} />
+                        <SelectFormik name="inherentRiskId" id="inherentRiskId" label="Riesgo inherente" options={riskImpactOptions} />
 
-                        <SelectFormik name="controlledRiskId"  id="controlledRiskId" label="Riesgo controlado" options={[{ id: 1, name: "Impacto X" }, { id: 2, name: "Impacto Y" }]} />
+                        <SelectFormik name="controlledRiskId" id="controlledRiskId" label="Riesgo controlado"
+                            options={riskImpactOptions} />
 
 
 

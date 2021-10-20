@@ -9,7 +9,8 @@ import {
     FAILED_RISK_REQUEST,
     SET_RISK,
     CLOSE_RISK_FORM_DIALOG,
-    OPEN_RISK_FORM_DIALOG
+    OPEN_RISK_FORM_DIALOG,
+    FETCH_RISKS_IMPACTS
 
 } from '../constants/actionTypes'
 
@@ -37,6 +38,21 @@ export const GetRisksByCategory = (riskCategoryId, page, itemsPerPage) => async 
         .then(response => {
             const { risks, currentPage, amountOfPages } = response.data
             dispatch({ type: FETCH_RISKS, payload: { risks, currentPage, amountOfPages } })
+
+        })
+        .catch(error => {
+            dispatch(FailedRequest(error.message))
+        })
+
+
+};
+
+export const GetRiskImpacts = () => async (dispatch) => {
+
+    await api.fetchRiskImpacts()
+        .then(response => {
+            const { riskImpacts } = response.data
+            dispatch({ type: FETCH_RISKS_IMPACTS, payload: riskImpacts })
 
         })
         .catch(error => {

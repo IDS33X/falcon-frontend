@@ -10,7 +10,7 @@ import RiskForm from '../../../components/Risks/RiskForm/RiskForm';
 import { useHistory, useLocation } from 'react-router';
 import { Grid } from '@material-ui/core';
 import useStyles from './styles';
-import { SetRisk, GetRisksByCategory, SearchRiskByCode, AddRisk, UpdateRisk } from '../../../actions/risks'
+import { SetRisk, GetRisksByCategory, SearchRiskByCode, AddRisk, UpdateRisk, GetRiskImpacts } from '../../../actions/risks'
 import { headers, getGridRows } from '../../../helpers/risksHelper'
 import { openFormDialog } from '../../../actions/risks'
 
@@ -22,7 +22,7 @@ const RisksPage = ({ match }) => {
 
     const categoryId = match ? match.params.categoryId : null;
     const selectedRisk = useSelector(state => state.risks.risk);
-    const { risks, loading, error, amountOfPages } = useSelector(state => state.risks);
+    const { risks, loading, error, amountOfPages, riskImpacts } = useSelector(state => state.risks);
     const classes = useStyles();
     const dispatch = useDispatch();
     const query = useQuery();
@@ -77,7 +77,9 @@ const RisksPage = ({ match }) => {
     // When edit button is clicked this actions are fired
     editButton.onClick = async (rowId) => {
         history.push(`${mainRouteName}/edit?risk=${rowId}`);
-        await dispatch(SetRisk(risks.find(risk => risk.id === rowId)))
+        await dispatch(SetRisk(risks.find(risk => risk.id === rowId)));
+        dispatch(GetRiskImpacts());
+
         dispatch(openFormDialog());
     }
 
@@ -137,9 +139,9 @@ const RisksPage = ({ match }) => {
 
             {
                 selectedRisk
-                    ? <RiskForm categoryId={categoryId} risk={selectedRisk} title={"Editar riesgo"} saveRisk={UpdateRisk} resetRoute={resetRoute} />
+                    ? <RiskForm categoryId={categoryId} risk={selectedRisk} title={"Editar riesgo"} saveRisk={UpdateRisk} resetRoute={resetRoute} riskImpacts={riskImpacts} />
 
-                    : <RiskForm resetRoute={resetRoute} categoryId={categoryId} risk={selectedRisk} title={"Agregar riesgo"} saveRisk={AddRisk} />
+                    : <RiskForm resetRoute={resetRoute} categoryId={categoryId} risk={selectedRisk} title={"Agregar riesgo"} saveRisk={AddRisk} riskImpacts={riskImpacts}   />
 
             }
 
