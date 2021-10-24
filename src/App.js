@@ -11,6 +11,7 @@ import AuthRoute from './pages/common/AuthPage/AuthRoute';
 import AreasPage from './pages/admin/AreasPage/AreasPage';
 import UsersPage from './pages/admin/UsersPage/UsersPage';
 import RisksPage from './pages/analyst/RisksPage/RisksPage';
+import ControlsPage from './pages/analyst/ControlsPage/ControlsPage';
 
 
 import RiskCategoriesPage from './pages/riskanalyst/RiskCategoriesPage/RiskCategoriesPage';
@@ -46,6 +47,13 @@ const App = () => {
               <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/risks/edit" exact roleWithAccess='admin' component={RisksPage} />
               <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/risks/search" exact roleWithAccess='admin' component={RisksPage} />
 
+
+              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/controls" exact roleWithAccess='admin' component={ControlsPage} />
+              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/controls/edit" exact roleWithAccess='admin' component={ControlsPage} />
+              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/controls/search" exact roleWithAccess='admin' component={ControlsPage} />
+
+
+              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/controls/delete" exact roleWithAccess='admin' component={ControlsPage} />
 
 
               <PrivateRoute path="/areas" exact roleWithAccess='admin' component={AreasPage} />

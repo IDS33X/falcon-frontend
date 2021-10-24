@@ -56,3 +56,87 @@ export const addRisk = (risk) => API.post(`/Risk/Add`, risk, { "headers": option
 
 export const updateRisk = (risk) => API.put(`/Risk/Update`, risk, { "headers": options.headers });
 
+// RiskControl 
+
+export const AddRangeRiskControls = (riskControls) => API.post(`/RiskControl/AddRange`, riskControls);
+
+export const RemoveRangeRiskControls = (riskControls) => API.post(`/RiskControl/RemoveRange`, riskControls);
+
+
+
+// Controls
+
+export const fetchControls = (page, itemsPerPage) => API.get(`/Control/GetControls?Page=${page}&ItemsPerPage=${itemsPerPage}`);
+
+export const fetchControlsByRisk = (riskId, page, itemsPerPage) => API.get(`/Control/GetControlsByRisk?RiskId=${riskId}&Page=${page}&ItemsPerPage=${itemsPerPage}`);
+
+export const searchControlsByCode = (code) => API.get(`/Control/GetControlByCode?Code=${code}`);
+
+
+export const addControl = (control) => API.post(`/Control/Add`, control, { "headers": options.headers });
+
+export const updateControl = (control) => API.put(`/Control/Update`, control, { "headers": options.headers });
+
+// Automation Level
+
+export const fetchAutomationLevels = () => API.get(`/AutomationLevel/GetAll`);
+
+// {
+//   "automationLevels": [
+//     {
+//       "id": 2,
+//       "title": "Manual",
+//       "description": "Nivel de automatizacion manual"
+//     },
+//     {
+//       "id": 3,
+//       "title": "Automatico",
+//       "description": "Nivel de automatizacion automatico"
+//     }
+//   ]
+// }
+
+// Control states 
+
+export const fetchControlStates = () => API.get(`/ControlState/GetAll`);
+
+// {
+//   "controlStates": [
+//     {
+//       "id": 1,
+//       "title": "Activo",
+//       "description": "Estado activo"
+//     },
+//     {
+//       "id": 2,
+//       "title": "Inactivo",
+//       "description": "Estado inactivo"
+//     }
+//   ]
+// }
+
+// Control types 
+
+export const fetchControlTypes = () => API.get(`/ControlType/GetAll`);
+
+// {
+//   "controlTypes": [
+//     {
+//       "id": 1,
+//       "title": "Prevencion ",
+//       "description": "Intenta minimizar la pérdida como resultado del mismo."
+//     },
+//     {
+//       "id": 6,
+//       "title": "Correctivo",
+//       "description": "Control preventivo"
+//     },
+//     {
+//       "id": 9,
+//       "title": "Detectivo",
+//       "description": "Control detectivo"
+//     }
+//   ]
+// }
+
+
