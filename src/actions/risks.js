@@ -10,7 +10,9 @@ import {
     SET_RISK,
     CLOSE_RISK_FORM_DIALOG,
     OPEN_RISK_FORM_DIALOG,
-    FETCH_RISKS_IMPACTS
+    FETCH_RISKS_IMPACTS,
+    ADD_RISK_CONTROLS,
+    REMOVE_RISK_CONTROLS
 
 } from '../constants/actionTypes'
 
@@ -24,7 +26,7 @@ export const FailedRequest = error => {
 }
 
 
-// Set user to null 
+// Set risk to null 
 export const ResetRisk = () => ({ type: SET_RISK, payload: null });
 
 export const SetRisk = (risk) => ({
@@ -128,5 +130,38 @@ export function closeFormDialog() {
     return {
         type: CLOSE_RISK_FORM_DIALOG
 
+    }
+}
+
+// RISK CONTROLS
+
+export const AddRiskControls = (riskControls) => {
+    return async function (dispatch) {
+        dispatch({ type: START_LOADING_RISK })
+        await api.AddRangeRiskControls(riskControls)
+            .then(response => {
+                //const risk = response.data
+                dispatch({
+                    type: ADD_RISK_CONTROLS
+                })
+            })
+            .catch(error => {
+                dispatch(FailedRequest(error.message))
+            })
+    }
+}
+
+export const RemoveRiskControls = (riskControls) => {
+    return async function (dispatch) {
+        await api.RemoveRangeRiskControls(riskControls)
+            .then(response => {
+                //const risk = response.data
+                dispatch({
+                    type: REMOVE_RISK_CONTROLS
+                })
+            })
+            .catch(error => {
+                dispatch(FailedRequest(error.message))
+            })
     }
 }

@@ -18,6 +18,7 @@ import {
 const initialState = {
   loading: false,
   controls: [],
+  controlsByRisk: [],
   error: '',
   control: null,
   currentPage: 0,
@@ -47,11 +48,7 @@ const controls = (state = initialState, { type, payload }) => {
     case FETCH_CONTROLS_BY_RISK:
       return {
         ...state,
-        loading: false,
-        error: '',
-        currentPage: payload.currentPage,
-        amountOfPages: payload.amountOfPages,
-        controls: payload.controls,
+        controlsByRisk: payload.controls,
       }
 
     case START_LOADING_CONTROL:
@@ -80,7 +77,6 @@ const controls = (state = initialState, { type, payload }) => {
         error: '',
         controls: [...state.controls, payload.control]
       }
-
 
 
     case SET_CONTROL:

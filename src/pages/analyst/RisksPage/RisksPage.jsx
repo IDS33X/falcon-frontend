@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import TableGrid from '../../../components/common/TableGrid/TableGrid'
-import AddButton from '../../../components/common/AddButton/AddButton';
-import { editButton } from '../../../buttons/buttons';
+import { useHistory, useLocation } from 'react-router';
+import useStyles from './styles';
+
+
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
+import { Grid } from '@material-ui/core';
+import { headers, getGridRows } from '../../../helpers/risksHelper'
+
+// Custom components 
+
+import { editButton, showControlsButton } from '../../../buttons/buttons';
+import RiskControls from '../../../components/Risks/RiskControls/RiskControls';
 import SearchBarComponent from '../../../components/common/SearchBar/SearchBar';
 import RiskForm from '../../../components/Risks/RiskForm/RiskForm';
-import { useHistory, useLocation } from 'react-router';
-import { Grid } from '@material-ui/core';
-import useStyles from './styles';
-import { SetRisk, GetRisksByCategory, SearchRiskByCode, AddRisk, UpdateRisk, GetRiskImpacts } from '../../../actions/risks'
-import { headers, getGridRows } from '../../../helpers/risksHelper'
-import { openFormDialog } from '../../../actions/risks'
 import CircularButton from '../../../components/common/CircularButton/CircularButton';
-import ExportRisks from '../../../components/Risks/ExportRisks/ExportRisks'
+import TableGrid from '../../../components/common/TableGrid/TableGrid'
+import AddButton from '../../../components/common/AddButton/AddButton';
+
+// Actions 
+import { SetRisk, GetRisksByCategory, SearchRiskByCode, AddRisk, openFormDialog, UpdateRisk, GetRiskImpacts } from '../../../actions/risks';
+import { GetControlsByRisk, GetControls } from '../../../actions/controls';
+
+
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
 }
@@ -36,9 +45,12 @@ const RisksPage = ({ match }) => {
     const [currentPage, setPage] = useState(0);
     const [pageSize, setPageSize] = React.useState(10);
     const [selectedRiskGridId, setSelectedRiskGrid] = React.useState(null);
+    const [showRiskControlsDialog, setShowRiskControlsDialog] = useState(false);
+    //const [controlsByRisk, setControlsByRisk] = useState([]);
 
     const mainRouteName = `/areas/${match.params.areaId}/divisions/${match.params.divisionId}/departments/${match.params.departmentId}/categories/${match.params.categoryId}/risks`;
-
+    //let riskId;
+    const [riskId, setRiskId] = React.useState(selectedRisk?.id);
 
     useEffect(() => {
 
@@ -73,6 +85,7 @@ const RisksPage = ({ match }) => {
         if (riskQuery && selectedRisk) {
             dispatch(openFormDialog());
         }
+        //setRiskId(selectedRisk?.id);
 
     }, [rowsDataGrid, selectedRisk, dispatch]);
 
@@ -82,10 +95,19 @@ const RisksPage = ({ match }) => {
         history.push(`${mainRouteName}/edit?risk=${rowId}`);
         await dispatch(SetRisk(risks.find(risk => risk.id === rowId)));
         dispatch(GetRiskImpacts());
-
         dispatch(openFormDialog());
     }
 
+
+    // When manage controls is clicked this actions are fired
+    showControlsButton.onClick = async (rowId) => {
+        setRiskId(rowId);
+        history.push(`${mainRouteName}/?risk=${rowId}&/controls/`);
+        await dispatch(GetControlsByRisk(rowId, 1, 20));
+        await dispatch(GetControls(1, 50));
+        setShowRiskControlsDialog(true);
+
+    }
 
     const searchRisk = (search) => {
         // Filter users by search only if there's something written on search bar
@@ -103,7 +125,6 @@ const RisksPage = ({ match }) => {
     const openControlsPage = () => {
         history.push(`/areas/${match.params.areaId}/divisions/${match.params.divisionId}/departments/${match.params.departmentId}/categories/${match.params.categoryId}/controls`);
     }
-
 
 
     // Reset the route from a child component (ex: used when closing a form dialog)
@@ -136,14 +157,8 @@ const RisksPage = ({ match }) => {
                 </Grid>
                 <Grid>
                     <CircularButton variant="contained" onClick={openControlsPage} color="primary">Gestionar controles</CircularButton>
-
                     <AddButton title="riesgo" onClick={openFormDialog}></AddButton>
 
-                    {
-                        //         rowsDataGrid && (
-                        //     <ExportRisks columns={headers} data={rowsDataGrid} documentName=""></ExportRisks>
-                        // )
-                    }
                 </Grid>
 
 
@@ -154,7 +169,7 @@ const RisksPage = ({ match }) => {
                 // Renders grid component only when data is fetched from database, this is in order to avoid 'undefined rows' error.
                 rowsDataGrid && (
                     <>
-                        <TableGrid headers={headers} actions={[editButton]}
+                        <TableGrid headers={headers} actions={[editButton, showControlsButton]}
                             amountOfPages={amountOfPages} editRoute={`${mainRouteName}/edit?risk=`} rowDoubleClick={openControlsPage}
                             data={rowsDataGrid} amountOfRows={10} page={currentPage} setPage={setPage} onSelectionChange={setSelectedRiskGrid}
                             pageSize={pageSize} setPageSize={setPageSize} />
@@ -174,7 +189,18 @@ const RisksPage = ({ match }) => {
                     : <RiskForm resetRoute={resetRoute} categoryId={categoryId} risk={selectedRisk} title={"Agregar riesgo"} saveRisk={AddRisk} riskImpacts={riskImpacts} />
 
             }
+            {
 
+
+                showRiskControlsDialog &&
+                <RiskControls
+                    mainRouteName={mainRouteName}
+                    riskId={riskQuery}
+                    showDialog={showRiskControlsDialog}
+                    setShowDialog={setShowRiskControlsDialog} />
+
+
+            }
 
 
 

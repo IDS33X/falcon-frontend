@@ -55,8 +55,8 @@ export const GetControlsByRisk = (riskId, page, itemsPerPage) => async (dispatch
     dispatch({ type: START_LOADING_CONTROL })
     await api.fetchControlsByRisk(riskId, page, itemsPerPage)
         .then(response => {
-            const { controls, currentPage, amountOfPages } = response.data
-            dispatch({ type: FETCH_CONTROLS_BY_RISK, payload: { controls, currentPage, amountOfPages } })
+            const { controls } = response.data
+            dispatch({ type: FETCH_CONTROLS_BY_RISK, payload: { controls} })
 
         })
         .catch(error => {

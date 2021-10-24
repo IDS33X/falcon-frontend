@@ -43,21 +43,23 @@ const App = () => {
               <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/users/search" exact
                 roleWithAccess='admin' component={UsersPage} />
 
-              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/risks" exact roleWithAccess='admin' component={RisksPage} />
-              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/risks/edit" exact roleWithAccess='admin' component={RisksPage} />
-              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/risks/search" exact roleWithAccess='admin' component={RisksPage} />
+              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/risks" exact roleWithAccess='analyst' component={RisksPage} />
+              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/risks/edit" exact roleWithAccess='analyst' component={RisksPage} />
+              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/risks/search" exact roleWithAccess='analyst' component={RisksPage} />
+              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/risks/:riskId/controls" exact roleWithAccess='analyst' component={RisksPage} />
 
 
-              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/controls" exact roleWithAccess='admin' component={ControlsPage} />
-              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/controls/edit" exact roleWithAccess='admin' component={ControlsPage} />
-              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/controls/search" exact roleWithAccess='admin' component={ControlsPage} />
+
+              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/controls" exact roleWithAccess='analyst' component={ControlsPage} />
+              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/controls/edit" exact roleWithAccess='analyst' component={ControlsPage} />
+              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/controls/search" exact roleWithAccess='analyst' component={ControlsPage} />
 
 
-              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/controls/delete" exact roleWithAccess='admin' component={ControlsPage} />
+              <PrivateRoute path="/areas/:areaId/divisions/:divisionId/departments/:departmentId/categories/:categoryId/controls/delete" exact roleWithAccess='analyst' component={ControlsPage} />
 
 
-              <PrivateRoute path="/areas" exact roleWithAccess='admin' component={AreasPage} />
-              <PrivateRoute path="/areas/search" exact roleWithAccess='admin' component={AreasPage} />
+              <PrivateRoute path="/areas" exact roleWithAccess='analyst' component={AreasPage} />
+              <PrivateRoute path="/areas/search" exact roleWithAccess='analyst' component={AreasPage} />
               <PrivateRoute path="/riskcategories" exact roleWithAccess='analyst' component={RiskCategoriesPage} />
               <PrivateRoute path="/deviationmatrix" exact roleWithAccess='internalcontrol' component={DeviationMatrixPage} />
               <PrivateRoute path="/mycontrols" exact roleWithAccess='employee' component={MyControlsPage} />
