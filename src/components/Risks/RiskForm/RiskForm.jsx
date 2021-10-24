@@ -16,10 +16,9 @@ const RiskForm = ({ saveRisk, resetRoute, title, risk, categoryId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const formRef = useRef(); // Allows to access properties and methods of the formik form from outside   
-    const { showRiskFormDialog } = useSelector(state => state.risks);
-
-    // State management of the form
+    const { showRiskFormDialog, riskImpacts } = useSelector(state => state.risks);
     const [riskForm, setRiskForm] = useState({ risk: {} });
+    let riskImpactOptions = riskImpacts?.map(impact => ({ id: impact.id, name: impact.title }));
 
     // When the user is fetched the values of the form are updated
     useEffect(() => {
@@ -73,24 +72,25 @@ const RiskForm = ({ saveRisk, resetRoute, title, risk, categoryId }) => {
                             risk &&
                             (
                                 <>
-                                    <InputFormik name="creator" disabled label="Creador" />
+                                    <InputFormik type="text" name="creator" disabled label="Creador" />
 
-                                    <InputFormik name="creationDate" disabled label="Fecha de creación" />
+                                    <InputFormik type="text" name="creationDate" disabled label="Fecha de creación" />
                                 </>
                             )
                         }
-                        <InputFormik name="code" label="Codigo" />
+                        <InputFormik type="text" name="code" label="Codigo" />
 
-                        <InputFormik name="description" label="Descripción" multiline rows={2} />
-
-
-                        <SelectFormik name="inherentRiskId" id="inherentRiskId" label="Riesgo inherente" options={[{ id: 1, name: "Impacto X" }, { id: 2, name: "Impacto Y" }]} />
-
-                        <SelectFormik name="controlledRiskId"  id="controlledRiskId" label="Riesgo controlado" options={[{ id: 1, name: "Impacto X" }, { id: 2, name: "Impacto Y" }]} />
+                        <InputFormik type="text" name="description" label="Descripción" multiline rows={2} />
 
 
+                        <SelectFormik type="text" name="inherentRiskId" id="inherentRiskId" label="Riesgo inherente" options={riskImpactOptions} />
 
-                        <InputFormik name="rootCause" label="Causa raíz" multiline rows={4} />
+                        <SelectFormik type="text" name="controlledRiskId" id="controlledRiskId" label="Riesgo controlado"
+                            options={riskImpactOptions} />
+
+
+
+                        <InputFormik type="text"name="rootCause" label="Causa raíz" multiline rows={4} />
 
                         <Button variant="contained" color="secondary" onClick={closeForm}
                             className={classes.button}>Cancelar</Button>

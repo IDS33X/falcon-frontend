@@ -33,7 +33,7 @@ const UsersPage = ({ match }) => {
     const [rowsDataGrid, setRows] = useState([]);
     const [currentPage, setPage] = useState(0);
     const [pageSize, setPageSize] = React.useState(10);
-    const mainRouteName = `/areas/${match.params.areaId}/divisions/${match.params.divisionId}/departments/${match.params.departmentId}/users`;
+    const mainRouteName = `/departments/${match.params.departmentId}/users`;
 
     // Table headers
     const headers = [
@@ -101,7 +101,7 @@ const UsersPage = ({ match }) => {
     }
 
     return loading ? (
-        <Box textAlign='center'>
+        <Box textAlign='center' justifyContent = 'center'>
             <CircularProgress />
         </Box>
     ) : error ? (
@@ -122,7 +122,6 @@ const UsersPage = ({ match }) => {
 
             </Grid>
             <Grid container justify="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
-                {/* className={classes.gridContainer} */}
                 <Grid item xs={12} sm={6} md={9}>
                     <SearchBarComponent onSearchClick={searchUser} search={search} setSearch={setSearch} history={history} />
                 </Grid>

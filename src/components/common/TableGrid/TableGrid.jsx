@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 // Generic componet that renders a grid with dynamic  headers and data
 
 
-const TableGrid = ({ headers, actions, data, amountOfRows, onRowSelection, page, setPage, pageSize, setPageSize }) => {
+const TableGrid = ({ headers, actions, data, amountOfRows, page, setPage, pageSize, setPageSize, onSelectionChange }) => {
 
     const classes = useStyles();
     const [loading, setLoading] = useState(false);
@@ -40,7 +40,6 @@ const TableGrid = ({ headers, actions, data, amountOfRows, onRowSelection, page,
             disableReorder: true,
             disableClickEventBubbling: true,
 
-
         },
         ...headers // Add all the other headers to the grid
     ];
@@ -56,6 +55,13 @@ const TableGrid = ({ headers, actions, data, amountOfRows, onRowSelection, page,
         setPage(0);
     };
 
+    const handleRowSelection = (rowId) => {
+        if (onSelectionChange) {
+            onSelectionChange(rowId);
+        }
+    };
+
+
 
     return (
         <div className={classes.tableGrid}>
@@ -67,7 +73,9 @@ const TableGrid = ({ headers, actions, data, amountOfRows, onRowSelection, page,
                 page={page}
                 pageSize={pageSize}
                 pagination
+                disableSelectionOnClick
                 components={{ Toolbar: GridToolbar }}
+                onSelectionModelChange={(e) => handleRowSelection(e[0])}
                 paginationMode="server"
                 onPageChange={(newpage) => handleChangePage(newpage)}
                 loading={loading}
