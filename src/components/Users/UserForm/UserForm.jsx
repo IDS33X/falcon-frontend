@@ -84,15 +84,15 @@ const UserForm = ({ saveUser, resetRoute, title, user, departmentId }) => {
 
                     <Form >
 
-                        <InputFormik name="code" label="Codigo" id="code" />
+                        <InputFormik type="text" name="code" label="Codigo" id="code" />
 
-                        <InputFormik name="name" label="Nombre" id="name" />
-                        <InputFormik name="lastName" label="Apellido" id="lastName" />
+                        <InputFormik type="text" name="name" label="Nombre" id="name" />
+                        <InputFormik type="text" name="lastName" label="Apellido" id="lastName" />
                         <SelectFormik name="roleId" label="Rol" id="roleId" options={[{ id: 2, name: "Administrador" }, { id: 3, name: "Analista de riesgo" }]} disabled />
 
-                        <InputFormik name="username" label="Usuario" />
+                        <InputFormik type="text" name="username" label="Usuario" />
 
-                        <InputFormik name="password" type="password" label="Contraseña" />
+                        <InputFormik type="text" name="password" type="password" label="Contraseña" />
 
                         <Button variant="contained" color="secondary" onClick={closeForm}
                             className={classes.button}>Cancelar</Button>

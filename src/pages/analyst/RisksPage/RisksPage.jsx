@@ -48,7 +48,7 @@ const RisksPage = ({ match }) => {
     const [showRiskControlsDialog, setShowRiskControlsDialog] = useState(false);
     //const [controlsByRisk, setControlsByRisk] = useState([]);
 
-    const mainRouteName = `/areas/${match.params.areaId}/divisions/${match.params.divisionId}/departments/${match.params.departmentId}/categories/${match.params.categoryId}/risks`;
+    const mainRouteName = `/riskcategories/${match.params.categoryId}/risks`;
     //let riskId;
     const [riskId, setRiskId] = React.useState(selectedRisk?.id);
 
@@ -123,7 +123,7 @@ const RisksPage = ({ match }) => {
     }
 
     const openControlsPage = () => {
-        history.push(`/areas/${match.params.areaId}/divisions/${match.params.divisionId}/departments/${match.params.departmentId}/categories/${match.params.categoryId}/controls`);
+        history.push(`/riskCategories/${match.params.categoryId}/controls`);
     }
 
 

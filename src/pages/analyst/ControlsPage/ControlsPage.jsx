@@ -34,7 +34,7 @@ const ControlsPage = ({ match }) => {
     const [rowsDataGrid, setRows] = useState([]);
     const [currentPage, setPage] = useState(0);
     const [pageSize, setPageSize] = React.useState(10);
-    const mainRouteName = `/areas/${match.params.areaId}/divisions/${match.params.divisionId}/departments/${match.params.departmentId}/categories/${match.params.categoryId}/controls`;
+    const mainRouteName = `/riskcategories/${match.params.categoryId}/controls`;
 
 
     useEffect(() => {
