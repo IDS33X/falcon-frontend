@@ -35,7 +35,7 @@ const employees = [
     { employee: {
         id: '4',
         rol: 'analyst',
-        departmentId: '3',
+        departmentId: '1',
         name: 'María Gabriela',
         lastname: 'Durán Gónzales',
         code: '32902',

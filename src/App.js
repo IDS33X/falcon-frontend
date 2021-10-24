@@ -5,26 +5,30 @@ import { useDispatch } from 'react-redux';
 import TestPage from './pages/TestPage/TestPage';
 import { ThemeProvider } from '@material-ui/core';
 import theme from './theme';
+import { useStyles } from './styles';
 
 
 import AuthPage from './pages/common/AuthPage/AuthPage';
 import AuthRoute from './pages/common/AuthPage/AuthRoute';
 import AreasPage from './pages/admin/AreasPage/AreasPage';
+import DivisionsPage from './pages/admin/DivisionsPage/DivisionsPage';
+import DepartmentsPage from './pages/admin/DepartmentsPage/DepartmentsPage';
 import UsersPage from './pages/UsersPage/UsersPage';
 import RiskCategoriesPage from './pages/riskanalyst/RiskCategoriesPage/RiskCategoriesPage';
-import DeviationMatrixPage from './pages/internalcontrol/DeviationMatrixPage/DeviationMatrixPage';
 import MyControlsPage from './pages/employee/MyControlsPage/MyControlsPage';
 import PrivateRoute from './pages/PrivateRoute';
 import Layout from './components/common/Layout/Layout';
 
 const App = () => {
   var [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  var [section, setSection] = useState('');
+  const classes = useStyles();
 
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <Container maxWidth="xl">
-          {!user ? <AuthRoute path="/" exact type={'notLogged'} setUser={setUser} /> : <Layout user={user} setUser={setUser}>
+        <Container maxWidth="xl" className={!user ? "" : classes.mainContainer}>
+          {!user ? <AuthRoute path="/" exact type={'notLogged'} setUser={setUser} /> : <Layout user={user} setUser={setUser} section={section}>
             <Switch>
 
 
@@ -35,11 +39,16 @@ const App = () => {
             */}
 
               <AuthRoute path="/" exact type={!user ? 'notLogged' : user.employee.rol} setUser={setUser} /> {/*Its here too because other components need it for redirect in case of a restricted route.*/}
-              <PrivateRoute path="/areas/:areaId/divisions/:departmentId/users" exact roleWithAccess='admin' component={UsersPage} />
-              <PrivateRoute path="/areas" exact roleWithAccess='admin' component={AreasPage} />
-              <PrivateRoute path="/areas/search" exact roleWithAccess='admin' component={AreasPage} />
-              <PrivateRoute path="/riskcategories" exact roleWithAccess='analyst' component={RiskCategoriesPage} />
-              <PrivateRoute path="/deviationmatrix" exact roleWithAccess='internalcontrol' component={DeviationMatrixPage} />
+              {/* <PrivateRoute path="/areas/:areaId/divisions/:departmentId/users" exact roleWithAccess='admin' component={UsersPage} /> */}
+              <PrivateRoute path="/areas" exact roleWithAccess='admin' component={AreasPage} setSection={setSection} sectionName="Administrador"/>
+              <PrivateRoute path="/areas/search" exact roleWithAccess='admin' component={AreasPage} setSection={setSection} sectionName="Administrador"/>
+              <PrivateRoute path="/divisions" exact roleWithAccess='admin' component={DivisionsPage} setSection={setSection} sectionName="Administrador"/>
+              <PrivateRoute path="/divisions/search" exact roleWithAccess='admin' component={DivisionsPage} setSection={setSection}sectionName="Administrador"/>
+              <PrivateRoute path="/departments" exact roleWithAccess='admin' component={DepartmentsPage} setSection={setSection} sectionName="Administrador"/>
+              <PrivateRoute path="/departments/search" exact roleWithAccess='admin' component={DepartmentsPage} setSection={setSection} sectionName="Administrador"/>
+              <PrivateRoute path="/riskcategories" exact roleWithAccess='analyst' component={RiskCategoriesPage} setSection={setSection} sectionName="Analista de Riesgo"/>
+              <PrivateRoute path="/riskcategories/search" exact roleWithAccess='analyst' component={RiskCategoriesPage} setSection={setSection} sectionName="Analista de Riesgo"/>
+              
               <PrivateRoute path="/mycontrols" exact roleWithAccess='employee' component={MyControlsPage} />
               <PrivateRoute path="/test" exact roleWithAccess='admin' component={TestPage} />
 

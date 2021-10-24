@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import useStyles from './styles';
 export const itemsPerPage = 8;
-const Paginate = ({ page, stateSource, onDispatch, mainRouteName }) => {
+const Paginate = ({ page, stateSource, onDispatch, mainRouteName, areaId, divisionId, departmentId }) => {
   
   const { amountOfPages } = stateSource;
   //const { amountOfPages } = useSelector((state) => state.areas);
@@ -18,6 +18,8 @@ const Paginate = ({ page, stateSource, onDispatch, mainRouteName }) => {
   useEffect(() => {
     if (page) {
       onDispatch();
+      console.log(amountOfPages);
+      console.log(mainRouteName);
     }
   }, [dispatch, page]);
 
@@ -29,7 +31,12 @@ const Paginate = ({ page, stateSource, onDispatch, mainRouteName }) => {
       variant="outlined"
       color="primary"
       renderItem={(item) => ( //Configuring the item buttons, here item refers to each button.
-        <PaginationItem {...item} component={Link} to={`/${mainRouteName}?page=${item.page}`} />
+            mainRouteName === 'areas' ? <PaginationItem {...item} component={Link} to={`/${mainRouteName}?page=${item.page}`} /> 
+            : (mainRouteName === 'divisions') ? <PaginationItem {...item} component={Link} to={`/${mainRouteName}?areaId=${areaId}&page=${item.page}`} />
+            : (mainRouteName === 'departments') ? <PaginationItem {...item} component={Link} to={`/${mainRouteName}?divisionId=${divisionId}&page=${item.page}`} />
+            : (mainRouteName === 'riskcategories') ? <PaginationItem {...item} component={Link} to={`/${mainRouteName}?departmentId=${departmentId}&page=${item.page}`} />
+            : null
+            // Crear paginacion para divisionsSearch y areasSearch.
       )}
     />
   );

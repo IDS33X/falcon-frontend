@@ -5,17 +5,17 @@ import { openEditCardDialog } from "../../../actions/editCardDialogActions";
 import SmallCard from "../../common/SmallCard/SmallCard";
 import TableChartIcon from '@material-ui/icons/TableChart';
 import { useDispatch } from "react-redux";
-import { useHistory, useLocation } from 'react-router';
 import { FaRegEdit } from 'react-icons/fa';
+import { useHistory, useLocation } from 'react-router';
 
-const Area = ({area, currentAreaId, setCurrentAreaId, setFormType}) => {
+const Division = ({division, currentDivisionId, setCurrentDivisionId, setFormType}) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
     const openEditCard = () => {
         setFormType('Editar');
-        setCurrentAreaId(area.id);
-        //console.log(area.id);
+        setCurrentDivisionId(division.id);
+        //console.log(`Este es el id de la division abierta: ${division.id}`);
         dispatch(openEditCardDialog());
     }
 
@@ -37,10 +37,9 @@ const Area = ({area, currentAreaId, setCurrentAreaId, setFormType}) => {
 
 
     const onClickCard = () => {
-        // Use area.id and dispatch the GetDivisionsByArea
-        history.push(`/divisions?areaId=${area.id}`);
-        // use history push or dispatch.
-        console.log("Opening division");
+        history.push(`/departments?divisionId=${division.id}`);
+        // use history push or dispatch
+        console.log("Opening department");
     }
 
     //const description = "Lorem Ipsum Dolor Sit Amet, Consectetur A Ipiscing Elit, Sed Do Eiusmod Tempor Incidid Ut Labore Et Dolore."
@@ -49,7 +48,7 @@ const Area = ({area, currentAreaId, setCurrentAreaId, setFormType}) => {
     // Card
     return(
         <>
-            <SmallCard editButton={editButton} title={area.title} description={area.description}
+            <SmallCard editButton={editButton} title={division.title} description={division.description}
                     bottomActions={[pricipalMatrixButton]} onClickCard = {onClickCard}></SmallCard>
             <ConfirmationDialog/>
             {/* <EditCardDialog currentAreaId={currentAreaId} setCurrentAreaId={setCurrentAreaId}/> */}
@@ -57,8 +56,5 @@ const Area = ({area, currentAreaId, setCurrentAreaId, setFormType}) => {
     );
 }
 
-export default Area;
-
-
-
+export default Division;
 
