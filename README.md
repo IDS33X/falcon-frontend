@@ -15,10 +15,10 @@ Falcon permite consultar la probabilidad y severidad de los riesgos para dar seg
 
 ## Some Captures
 #### Login Page
-![falconApp1](\screenshots\falconScreenshot1.png)
+![falconApp1](\screenshots\falconScreenshot1.PNG)
 
 #### Admin Dashboard Page
-![falconApp1](\screenshots\falconScreenshot2.png)
+![falconApp1](\screenshots\falconScreenshot2.PNG)
 
 
 ## Developers
