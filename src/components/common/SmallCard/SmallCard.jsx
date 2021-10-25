@@ -19,7 +19,10 @@ const SmallCard = ({ bottomActions, editButton, title, description, onClickCard 
         component="span"
         name="test"
         className={classes.cardAction}
-        onClick={onClickCard}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClickCard();
+        }}
       >
       <Card className={classes.card} raised elevation = {6}>
               <div>

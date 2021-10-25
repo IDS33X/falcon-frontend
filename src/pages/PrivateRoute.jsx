@@ -2,9 +2,9 @@ import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
 const PrivateRoute = props => {
-    const { roleWithAccess, path} = props;         
+    const { roleWithAccess, path, setSection, sectionName } = props;         
     const user = JSON.parse(localStorage.getItem('profile'));
-  
+    
     console.log(`Rol with acces ${roleWithAccess}`);
     console.log(user?.employee?.rol);
 
@@ -12,6 +12,7 @@ const PrivateRoute = props => {
         return <Redirect to="/"/>   
      } 
     else {
+        setSection(sectionName);
         <Redirect to={path} />
      }
 

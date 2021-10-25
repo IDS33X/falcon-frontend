@@ -85,7 +85,6 @@ const UsersPage = ({ match }) => {
     const searchUser = (search) => {
         if (search?.trim()) {
             dispatch(SearchUsersByDepartment(departmentId, 1, search, pageSize));
-
             history.push(`${mainRouteName}/search?&searchQuery=${search || 'none'}`);
         }
         else {
