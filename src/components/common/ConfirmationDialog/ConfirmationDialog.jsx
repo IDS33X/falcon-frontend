@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { closeConfirmationDialog } from '../../../actions/confirmationDialogActions'
 
 // This is the dialog that will show up when an user is about to make a permanent action 
-const ConfirmationDialog = ({ onClick }) => {
+const ConfirmationDialog = ({ confirmAction }) => {
     const classes = useStyles();
     const { showConfirmationDialog } = useSelector(state => state.confirmationDialog);
     const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const ConfirmationDialog = ({ onClick }) => {
                     Cancelar
                 </Button>
                 <Button variant="contained" color="primary"
-                    onClick={onClick}
+                    onClick={confirmAction}
                     className={classes.button}> Sí </Button>
             </DialogActions>
 

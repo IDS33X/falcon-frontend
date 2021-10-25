@@ -79,8 +79,8 @@ const EditCardDialog = ({
         //setAreaData({ title: '', description: ''});
     }; // We dont need this fuction because of the reinitilize property that lets us have the updated state.
 
-   // const [initialValues, setInitialValues] = useState({title: '', description: ''});
-    
+    // const [initialValues, setInitialValues] = useState({title: '', description: ''});
+
     // useEffect(() => {
     //     if (!area?.title) clear();
     //     if (area) setAreaData({title: area.title, description: area.description});
@@ -117,7 +117,8 @@ const EditCardDialog = ({
     // }
     //dispatch(getAreas(amountOfPages, 8))
 
-    async function handleSubmit (values, setSubmitting) {
+
+    async function handleSubmit(values, setSubmitting) {
         setSubmitting(true);
         
         if (formType === 'Crear') {
@@ -186,11 +187,11 @@ const EditCardDialog = ({
                 validateOnMount
                 validateOnChange
                 validationSchema={formValidationSchema}
-                >
+            >
 
                 {({ isValid, isSubmitting, dirty, values, setSubmitting }) => (
 
-                    <Form >
+                    <Form>
                         {formType === 'Editar' ?
                             (<div>
                                 <label>Editar</label>
@@ -199,8 +200,8 @@ const EditCardDialog = ({
                                 <label>Crear</label>
                             </div>)
                         }
-                        <InputFormik name="title" label="Name" id="name"/>
-                        <InputFormik name="description" label="Description" id="description" multiline rows={4}/>
+                        <InputFormik name="title" label="Name" id="name" type='text'/>
+                        <InputFormik name="description" label="Description" id="description" multiline rows={4} type='text'/>
                         
                         <Button variant="contained" color="secondary"
                             onClick={() => {

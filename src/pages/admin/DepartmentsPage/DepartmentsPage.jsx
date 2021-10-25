@@ -35,23 +35,28 @@ const DepartmentsPage = () => {
     const [search, setSearch] = useState('');
     const [currentDepartmentId, setCurrentDepartmentId] = useState(1);
     const [formType, setFormType] = useState('Editar');
+    const { currentAreaTitle } = useSelector((state) => state.areas);
+    const { currentDivisionTitle } = useSelector((state) => state.divisions);
+
+
 
     // const bull = <span className={classes.bullet}>•</span>;
     // const search = 'hola';
     //search.trim() false/true
 
-    const searchDepartment = () => {
-        if (search.trim()){
+    const searchDepartment = (search) => {
+        if (search?.trim()){
             dispatch(getDepartmentsBySearch({divisionId, search, page, itemsPerPage}));
             history.push(`/departments/search?searchQuery=${search || 'none'}&divisionId=${divisionId}&page=${page}`);
         }else{
-            history.push('/');
+            dispatch(getDepartmentsByDivision({divisionId, page, itemsPerPage}));
+            //history.push('/');
         }
     }
     
     const onDispatch = () => {
         if(searchQuery){
-            searchDepartment();
+            searchDepartment(search);
         }else{
             console.log(amountOfPages);
             dispatch(getDepartmentsByDivision({divisionId, page, itemsPerPage}));
@@ -94,7 +99,10 @@ const DepartmentsPage = () => {
                 <Grid item xs={12} sm={6} md={9}>
                     <SearchBarComponent onSearchClick={searchDepartment} search={search} setSearch={setSearch} history={history}/>
                 </Grid>
-                    <AddButton setFormType={setFormType}/>
+                <AddButton setFormType={setFormType}/>
+                <Grid item xs={12} style={{marginBottom: -12, marginTop: -10, display: 'flex', alignContent: 'center', alignSelf: 'center', alignItems: 'center'}}>
+                    <h2 style={{float: "left", display: 'inline-block', fontWeight: 400, color: '#023E7D', fontSize: '16px',marginTop: '-5px'}}><span style={{color: '#000e29', fontStyle: 'normal', fontWeight: 700}}>Home &gt; </span>{currentAreaTitle} &gt; {currentDivisionTitle}</h2>
+                </Grid>
                 <Grid item xs={12}>
                     <Departments currentDepartmentId={currentDepartmentId} setCurrentDepartmentId={setCurrentDepartmentId} setFormType={setFormType}/>
                     <Grid className={classes.paginationGrid}>

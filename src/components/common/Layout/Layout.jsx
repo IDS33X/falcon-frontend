@@ -77,14 +77,11 @@ const Layout = ({ children, user, setUser, section }) => {
             <div className={classes.profile} style={{flexGrow: 1}} >
               <Typography className={classes.userName} variant="h6" style={{position: 'fixed', right: 10, transform: 'translate(-70px, -23px)'}} >{user?.employee.name}</Typography>
               <Avatar className={classes.purple} alt={user?.employee.name} style={{position: 'fixed', right: 10, transform: 'translate(-20px, -19px)'}}>{user?.employee.name.charAt(0)}</Avatar>
+              <Button variant="text" className={classes.logoutButton} color="secondary" onClick={logout} style={{position: 'fixed', right: 10, transform: 'translate(-66px, -5px)'}}>Cerrar Sesión</Button>
             </div>
           ) : (
             <Button component={Link} to="/areas" variant="contained" color="primary">Sign In</Button>
             )}
-          <div className='dropdown' style={{position: 'fixed', right: 10, backgroundColor: 'red'}}>
-
-            <Button variant="text" className={classes.logoutButton} color="secondary" onClick={logout} style={{position: 'fixed', right: 10, transform: 'translate(-66px, -5px)'}}>Cerrar Sesión</Button>
-          </div>
         </Toolbar>
       </AppBar>
 

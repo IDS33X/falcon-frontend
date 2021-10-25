@@ -7,8 +7,9 @@ import TableChartIcon from '@material-ui/icons/TableChart';
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from 'react-router';
 import { FaRegEdit } from 'react-icons/fa';
+import { setCurrentAreaTitle } from "../../../actions/areas";
 
-const Area = ({area, currentAreaId, setCurrentAreaId, setFormType}) => {
+const Area = ({area, currentAreaId, setCurrentAreaId, setFormType }) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -38,7 +39,9 @@ const Area = ({area, currentAreaId, setCurrentAreaId, setFormType}) => {
 
     const onClickCard = () => {
         // Use area.id and dispatch the GetDivisionsByArea
-        history.push(`/divisions?areaId=${area.id}`);
+        history.push(`/divisions?areaId=${area.id}&areaName=${area.title}`);
+        // Setting the current area name for breadcrumb
+        dispatch(setCurrentAreaTitle(area.title));
         // use history push or dispatch.
         console.log("Opening division");
     }

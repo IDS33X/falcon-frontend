@@ -1,4 +1,4 @@
-import { FETCH_ALL, FETCH_BY_SEARCH, FETCH_ONE, CREATE, UPDATE, START_LOADING, END_LOADING, UPDATE_AREA, CREATE_AREA, FETCH_AMOUNT_OF_AREAS} from '../constants/actionTypes';
+import { FETCH_ALL, FETCH_BY_SEARCH, FETCH_ONE, CREATE, UPDATE, START_LOADING, END_LOADING, UPDATE_AREA, CREATE_AREA, FETCH_AMOUNT_OF_AREAS, SET_CURRENT_AREA_TITLE} from '../constants/actionTypes';
 
 const areasReducer = (state = { isLoading: true, areas: [] }, action) => {
     switch (action.type) {
@@ -25,6 +25,11 @@ const areasReducer = (state = { isLoading: true, areas: [] }, action) => {
           return { 
             ...state,
             amountOfLastPageAreas: action.payload
+          }
+        case SET_CURRENT_AREA_TITLE:
+          return { 
+            ...state,
+            currentAreaTitle: action.payload
           }
         case CREATE_AREA:
           return { ...state, areas: [...state.areas, action.payload] };

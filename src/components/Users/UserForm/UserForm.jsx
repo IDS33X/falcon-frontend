@@ -7,20 +7,21 @@ import { Form, Formik } from "formik";
 import InputFormik from "../../common/Formik/InputFormik";
 import userFormValidations from "../../../validations/userFormValidations";
 import SelectFormik from "../../common/Formik/SelectFormik";
-import { GetUsers, ResetUser } from '../../../actions/users'
+import { ResetUser } from '../../../actions/users'
 import React, { useState, useEffect, useRef } from 'react'
 
 
-const UserForm = ({ saveUser, title, departmentId }) => {
+const UserForm = ({ saveUser, resetRoute, title, user, departmentId }) => {
     const classes = useStyles();
 
     const dispatch = useDispatch();
     const formRef = useRef(); // Allows to access properties and methods of the formik form from outside   
     const { showUserFormDialog } = useSelector(state => state.userFormDialog);
-    const user = useSelector(state => state.users.user);
+    //const user = useSelector(state => state.users.user);
 
     // State management of the form
     const [userForm, setUserForm] = useState({ user: {} });
+    const [showPassword, setShowPassword] = useState(false);
 
     // When the user is fetched the values of the form are updated
     useEffect(() => {
@@ -55,16 +56,18 @@ const UserForm = ({ saveUser, title, departmentId }) => {
         setSubmitting(true);
         values.departmentId = departmentId;
         Object.assign(userForm.user, values);
+        if(user){
+            userForm.user.id = user.id;
+        }
         await dispatch(saveUser(JSON.stringify(userForm)));
-        dispatch(GetUsers({ departmentId: departmentId, page: 1, itemsPerPage: 15 }));
-        closeForm(); // formik function that reset the state of the form (all the errors and data will be deleted)
-
+        closeForm();
     }
 
     // Close the form and resets it to its original state
-    const closeForm = () => {
+    const closeForm = async () => {
+        await dispatch(closeUserFormDialog());
+        resetRoute();
         dispatch(ResetUser());
-        dispatch(closeUserFormDialog());
 
     };
 
@@ -81,15 +84,15 @@ const UserForm = ({ saveUser, title, departmentId }) => {
 
                     <Form >
 
-                        <InputFormik name="code" label="Codigo" id="code" />
+                        <InputFormik type="text" name="code" label="Codigo" id="code" />
 
-                        <InputFormik name="name" label="Nombre" id="name" />
-                        <InputFormik name="lastName" label="Apellido" id="lastName" />
+                        <InputFormik type="text" name="name" label="Nombre" id="name" />
+                        <InputFormik type="text" name="lastName" label="Apellido" id="lastName" />
                         <SelectFormik name="roleId" label="Rol" id="roleId" options={[{ id: 2, name: "Administrador" }, { id: 3, name: "Analista de riesgo" }]} disabled />
 
-                        <InputFormik name="username" label="Usuario" id="password" />
+                        <InputFormik type="text" name="username" label="Usuario" />
 
-                        <InputFormik name="password" type="password" label="Contraseña" id="password" />
+                        <InputFormik type="text" name="password" type="password" label="Contraseña" />
 
                         <Button variant="contained" color="secondary" onClick={closeForm}
                             className={classes.button}>Cancelar</Button>

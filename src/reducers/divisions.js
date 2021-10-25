@@ -1,4 +1,4 @@
-import { FETCH_ALL, FETCH_BY_SEARCH, FETCH_ONE, CREATE_DIVISION, UPDATE_DIVISION, FETCH_DIVISIONS_BY_SEARCH, START_LOADING, END_LOADING, FETCH_BY_AREA, FETCH_ALL_DIVISIONS, FETCH_AMOUNT_OF_DIVISIONS} from '../constants/actionTypes';
+import { FETCH_ALL, FETCH_BY_SEARCH, FETCH_ONE, CREATE_DIVISION, UPDATE_DIVISION, FETCH_DIVISIONS_BY_SEARCH, START_LOADING, END_LOADING, FETCH_BY_AREA, FETCH_ALL_DIVISIONS, FETCH_AMOUNT_OF_DIVISIONS, SET_CURRENT_DIVISION_TITLE} from '../constants/actionTypes';
 
 const divisionsReducer = (state = { isLoading: true, divisions: [] }, action) => {
     switch (action.type) {
@@ -27,6 +27,11 @@ const divisionsReducer = (state = { isLoading: true, divisions: [] }, action) =>
             ...state,
             amountOfLastPageDivisions: action.payload
           } 
+        case SET_CURRENT_DIVISION_TITLE:
+          return { 
+            ...state,
+            currentDivisionTitle: action.payload
+          }
         case CREATE_DIVISION:
           return { ...state, divisions: [...state.divisions, action.payload] };
         case UPDATE_DIVISION:

@@ -7,6 +7,7 @@ import TableChartIcon from '@material-ui/icons/TableChart';
 import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router';
 import { FaRegEdit } from 'react-icons/fa';
+import { setCurrentDepartmentTitle } from "../../../actions/departments";
 
 const Department = ({department, currentDepartmentId, setCurrentDepartmentId, setFormType}) => {
     const dispatch = useDispatch();
@@ -38,10 +39,10 @@ const Department = ({department, currentDepartmentId, setCurrentDepartmentId, se
 
     const onClickCard = (area) => {
         // Link this to the users table.
-        history.push(`/departments/${department.id}/users`);
         // use history push or dispatch
-        //history.push(`/departments?divisionId=${division.id}`);
-        //history.push(`/users?departmentId=${department.id}`);
+        history.push(`/departments/${department.id}/users`);
+        // Setting the current area name for breadcrumb
+        dispatch(setCurrentDepartmentTitle(department.title));
         console.log("Opening users table");
     }
 

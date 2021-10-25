@@ -1,6 +1,6 @@
 import * as api from '../api/index.js';
 import { itemsPerPage } from '../components/common/Pagination/Pagination.jsx';
-import { FETCH_ALL, CREATE, UPDATE_AREA, DELETE, LIKE, FETCH_ONE, START_LOADING, END_LOADING, FETCH_BY_SEARCH, CREATE_AREA, FETCH_AMOUNT_OF_AREAS} from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, UPDATE_AREA, DELETE, LIKE, FETCH_ONE, START_LOADING, END_LOADING, FETCH_BY_SEARCH, CREATE_AREA, FETCH_AMOUNT_OF_AREAS, SET_CURRENT_AREA_TITLE} from '../constants/actionTypes';
 
 export const getAreas = (page, itemsPerPage) => async (dispatch) => {
   try {
@@ -57,6 +57,14 @@ export const getAmountOfAreas = (lastPage) => async (dispatch) => {
     dispatch({ type: FETCH_AMOUNT_OF_AREAS, payload: areas.length });
     dispatch({ type: END_LOADING });
 
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const setCurrentAreaTitle = (areaTitle) => async (dispatch) => {
+  try {
+    dispatch({ type: SET_CURRENT_AREA_TITLE, payload: areaTitle });
   } catch (error) {
     console.log(error);
   }

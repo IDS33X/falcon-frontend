@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import useStyles from './styles';
 export const itemsPerPage = 8;
-const Paginate = ({ page, stateSource, onDispatch, mainRouteName, areaId, divisionId, departmentId }) => {
+const Paginate = ({ page, stateSource, onDispatch, mainRouteName, areaId, divisionId, departmentId, departmentName }) => {
   
   const { amountOfPages } = stateSource;
   //const { amountOfPages } = useSelector((state) => state.areas);

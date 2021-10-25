@@ -13,8 +13,12 @@ const AddButton = ({ title, color = "primary", onClick, setFormType}) => {
     titleTooltip += title ? title : "";
     
     const handleOnClick = () => {
-        setFormType('Crear');
-        dispatch(openEditCardDialog());
+        if (setFormType) {
+            setFormType('Crear')
+            dispatch(openEditCardDialog());
+        } else{
+            dispatch(onClick());
+        }
     }
 
     return (

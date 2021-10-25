@@ -109,7 +109,7 @@ export default makeStyles((theme) => ({
     fontSize: '20px'
   },
   sectionName: {
-    fontSize: '16px',
+    fontSize: '13px',
     fontWeight: 200,
     color: '#85caff',
     position:'fixed', 

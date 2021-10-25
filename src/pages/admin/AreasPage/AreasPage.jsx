@@ -37,20 +37,20 @@ const AreasPage = ({match}) => {
     // const search = 'hola';
     //search.trim() false/true
 
-    const searchArea = () => {
-        if (search.trim()){
+    const searchArea = (search) => {
+        if (search?.trim()){
             dispatch(getAreasBySearch({search, page, itemsPerPage}));
             history.push(`/areas/search?searchQuery=${search || 'none'}&page=${page}`);
         }else{
-            history.push('/');
+            dispatch(getAreas(page, itemsPerPage));
+            //history.push('/');
         }
     }
     
     const onDispatch = () => {
         if(searchQuery){
-            searchArea();
+            searchArea(search);
         }else{
-
             dispatch(getAreas(page, itemsPerPage));
         }
     } // EL ON DISPATCH ES EL QUE ACTUALIZA LA PAGINACION
@@ -95,12 +95,10 @@ const AreasPage = ({match}) => {
                 <Grid item xs={12} sm={6} md={9}>
                     <SearchBarComponent onSearchClick={searchArea} search={search} setSearch={setSearch} history={history}/>
                 </Grid>
-                <div>
-                    <h2>Area de Mantenimiento</h2>
-                </div>
-                <div className='addButton'>
-                    <AddButton setFormType={setFormType}/>
-                </div>
+                <AddButton setFormType={setFormType}/>
+                <Grid item xs={12} style={{marginBottom: -12, marginTop: -10, display: 'flex', alignContent: 'center', alignSelf: 'center', alignItems: 'center'}}>
+                    <h2 style={{float: "left", display: 'inline-block', fontWeight: 700, color: '#023E7D', fontSize: '16px',marginTop: '-5px'}}>Home</h2> 
+                </Grid>
                 <Grid item xs={12}>
                     <Areas currentAreaId={currentAreaId} setCurrentAreaId={setCurrentAreaId} setFormType={setFormType}/>
                     <Grid className={classes.paginationGrid}>

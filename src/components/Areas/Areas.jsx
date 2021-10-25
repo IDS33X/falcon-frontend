@@ -5,7 +5,7 @@ import { CircularProgress, Grid } from '@material-ui/core';
 import Area from './Area/Area';
 import { green } from '@material-ui/core/colors';
 
-const Areas = ({currentAreaId, setCurrentAreaId, setFormType}) => {
+const Areas = ({currentAreaId, setCurrentAreaId, setFormType }) => {
     const classes = useStyles();
     const { areas, isLoading } = useSelector((state) => state.areas);
 

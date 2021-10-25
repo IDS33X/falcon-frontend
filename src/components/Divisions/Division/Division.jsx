@@ -7,11 +7,12 @@ import TableChartIcon from '@material-ui/icons/TableChart';
 import { useDispatch } from "react-redux";
 import { FaRegEdit } from 'react-icons/fa';
 import { useHistory, useLocation } from 'react-router';
+import { setCurrentDivisionTitle } from "../../../actions/divisions";
 
 const Division = ({division, currentDivisionId, setCurrentDivisionId, setFormType}) => {
     const dispatch = useDispatch();
     const history = useHistory();
-
+    
     const openEditCard = () => {
         setFormType('Editar');
         setCurrentDivisionId(division.id);
@@ -37,8 +38,10 @@ const Division = ({division, currentDivisionId, setCurrentDivisionId, setFormTyp
 
 
     const onClickCard = () => {
-        history.push(`/departments?divisionId=${division.id}`);
         // use history push or dispatch
+        history.push(`/departments?divisionId=${division.id}`);
+        // Setting the current area name for breadcrumb
+        dispatch(setCurrentDivisionTitle(division.title));
         console.log("Opening department");
     }
 

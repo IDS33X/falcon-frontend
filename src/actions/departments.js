@@ -1,5 +1,5 @@
 import * as api from '../api/index.js';
-import { START_LOADING, END_LOADING, FETCH_ALL_DEPARTMENTS, CREATE_DEPARTMENT, FETCH_DEPARTMENTS_BY_SEARCH, FETCH_AMOUNT_OF_DEPARTMENTS, UPDATE_DEPARTMENT } from '../constants/actionTypes';
+import { START_LOADING, END_LOADING, FETCH_ALL_DEPARTMENTS, CREATE_DEPARTMENT, FETCH_DEPARTMENTS_BY_SEARCH, FETCH_AMOUNT_OF_DEPARTMENTS, UPDATE_DEPARTMENT, SET_CURRENT_DEPARTMENT_TITLE } from '../constants/actionTypes';
 
 export const getDepartmentsByDivision = (searchQuery) => async(dispatch) => {
     try {
@@ -60,3 +60,11 @@ export const updateDepartment = (updatedDepartment) => async(dispatch) => {
     console.log(error);
   }
 };
+
+export const setCurrentDepartmentTitle = (departmentTitle) => async (dispatch) => {
+    try {
+      dispatch({ type: SET_CURRENT_DEPARTMENT_TITLE, payload: departmentTitle });
+    } catch (error) {
+      console.log(error);
+    }
+  };

@@ -8,7 +8,7 @@ const CircularButton = ({ children, color = "primary", onClick }) => {
     const dispatch = useDispatch();
 
     return (
-        <Button variant="contained" color={color} onClick={() => dispatch(onClick())} className={classes.button}>
+        <Button variant="contained" color={color} onClick={onClick} className={classes.button}>
             {children}
         </Button>
 

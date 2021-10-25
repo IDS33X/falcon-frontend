@@ -1,25 +1,26 @@
 import useStyles from './styles';
 import SearchBar from "material-ui-search-bar";
-import {useState} from 'react'
+import { useState } from 'react'
 
 const SearchBarComponent = ({onSearchClick, search, setSearch, history}) => {
   //const [searchItem, setSearchItem] = useState("");
     const classes = useStyles();
     
-    const handleCancel = () => {
-      setSearch("");
-      history.push('/');   
-    }
+    // const handleCancel = () => {
+    //   setSearch("");
+    //   onSearchClick();
+    //   //history.push('/');
+    // }
 
     return (  
           <SearchBar
-            onRequestSearch={(e) => onSearchClick()}
+            onRequestSearch={(e) => onSearchClick(e)}
             value={search}
             onChange={value => { setSearch(value); }}
-            onCancelSearch={() => { handleCancel() }}
+            onCancelSearch={(e) => { setSearch(""); onSearchClick(e);}}
             placeholder	= "Buscar..."
             className={classes.searchBar}/>  
     );
 }
- 
+
 export default SearchBarComponent;

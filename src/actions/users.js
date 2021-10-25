@@ -1,107 +1,82 @@
-import axios from 'axios'
+
+import * as api from '../api/index.js';
+
 import {
-    GET_USERS_REQUEST,
-    GET_USERS_SUCCESS,
-    GET_USERS_FAILURE,
-    SEND_REQUEST,
-    SUCCESSFUL_REQUEST,
-    FAILED_REQUEST,
-    SET_NULL_USER
+
+    FAILED_USER_REQUEST,
+
+    SET_USER,
+    FETCH_USERS,
+    SEARCH_USERS,
+    FETCH_USER,
+    CREATE_USER,
+    UPDATE_USER,
+    START_LOADING_USER
 } from '../constants/actionTypes'
 
-const options = {
-    headers: {
-        'Content-Type': 'application/json',
-    }
-};
-
-// Generic Action creators 
-
-export const GetUsersRequest = () => {
-    return {
-        type: GET_USERS_REQUEST
-    }
-}
-
-export const GetUsersSuccess = users => {
-    return {
-        type: GET_USERS_SUCCESS,
-        payload: users
-    }
-}
-
-export const GetUsersFailure = error => {
-    return {
-        type: GET_USERS_FAILURE,
-        payload: error
-    }
-}
-
-
-export const SendRequest = () => {
-    return {
-        type: SEND_REQUEST
-    }
-}
-
-export const SuccessfulRequest = payload => {
-    return {
-        type: SUCCESSFUL_REQUEST,
-        payload: payload
-    }
-}
+// Generic Action creators
 
 export const FailedRequest = error => {
     return {
-        type: FAILED_REQUEST,
+        type: FAILED_USER_REQUEST,
         payload: error
     }
 }
 
 
 // Set user to null 
-export const ResetUser = () => ({ type: SET_NULL_USER });
 
-// READ
-export const GetUsers = ({ departmentId, page, itemsPerPage }) => {
+export const ResetUser = () => ({ type: SET_USER, payload: null });
+
+export const GetUsers = (departmentId, page, itemsPerPage) => async (dispatch) => {
+
+    dispatch({ type: START_LOADING_USER })
+    await api.fetchUsers(departmentId, page, itemsPerPage)
+        .then(response => {
+            const { users, currentPage, amountOfPages, totalOfItems } = response.data
+            dispatch({ type: FETCH_USERS, payload: { users, currentPage, totalOfItems, amountOfPages } })
+
+        })
+        .catch(error => {
+            dispatch(FailedRequest(error))
+        })
+
+    //dispatch({ type: GET_USERS_SUCCESS, payload: { users, currentPage, amountOfPages } });
+
+
+};
+
+export const SearchUsersByDepartment = (departmentId, page, filter, itemsPerPage) => {
     return async function (dispatch) {
-        dispatch(GetUsersRequest())
-        await axios
-            .get(`https://localhost:44382/api/User/GetUsersByDepartment?DepartmentId=${departmentId}&Page=${page}&ItemsPerPage=${itemsPerPage}`)
+        dispatch({ type: START_LOADING_USER })
+        await api.fetchUsersBySearch(departmentId, page, filter, itemsPerPage)
             .then(response => {
                 const users = response.data
-                dispatch(GetUsersSuccess(users))
+                dispatch({
+                    type: SEARCH_USERS,
+                    payload: users
+                })
             })
             .catch(error => {
-                dispatch(GetUsersFailure(error.message))
+                //dispatch(GetUsersFailure(error.message))
             })
     }
 }
 
-export const SearchUsersByDepartment = ({ departmentId, page, filter, itemsPerPage }) => {
-    return async function (dispatch) {
-        dispatch(GetUsersRequest())
-        await axios
-            .get(`https://localhost:44382/api/User/SearchUsersByDepartment?DepartmentId=${departmentId}&Filter=${filter}&Page=${page}&ItemsPerPage=${itemsPerPage}`)
-            .then(response => {
-                const users = response.data
-                dispatch(GetUsersSuccess(users))
-            })
-            .catch(error => {
-                dispatch(GetUsersFailure(error.message))
-            })
-    }
-}
+
+
 
 
 export const GetById = (id) => {
     return async function (dispatch) {
-        dispatch(SendRequest())
-        await axios
-            .get(`https://localhost:44382/api/User/GetById?id=${id}`)
+        dispatch({ type: START_LOADING_USER })
+        await api.fetchUser(id)
             .then(response => {
                 const user = response.data
-                dispatch(SuccessfulRequest(user))
+                dispatch({
+                    type: FETCH_USER,
+                    payload: user
+                })
             })
             .catch(error => {
                 dispatch(FailedRequest(error.message))
@@ -112,13 +87,14 @@ export const GetById = (id) => {
 // CREATE  
 export const AddUser = (user) => {
     return async function (dispatch) {
-        dispatch(SendRequest())
-        await axios
-            .post(`https://localhost:44382/api/User/Add`, user, { "headers": options.headers })
+        dispatch({ type: START_LOADING_USER })
+        await api.addUser(user)
             .then(response => {
                 const user = response.data
-                console.log('ADD USER SUCCESS  ', response.data);
-                dispatch(SuccessfulRequest(user))
+                dispatch({
+                    type: CREATE_USER,
+                    payload: user
+                })
             })
             .catch(error => {
                 dispatch(FailedRequest(error.message))
@@ -129,17 +105,30 @@ export const AddUser = (user) => {
 // UPDATE  
 export const UpdateProfile = (user) => {
     return async function (dispatch) {
-        dispatch(SendRequest())
-        await axios
-            .post(`https://localhost:44382/api/User/UpdateProfile`, user, { "headers": options.headers })
+        dispatch({ type: START_LOADING_USER })
+        api.updateProfile(user)
             .then(response => {
                 const user = response.data
-                console.log('UPDATE USER SUCCESS  ', response.data);
-                dispatch(SuccessfulRequest(user))
+                dispatch({
+                    type: UPDATE_USER,
+                    payload: user
+                })
             })
             .catch(error => {
                 dispatch(FailedRequest(error.message))
             })
+
+        // api.updateLogin(user)
+        //     .then(response => {
+        //         const user = response.data
+        //         dispatch({
+        //             type: UPDATE_USER,
+        //             payload: user
+        //         })
+        //     })
+        //     .catch(error => {
+        //         dispatch(FailedRequest(error.message))
+        //     })
     }
 }
 

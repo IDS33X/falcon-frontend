@@ -33,23 +33,25 @@ const DivisionsPage = () => {
     const [search, setSearch] = useState('');
     const [currentDivisionId, setCurrentDivisionId] = useState(1);
     const [formType, setFormType] = useState('Editar');
+    const { currentAreaTitle } = useSelector((state) => state.areas);
 
     // const bull = <span className={classes.bullet}>•</span>;
     // const search = 'hola';
     //search.trim() false/true
 
-    const searchDivision = () => {
-        if (search.trim()){
+    const searchDivision = (search) => {
+        if (search?.trim()){
             dispatch(getDivisionsBySearch({areaId, search, page, itemsPerPage}));
             history.push(`/divisions/search?searchQuery=${search || 'none'}&areaId=${areaId}&page=${page}`);
         }else{
-            history.push('/');
+            dispatch(getDivisionsByArea({areaId, page, itemsPerPage}));
+            //history.push('/');
         }
     }
     
     const onDispatch = () => {
         if(searchQuery){
-            searchDivision();
+            searchDivision(search);
         }else{
             dispatch(getDivisionsByArea({areaId, page, itemsPerPage}));
         }
@@ -91,7 +93,10 @@ const DivisionsPage = () => {
                 <Grid item xs={12} sm={6} md={9}>
                     <SearchBarComponent onSearchClick={searchDivision} search={search} setSearch={setSearch} history={history}/>
                 </Grid>
-                    <AddButton setFormType={setFormType}/>
+                <AddButton setFormType={setFormType}/>
+                <Grid item xs={12} style={{marginBottom: -12, marginTop: -10, display: 'flex', alignContent: 'center', alignSelf: 'center', alignItems: 'center'}}>
+                    <h2 style={{float: "left", display: 'inline-block', fontWeight: 400, color: '#023E7D', fontSize: '16px',marginTop: '-5px'}}><span style={{color: '#000e29', fontStyle: 'normal', fontWeight: 700}}>Home &gt; </span>{currentAreaTitle}</h2>
+                </Grid>
                 <Grid item xs={12}>
                     <Divisions currentDivisionId={currentDivisionId} setCurrentDivisionId={setCurrentDivisionId} setFormType={setFormType}/>
                     <Grid className={classes.paginationGrid}>

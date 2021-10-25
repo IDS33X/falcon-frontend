@@ -1,5 +1,5 @@
 import * as api from '../api/index.js';
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, FETCH_ONE, START_LOADING, END_LOADING, FETCH_BY_SEARCH, FETCH_BY_AREA, FETCH_ALL_DIVISIONS, CREATE_DIVISION, FETCH_AMOUNT_OF_DIVISIONS, FETCH_DIVISIONS_BY_SEARCH, UPDATE_DIVISION} from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, FETCH_ONE, START_LOADING, END_LOADING, FETCH_BY_SEARCH, FETCH_BY_AREA, FETCH_ALL_DIVISIONS, CREATE_DIVISION, FETCH_AMOUNT_OF_DIVISIONS, FETCH_DIVISIONS_BY_SEARCH, UPDATE_DIVISION, SET_CURRENT_DIVISION_TITLE} from '../constants/actionTypes';
 
 export const getDivisionsByArea = (searchQuery) => async(dispatch) => {
     try {
@@ -56,6 +56,14 @@ export const updateDivision = (updatedDivision) => async(dispatch) => {
     dispatch({ type: END_LOADING });
 
     dispatch({ type: UPDATE_DIVISION, payload: division });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const setCurrentDivisionTitle = (divisionTitle) => async (dispatch) => {
+  try {
+    dispatch({ type: SET_CURRENT_DIVISION_TITLE, payload: divisionTitle });
   } catch (error) {
     console.log(error);
   }

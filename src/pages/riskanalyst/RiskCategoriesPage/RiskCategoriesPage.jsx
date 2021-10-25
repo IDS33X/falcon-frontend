@@ -42,19 +42,19 @@ const RiskCategoriesPage = () => {
     // const search = 'hola';
     //search.trim() false/true
 
-    const searchRiskCategory = () => {
-        if (search.trim()){
-
+    const searchRiskCategory = (search) => {
+        if (search?.trim()){
             dispatch(getRiskCategoriesBySearch({departmentId, search, page, itemsPerPage})); // We need to implement searching among the complete state, not just one page.
             history.push(`/riskcategories/search?searchQuery=${search || 'none'}&departmentId=${departmentId}&page=${page}`);
         }else{
-            history.push('/');
+            dispatch(getRiskCategoriesByDepartment({departmentId, page, itemsPerPage}));
+            //history.push('/');
         }
     }
     
     const onDispatch = () => {
         if(searchQuery){
-            searchRiskCategory();
+            searchRiskCategory(search);
         }else{
             console.log(`There is a department Id of ${departmentId}`);
             dispatch(getRiskCategoriesByDepartment({departmentId, page, itemsPerPage}));
