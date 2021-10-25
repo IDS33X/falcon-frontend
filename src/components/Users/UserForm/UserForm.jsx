@@ -9,7 +9,7 @@ import userFormValidations from "../../../validations/userFormValidations";
 import SelectFormik from "../../common/Formik/SelectFormik";
 import { ResetUser } from '../../../actions/users'
 import React, { useState, useEffect, useRef } from 'react'
-
+import {UpdatePassword} from "../../../actions/users"
 
 const UserForm = ({ saveUser, resetRoute, title, user, departmentId }) => {
     const classes = useStyles();
@@ -33,7 +33,7 @@ const UserForm = ({ saveUser, resetRoute, title, user, departmentId }) => {
                 name: user?.name ?? '',
                 lastName: user?.lastName ?? '',
                 code: user?.code ?? '',
-                password: user?.code ?? ''
+                password: user?.password ?? ''
             }
         })
 
@@ -56,10 +56,20 @@ const UserForm = ({ saveUser, resetRoute, title, user, departmentId }) => {
         setSubmitting(true);
         values.departmentId = departmentId;
         Object.assign(userForm.user, values);
-        if(user){
+        if (user) {
+
+            const updatePasswordForm = {
+                "userPassword": {
+                    "id": user.id,
+                    "password": values.password
+                }
+            }
             userForm.user.id = user.id;
+            await dispatch(UpdatePassword(JSON.stringify(updatePasswordForm)));
+
         }
         await dispatch(saveUser(JSON.stringify(userForm)));
+
         closeForm();
     }
 
@@ -86,13 +96,13 @@ const UserForm = ({ saveUser, resetRoute, title, user, departmentId }) => {
 
                     <Form >
 
-                        <InputFormik name="code" label="Codigo" id="code" />
+                        <InputFormik disabled type="text" name="code" label="Codigo" id="code" />
 
-                        <InputFormik name="name" label="Nombre" id="name" />
-                        <InputFormik name="lastName" label="Apellido" id="lastName" />
+                        <InputFormik type="text" name="name" label="Nombre" id="name" />
+                        <InputFormik type="text" name="lastName" label="Apellido" id="lastName" />
                         <SelectFormik name="roleId" label="Rol" id="roleId" options={[{ id: 2, name: "Administrador" }, { id: 3, name: "Analista de riesgo" }]} disabled />
 
-                        <InputFormik name="username" label="Usuario" />
+                        <InputFormik type="text" name="username" label="Usuario" />
 
                         <InputFormik name="password" type="password" label="Contraseña" type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
 

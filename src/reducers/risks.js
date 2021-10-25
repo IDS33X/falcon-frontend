@@ -8,7 +8,10 @@ import {
   FAILED_RISK_REQUEST,
   SET_RISK,
   CLOSE_RISK_FORM_DIALOG,
-  OPEN_RISK_FORM_DIALOG
+  OPEN_RISK_FORM_DIALOG,
+  FETCH_RISKS_IMPACTS,
+  ADD_RISK_CONTROLS,
+  REMOVE_RISK_CONTROLS
 } from '../constants/actionTypes'
 
 const initialState = {
@@ -19,6 +22,7 @@ const initialState = {
   currentPage: 0,
   amountOfPages: 0,
   showRiskFormDialog: false,
+  riskImpacts: []
 };
 
 const risks = (state = initialState, { type, payload }) => {
@@ -32,6 +36,12 @@ const risks = (state = initialState, { type, payload }) => {
         currentPage: payload.currentPage,
         amountOfPages: payload.amountOfPages,
         risks: payload.risks,
+      }
+
+    case FETCH_RISKS_IMPACTS:
+      return {
+        ...state,
+        riskImpacts: payload,
       }
     case START_LOADING_RISK:
       return {
@@ -70,15 +80,15 @@ const risks = (state = initialState, { type, payload }) => {
     case UPDATE_RISK:
       let index = state.risks.findIndex(risk => risk.id === payload.risk.id);
       const newArray = [...state.risks]; //making a new array
-      newArray[index] = {...payload.risk}//changing value in the new array
-      
+      newArray[index] = { ...payload.risk }//changing value in the new array
+
       return {
         ...state,
         risks: newArray,
         loading: false,
 
       };
-      
+
 
     case FAILED_RISK_REQUEST:
       return {
@@ -99,6 +109,24 @@ const risks = (state = initialState, { type, payload }) => {
         ...state,
         showRiskFormDialog: false
       }
+
+    case ADD_RISK_CONTROLS:
+      return {
+        ...state,
+        showRiskFormDialog: false,
+        loading: false
+
+      }
+
+    case REMOVE_RISK_CONTROLS:
+      return {
+        ...state,
+        showRiskFormDialog: false,
+        loading: false
+
+      }
+
+
 
 
 

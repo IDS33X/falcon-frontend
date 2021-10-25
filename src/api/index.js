@@ -37,7 +37,7 @@ export const addUser = (user) => API.post(`/User/Add`, user, { "headers": option
 
 export const updateProfile = (user) => API.put(`/User/UpdateProfile`, user, { "headers": options.headers });
 
-export const updateLogin = (user) => API.put(`/User/UpdateLogin`, user, { "headers": options.headers });
+export const updatePassword = (userPassword) => API.put(`/User/ChangePassword`, userPassword, { "headers": options.headers });
 
 
 // Risks Impacts
@@ -47,12 +47,38 @@ export const fetchRiskImpacts = () => API.get(`/RiskImpact/GetAll`)
 // Risks
 
 export const fetchRiskByCategory = (riskCategoryId, page, itemsPerPage) => API.get(`/Risk/GetRiskByCategory?RiskCategoryId=${riskCategoryId}&Page=${page}&ItemsPerPage=${itemsPerPage}`)
-
 export const searchRiskByCode = (riskCategoryId, page, itemsPerPage, filter) => API.get(`/Risk/GetRiskByCategoryAndCode?RiskCategoryId=${riskCategoryId}&Filter=${filter}&Page=${page}&ItemsPerPage=${itemsPerPage}`)
-
-export const searchRiskByDescription = (riskCategoryId, page, filter, itemsPerPage) => API.get(`/Risk/GetRiskByCategoryAndDescription?RiskCategoryId=${riskCategoryId}&Filter=${filter}&Page=${page}&ItemsPerPage=${itemsPerPage}`)
-
+export const searchRiskByDescription = (riskCategoryId, page, filter, itemsPerPage) => API.get(`/Risk/GetRiskByCategoryAndDescription?RiskCategoryId=${riskCategoryId}&Filter=${filter}&Page=${page}&ItemsPerPage=${itemsPerPage}`);
 export const addRisk = (risk) => API.post(`/Risk/Add`, risk, { "headers": options.headers });
-
 export const updateRisk = (risk) => API.put(`/Risk/Update`, risk, { "headers": options.headers });
+
+// RiskControl 
+
+export const AddRangeRiskControls = (riskControls) => API.post(`/RiskControl/AddRange`, riskControls);
+export const RemoveRangeRiskControls = (riskControls) => API.put(`/RiskControl/RemoveRange`, riskControls);
+
+
+
+// Controls
+
+export const fetchControls = (page, itemsPerPage) => API.get(`/Control/GetControls?Page=${page}&ItemsPerPage=${itemsPerPage}`);
+export const fetchControlsByRisk = (riskId, page, itemsPerPage) => API.get(`/Control/GetControlsByRisk?RiskId=${riskId}&Page=${page}&ItemsPerPage=${itemsPerPage}`);
+export const searchControlsByCode = (code) => API.get(`/Control/GetControlByCode?Code=${code}`);
+export const addControl = (control) => API.post(`/Control/Add`, control, { "headers": options.headers });
+export const updateControl = (control) => API.put(`/Control/Update`, control, { "headers": options.headers });
+
+
+// Automation Level
+
+export const fetchAutomationLevels = () => API.get(`/AutomationLevel/GetAll`);
+
+// Control states 
+
+export const fetchControlStates = () => API.get(`/ControlState/GetAll`);
+
+// Control types 
+
+export const fetchControlTypes = () => API.get(`/ControlType/GetAll`);
+
+
 
