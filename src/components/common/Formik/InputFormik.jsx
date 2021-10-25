@@ -10,7 +10,7 @@ export default function InputFormik({ label, type, ...props }) {
     <>
       {
 
-        type === "text" ?
+        type === "text" || type === "password"  ?
 
           <TextField
             {...field}

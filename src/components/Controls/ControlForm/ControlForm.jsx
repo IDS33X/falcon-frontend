@@ -69,28 +69,28 @@ const ControlForm = ({ saveControl, resetRoute, title, control }) => {
 
                     <Form >
 
-                        <Grid container spacing={6}   alignItems="center" justifyContent="space-even"> 
+                        <Grid container spacing={6} alignItems="center" justifyContent="space-even">
                             <Grid item xs={4} sm={6} md={5} >
-                                 {
-                            control &&
-                            (
-                                <>
-                                    <InputFormik name="creator" type="text" disabled label="Creador" />
+                                {
+                                    control &&
+                                    (
+                                        <>
+                                            <InputFormik name="creator" type="text" disabled label="Creador" />
 
-                                    <InputFormik name="creationDate" type="text" disabled label="Fecha de creación" />
+                                            <InputFormik name="creationDate" type="text" disabled label="Fecha de creación" />
 
-                                    <InputFormik name="lastUpdateDate" disabledtype="text" label="Fecha de modificación" />
+                                            <InputFormik name="lastUpdateDate" disabledtype="text" label="Fecha de modificación" />
 
-                                </>
-                            )
-                        }
-                        <InputFormik name="code" type="text" label="Código" />
+                                        </>
+                                    )
+                                }
+                                <InputFormik name="code" disabled type="text" label="Código" />
 
-                        <InputFormik name="activity" type="text" label="Actividad" multiline rows={2} />
+                                <InputFormik name="activity" type="text" label="Actividad" multiline rows={2} />
 
-                        <InputFormik name="objective" type="text" label="Objetivo" multiline rows={1} />
+                                <InputFormik name="objective" type="text" label="Objetivo" multiline rows={1} />
 
-                        <InputFormik name="evidence" type="text" label="Evidencia" multiline rows={2} />
+                                <InputFormik name="evidence" type="text" label="Evidencia" multiline rows={2} />
 
                             </Grid>
 
@@ -98,27 +98,27 @@ const ControlForm = ({ saveControl, resetRoute, title, control }) => {
 
                                 <SelectFormik name="automationLevelId" label="Nivel de automatización" options={automationLevels.map(automationLevel => ({ id: automationLevel.id, name: automationLevel.title }))} />
 
-                        <SelectFormik name="controlTypeId" label="Tipo de control" options={controlTypes.map(controlType => ({ id: controlType.id, name: controlType.title }))} />
+                                <SelectFormik name="controlTypeId" label="Tipo de control" options={controlTypes.map(controlType => ({ id: controlType.id, name: controlType.title }))} />
 
-                        <SelectFormik name="controlStateId" label="Estado" options={controlStates.map(controlState => ({ id: controlState.id, name: controlState.title }))} />
+                                <SelectFormik name="controlStateId" label="Estado" options={controlStates.map(controlState => ({ id: controlState.id, name: controlState.title }))} />
 
-                        <InputFormik name="responsablePosition" type="text" label="Posición responsable" />
+                                <InputFormik name="responsablePosition" type="text" label="Posición responsable" />
 
-                        <InputFormik name="frequency" type="text" label="Frecuencia" />
+                                <InputFormik name="frequency" type="text" label="Frecuencia" />
 
-                        <InputFormik name="policy" type="text" label="Política" multiline rows={3} />
+                                <InputFormik name="policy" type="text" label="Política" multiline rows={3} />
 
 
-                        <InputFormik name="documented" type="checkbox" label="Documentado" />
+                                <InputFormik name="documented" type="checkbox" label="Documentado" />
+
+                            </Grid>
+
 
                         </Grid>
 
 
-                        </Grid>
 
-                       
 
-                        
 
                         <Button variant="contained" color="secondary" onClick={closeForm}
                             className={classes.button}>Cancelar</Button>

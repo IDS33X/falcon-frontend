@@ -37,7 +37,7 @@ export const addUser = (user) => API.post(`/User/Add`, user, { "headers": option
 
 export const updateProfile = (user) => API.put(`/User/UpdateProfile`, user, { "headers": options.headers });
 
-export const updateLogin = (user) => API.put(`/User/UpdateLogin`, user, { "headers": options.headers });
+export const updatePassword = (userPassword) => API.put(`/User/ChangePassword`, userPassword, { "headers": options.headers });
 
 
 // Risks Impacts

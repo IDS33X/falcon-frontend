@@ -33,10 +33,12 @@ export const FETCH_USER = 'FETCH_USER';
 export const CREATE_USER = 'CREATE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const START_LOADING_USER = 'START_LOADING_USER';
-
 export const SEND_REQUEST = 'SEND_REQUEST'
 export const FAILED_USER_REQUEST = 'FAILED_USER_REQUEST'
 export const SET_USER = 'SET_USER';
+export const UPDATE_USER_PASSWORD = 'UPDATE_USER_PASSWORD';
+
+
 
 // Risks page actions 
 

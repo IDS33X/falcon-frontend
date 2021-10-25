@@ -78,7 +78,7 @@ const RiskForm = ({ saveRisk, resetRoute, title, risk, categoryId }) => {
                                 </>
                             )
                         }
-                        <InputFormik type="text" name="code" label="Codigo" />
+                        <InputFormik type="text" disabled name="code" label="Codigo" />
 
                         <InputFormik type="text" name="description" label="Descripción" multiline rows={2} />
 
@@ -90,7 +90,7 @@ const RiskForm = ({ saveRisk, resetRoute, title, risk, categoryId }) => {
 
 
 
-                        <InputFormik type="text"name="rootCause" label="Causa raíz" multiline rows={4} />
+                        <InputFormik type="text" name="rootCause" label="Causa raíz" multiline rows={4} />
 
                         <Button variant="contained" color="secondary" onClick={closeForm}
                             className={classes.button}>Cancelar</Button>

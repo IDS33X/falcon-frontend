@@ -101,7 +101,7 @@ const UsersPage = ({ match }) => {
     }
 
     return loading ? (
-        <Box textAlign='center' justifyContent = 'center'>
+        <Box textAlign='center' justifyContent='center'>
             <CircularProgress />
         </Box>
     ) : error ? (
