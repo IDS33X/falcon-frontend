@@ -33,6 +33,8 @@ const RisksPage = ({ match }) => {
     const categoryId = match ? match.params.categoryId : null;
     const selectedRisk = useSelector(state => state.risks.risk);
     const { risks, loading, error, amountOfPages, riskImpacts } = useSelector(state => state.risks);
+    const selectedCategoryTitle = useSelector(state => state.controls.control)?.title;
+
     const classes = useStyles();
     const dispatch = useDispatch();
     const query = useQuery();
@@ -78,6 +80,7 @@ const RisksPage = ({ match }) => {
     useEffect(() => {
         if (risks) {
             setRows(getGridRows(risks));
+
         }
     }, [risks]);
 
@@ -85,16 +88,16 @@ const RisksPage = ({ match }) => {
         if (riskQuery && selectedRisk) {
             dispatch(openFormDialog());
         }
+        dispatch(GetRiskImpacts());
         //setRiskId(selectedRisk?.id);
 
-    }, [rowsDataGrid, selectedRisk, dispatch]);
+    }, [rowsDataGrid, selectedRisk]);
 
 
     // When edit button is clicked this actions are fired
     editButton.onClick = async (rowId) => {
         history.push(`${mainRouteName}/edit?risk=${rowId}`);
         await dispatch(SetRisk(risks.find(risk => risk.id === rowId)));
-        dispatch(GetRiskImpacts());
         dispatch(openFormDialog());
     }
 
@@ -104,7 +107,7 @@ const RisksPage = ({ match }) => {
         setRiskId(rowId);
         history.push(`${mainRouteName}/?risk=${rowId}&/controls/`);
         await dispatch(GetControlsByRisk(rowId, 1, 20));
-        await dispatch(GetControls(1, 50));
+        await dispatch(GetControls(categoryId, 1, 50));
         setShowRiskControlsDialog(true);
 
     }
@@ -144,7 +147,7 @@ const RisksPage = ({ match }) => {
                 {/* className={classes.gridContainer} */}
                 <Grid item xs={12} sm={6} md={9}>
                     <h1>
-                        Gestionar riesgos
+                        Riesgos de categoria {selectedCategoryTitle}
                     </h1>
                 </Grid>
 

@@ -53,7 +53,8 @@ export const GetRiskImpacts = () => async (dispatch) => {
 
     await api.fetchRiskImpacts()
         .then(response => {
-            const { riskImpacts } = response.data
+            const { riskImpacts } = response.data;
+            console.log(riskImpacts);
             dispatch({ type: FETCH_RISKS_IMPACTS, payload: riskImpacts })
 
         })

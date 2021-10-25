@@ -22,6 +22,7 @@ const UsersPage = ({ match }) => {
     const departmentId = match ? match.params.departmentId : null;
     const selectedUser = useSelector(state => state.users.user);
     const { users, loading, error, amountOfPages, totalOfItems } = useSelector(state => state.users);
+    const selectedDepartmentTitle = useSelector(state => state.departments.department)?.title;
     const classes = useStyles();
     const dispatch = useDispatch();
     const query = useQuery();
@@ -100,7 +101,7 @@ const UsersPage = ({ match }) => {
     }
 
     return loading ? (
-        <Box textAlign='center' justifyContent = 'center'>
+        <Box textAlign='center' justifyContent='center'>
             <CircularProgress />
         </Box>
     ) : error ? (
@@ -113,7 +114,7 @@ const UsersPage = ({ match }) => {
                 {/* className={classes.gridContainer} */}
                 <Grid item xs={12} sm={6} md={9}>
                     <h1>
-                        Gestionar usuarios
+                        Usuarios del departamento {selectedDepartmentTitle}
                     </h1>
                 </Grid>
 
