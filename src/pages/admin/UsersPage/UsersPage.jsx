@@ -22,7 +22,6 @@ const UsersPage = ({ match }) => {
     const departmentId = match ? match.params.departmentId : null;
     const selectedUser = useSelector(state => state.users.user);
     const { users, loading, error, amountOfPages, totalOfItems } = useSelector(state => state.users);
-    const selectedDepartmentTitle = useSelector(state => state.departments.department)?.title;
     const classes = useStyles();
     const dispatch = useDispatch();
     const query = useQuery();
@@ -35,6 +34,9 @@ const UsersPage = ({ match }) => {
     const [currentPage, setPage] = useState(0);
     const [pageSize, setPageSize] = React.useState(10);
     const mainRouteName = `/departments/${match.params.departmentId}/users`;
+    const { currentAreaTitle } = useSelector((state) => state.areas)
+    const { currentDivisionTitle } = useSelector((state) => state.divisions)
+    const { currentDepartmentTitle } = useSelector((state) => state.departments)
 
     // Table headers
     const headers = [
@@ -114,12 +116,13 @@ const UsersPage = ({ match }) => {
                 {/* className={classes.gridContainer} */}
                 <Grid item xs={12} sm={6} md={9}>
                     <h1>
-                        Usuarios del departamento {selectedDepartmentTitle}
+                        Usuarios
                     </h1>
                 </Grid>
-
-
-
+                <Grid item xs={12} style={{marginBottom: -12, marginTop: -10, display: 'flex', alignContent: 'center', alignSelf: 'center', alignItems: 'center'}}>
+                    <h2 style={{float: "left", display: 'inline-block', fontWeight: 400, color: '#023E7D', fontSize: '16px',marginTop: '-5px'}}>
+                        <span style={{color: '#000e29', fontStyle: 'normal', fontWeight: 700}}>Home &gt; </span>{currentAreaTitle} &gt; {currentDivisionTitle}  &gt; {currentDepartmentTitle}</h2>
+                </Grid>
             </Grid>
             <Grid container justify="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
                 <Grid item xs={12} sm={6} md={9}>
@@ -128,8 +131,6 @@ const UsersPage = ({ match }) => {
                 <Grid>
                     <AddButton title="usuario" onClick={openUserFormDialog}></AddButton>
                 </Grid>
-
-
             </Grid>
 
 

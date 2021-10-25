@@ -84,7 +84,7 @@ const ControlForm = ({ saveControl, resetRoute, title, control, riskCategoryId }
                                         </>
                                     )
                                 }
-                                <InputFormik name="code" type="text" label="Código" />
+                                <InputFormik name="code" type="text" label="Código" disabled={control} />
 
                                 <InputFormik name="activity" type="text" label="Actividad" multiline rows={2} />
 

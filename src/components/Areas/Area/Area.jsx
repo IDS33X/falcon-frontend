@@ -53,7 +53,7 @@ const Area = ({area, currentAreaId, setCurrentAreaId, setFormType }) => {
     return(
         <>
             <SmallCard editButton={editButton} title={area.title} description={area.description}
-                    bottomActions={[pricipalMatrixButton]} onClickCard = {onClickCard}></SmallCard>
+                    bottomTitle={'Divisiones'} bottomCounter={area.countDivisions} onClickCard = {onClickCard}></SmallCard>
             <ConfirmationDialog/>
             {/* <EditCardDialog currentAreaId={currentAreaId} setCurrentAreaId={setCurrentAreaId}/> */}
         </>

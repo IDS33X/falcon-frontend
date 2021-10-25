@@ -1,5 +1,5 @@
 import * as api from '../api/index.js';
-import { START_LOADING, END_LOADING, FETCH_ALL_RISK_CATEGORIES, CREATE_RISK_CATEGORY, FETCH_RISK_CATEGORIES_BY_SEARCH, FETCH_AMOUNT_OF_RISK_CATEGORIES, UPDATE_RISK_CATEGORY } from '../constants/actionTypes';
+import { START_LOADING, END_LOADING, FETCH_ALL_RISK_CATEGORIES, CREATE_RISK_CATEGORY, FETCH_RISK_CATEGORIES_BY_SEARCH, FETCH_AMOUNT_OF_RISK_CATEGORIES, UPDATE_RISK_CATEGORY, SET_CURRENT_RISK_CATEGORY_TITLE } from '../constants/actionTypes';
 
 export const getRiskCategoriesByDepartment = (searchQuery) => async(dispatch) => {
     try {
@@ -57,6 +57,14 @@ export const updateRiskCategory = (updatedRiskCategory) => async(dispatch) => {
     dispatch({ type: END_LOADING });
 
     dispatch({ type: UPDATE_RISK_CATEGORY, payload: riskCategory });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const setCurrentRiskCategoryTitle = (riskCategoryTitle) => async (dispatch) => {
+  try {
+    dispatch({ type: SET_CURRENT_RISK_CATEGORY_TITLE, payload: riskCategoryTitle });
   } catch (error) {
     console.log(error);
   }

@@ -22,7 +22,6 @@ const ControlsPage = ({ match }) => {
 
     const riskCategoryId = match ? match.params.categoryId : null;
     const selectedControl = useSelector(state => state.controls.control);
-    const selectedCategoryTitle = useSelector(state => state.controls.control)?.title;
     const { controls, loading, error, totalOfItems, amountOfPages } = useSelector(state => state.controls);
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -36,6 +35,7 @@ const ControlsPage = ({ match }) => {
     const [currentPage, setPage] = useState(0);
     const [pageSize, setPageSize] = React.useState(10);
     const mainRouteName = `/riskcategories/${match.params.categoryId}/controls`;
+    const { riskCategoryTitle } = useSelector(state => state.riskCategories);
 
 
     useEffect(() => {
@@ -112,10 +112,13 @@ const ControlsPage = ({ match }) => {
                 {/* className={classes.gridContainer} */}
                 <Grid item xs={12} sm={6} md={9}>
                     <h1>
-                        Controles de categoria {selectedCategoryTitle}
+                        Controles
                     </h1>
                 </Grid>
-
+            </Grid>
+            <Grid item xs={12} style={{marginBottom: -12, marginTop: -10, display: 'flex', alignContent: 'center', alignSelf: 'center', alignItems: 'center'}}>
+                    <h2 style={{float: "left", display: 'inline-block', fontWeight: 400, color: '#023E7D', fontSize: '16px',marginTop: '-5px'}}>
+                    <span style={{color: '#000e29', fontStyle: 'normal', fontWeight: 700}}>Home &gt; </span>{riskCategoryTitle}</h2>
             </Grid>
 
             <Grid container justify="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>

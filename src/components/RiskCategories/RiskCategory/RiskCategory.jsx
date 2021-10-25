@@ -7,6 +7,7 @@ import TableChartIcon from '@material-ui/icons/TableChart';
 import { useDispatch } from "react-redux";
 import { FaRegEdit } from 'react-icons/fa';
 import { useHistory, useLocation } from 'react-router';
+import { setCurrentRiskCategoryTitle } from "../../../actions/riskCategories";
 
 const RiskCategory = ({riskCategory, currentRiskCategoryId, setCurrentRiskCategoryId, setFormType}) => {
     const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const RiskCategory = ({riskCategory, currentRiskCategoryId, setCurrentRiskCatego
     const onClickCard = () => {
         // Open principal Matrix
         history.push(`/riskcategories/${riskCategory.id}/risks`);
+        dispatch(setCurrentRiskCategoryTitle(riskCategory.title));
         //history.push(`/matrizprincipal?riskCategoryId=${riskCategory.id}`);
         // use history push or dispatch
         console.log("Opening Principal Matrix");
