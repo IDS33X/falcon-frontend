@@ -9,7 +9,7 @@ import userFormValidations from "../../../validations/userFormValidations";
 import SelectFormik from "../../common/Formik/SelectFormik";
 import { ResetUser } from '../../../actions/users'
 import React, { useState, useEffect, useRef } from 'react'
-import {UpdatePassword} from "../../../actions/users"
+import { UpdatePassword } from "../../../actions/users"
 
 const UserForm = ({ saveUser, resetRoute, title, user, departmentId }) => {
     const classes = useStyles();
@@ -96,7 +96,7 @@ const UserForm = ({ saveUser, resetRoute, title, user, departmentId }) => {
 
                     <Form >
 
-                        <InputFormik disabled type="text" name="code" label="Codigo" id="code" />
+                        <InputFormik disabled={user} type="text" name="code" label="Codigo" id="code" />
 
                         <InputFormik type="text" name="name" label="Nombre" id="name" />
                         <InputFormik type="text" name="lastName" label="Apellido" id="lastName" />

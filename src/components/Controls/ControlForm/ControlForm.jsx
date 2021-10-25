@@ -84,11 +84,17 @@ const ControlForm = ({ saveControl, resetRoute, title, control }) => {
                                         </>
                                     )
                                 }
-                                <InputFormik name="code" disabled type="text" label="Código" />
+                                <InputFormik name="code" disabled={control} type="text" label="Código" />
 
                                 <InputFormik name="activity" type="text" label="Actividad" multiline rows={2} />
 
                                 <InputFormik name="objective" type="text" label="Objetivo" multiline rows={1} />
+                                {
+    !control &&
+                                    (<InputFormik name="responsablePosition" type="text" label="Posición responsable" />)
+
+}
+
 
                                 <InputFormik name="evidence" type="text" label="Evidencia" multiline rows={2} />
 
@@ -102,7 +108,11 @@ const ControlForm = ({ saveControl, resetRoute, title, control }) => {
 
                                 <SelectFormik name="controlStateId" label="Estado" options={controlStates.map(controlState => ({ id: controlState.id, name: controlState.title }))} />
 
-                                <InputFormik name="responsablePosition" type="text" label="Posición responsable" />
+{
+    control &&
+                                    (<InputFormik name="responsablePosition" type="text" label="Posición responsable" />)
+
+}
 
                                 <InputFormik name="frequency" type="text" label="Frecuencia" />
 
@@ -115,9 +125,6 @@ const ControlForm = ({ saveControl, resetRoute, title, control }) => {
 
 
                         </Grid>
-
-
-
 
 
                         <Button variant="contained" color="secondary" onClick={closeForm}
