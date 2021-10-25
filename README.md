@@ -14,11 +14,12 @@ Falcon permite consultar la probabilidad y severidad de los riesgos para dar seg
 - Evaluar y dar seguimiento a los controles de riesgo aplicados.
 
 ## Some Captures
+
 #### Login Page
-![falconApp1](\screenshots\falconScreenshot1.PNG)
+![falconScreenshot1](https://user-images.githubusercontent.com/47201459/138777659-0843f303-b162-4872-8aa9-ac81387e5ad8.png)
 
 #### Admin Dashboard Page
-![falconApp1](\screenshots\falconScreenshot2.PNG)
+![falconScreenshot2](https://user-images.githubusercontent.com/47201459/138777662-f8c47eb7-ab6c-445a-ba12-50b62cb2486e.png)
 
 
 ## Developers
