@@ -61,9 +61,11 @@ export const RemoveRangeRiskControls = (riskControls) => API.put(`/RiskControl/R
 
 // Controls
 
-export const fetchControls = (page, itemsPerPage) => API.get(`/Control/GetControls?Page=${page}&ItemsPerPage=${itemsPerPage}`);
+export const fetchControlsByRiskCategory = (riskCategoryId, page, itemsPerPage) => API.get(`/Control/GetControlsByRiskCategory?RiskCategoryId=${riskCategoryId}&Page=${page}&ItemsPerPage=${itemsPerPage}`);
+
 export const fetchControlsByRisk = (riskId, page, itemsPerPage) => API.get(`/Control/GetControlsByRisk?RiskId=${riskId}&Page=${page}&ItemsPerPage=${itemsPerPage}`);
-export const searchControlsByCode = (code) => API.get(`/Control/GetControlByCode?Code=${code}`);
+export const searchControlsByCode = (riskCategoryId, filter, page, itemsPerPage) => API.get(`/Control/SearchControlsByCode?RiskCategoryId=${riskCategoryId}&Filter=${filter}&Page=${page}&ItemsPerPage=${itemsPerPage}`);
+
 export const addControl = (control) => API.post(`/Control/Add`, control, { "headers": options.headers });
 export const updateControl = (control) => API.put(`/Control/Update`, control, { "headers": options.headers });
 

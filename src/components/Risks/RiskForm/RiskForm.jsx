@@ -18,7 +18,7 @@ const RiskForm = ({ saveRisk, resetRoute, title, risk, categoryId }) => {
     const formRef = useRef(); // Allows to access properties and methods of the formik form from outside   
     const { showRiskFormDialog, riskImpacts } = useSelector(state => state.risks);
     const [riskForm, setRiskForm] = useState({ risk: {} });
-    let riskImpactOptions = riskImpacts?.map(impact => ({ id: impact.id, name: impact.title }));
+    let riskImpactOptions = riskImpacts;
 
     // When the user is fetched the values of the form are updated
     useEffect(() => {
@@ -39,7 +39,7 @@ const RiskForm = ({ saveRisk, resetRoute, title, risk, categoryId }) => {
 
 
     // Saves the user data and fetch all the users 
-    async function handleSubmit(values, setSubmitting) {
+    async function handleSubmit(values, setSubmitting, resetForm) {
         setSubmitting(true);
         values.creationDate = new Date(Date.now());
         Object.assign(riskForm.risk, values);
@@ -83,14 +83,14 @@ const RiskForm = ({ saveRisk, resetRoute, title, risk, categoryId }) => {
                         <InputFormik type="text" name="description" label="Descripción" multiline rows={2} />
 
 
-                        <SelectFormik type="text" name="inherentRiskId" id="inherentRiskId" label="Riesgo inherente" options={riskImpactOptions} />
+                        <SelectFormik type="inherentRisk" name="inherentRiskId" id="inherentRiskId" label="Riesgo inherente" options={riskImpactOptions} />
 
-                        <SelectFormik type="text" name="controlledRiskId" id="controlledRiskId" label="Riesgo controlado"
+                        <SelectFormik type="inherentRisk" name="controlledRiskId" id="controlledRiskId" label="Riesgo controlado"
                             options={riskImpactOptions} />
 
 
 
-                        <InputFormik type="text"name="rootCause" label="Causa raíz" multiline rows={4} />
+                        <InputFormik type="text" name="rootCause" label="Causa raíz" multiline rows={4} />
 
                         <Button variant="contained" color="secondary" onClick={closeForm}
                             className={classes.button}>Cancelar</Button>

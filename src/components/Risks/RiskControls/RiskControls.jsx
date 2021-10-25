@@ -27,6 +27,7 @@ const RiskControls = ({ mainRouteName, showDialog, setShowDialog, riskId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const { controls, controlsByRisk } = useSelector(state => state.controls);
+    const riskName = useSelector(state => state.risks.risks.find(r => r.id === riskId))?.code;
     const [tableData, setTableData] = useState([]);
     const [selectedOption, setSelectedOption] = React.useState(null);
     const [optionsSelect, setOptionsSelect] = useState([]);
@@ -107,7 +108,7 @@ const RiskControls = ({ mainRouteName, showDialog, setShowDialog, riskId }) => {
     };
 
     return (
-        <DialogWrapper fullWidth="md" open={showDialog} title={"Asignar controles"} close={closeDialog}>
+        <DialogWrapper fullWidth="md" open={showDialog} title={"Controles del riesgo " + riskName} close={closeDialog}>
 
             <Grid className={classes.searchBarContainer} container mb={2} spacing={2} alignItems="left" justify="flex-end">
                 <Grid item xs={12} sm={6} md={4}>
@@ -118,25 +119,16 @@ const RiskControls = ({ mainRouteName, showDialog, setShowDialog, riskId }) => {
                         onChange={(event, newValue) => {
                             setSelectedOption(newValue);
                         }}
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter') {
+                                addControl();
+                            }
+                        }}
 
                         getOptionLabel={(option) => option.code}
                         sx={{ width: 50 }}
                         renderInput={(params) => <TextField {...params} variant="outlined" label="Buscar controles..." />} />
                 </Grid>
-
-                <Grid item xs={2} sm={2} md={1}>
-
-                    <Tooltip title="Agregar control" placement="bottom">
-
-                        <IconButton disabled={!selectedOption} onClick={() => addControl()} aria-label="delete">
-                            <AddIcon />
-                        </IconButton>
-
-                    </Tooltip>
-
-
-                </Grid>
-
 
             </Grid>
 
@@ -147,7 +139,7 @@ const RiskControls = ({ mainRouteName, showDialog, setShowDialog, riskId }) => {
                     <TableHead>
                         <TableRow>
                             <TableCell>Control</TableCell>
-                            <TableCell>Asignado</TableCell>
+                            <TableCell align="center" >Asignado</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -156,8 +148,13 @@ const RiskControls = ({ mainRouteName, showDialog, setShowDialog, riskId }) => {
                                 key={row.id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell>{row.code}</TableCell>
-                                <TableCell>
-                                    <Checkbox checked={row.selected} onChange={(e) => handleChangeCheckbox(e, row.id)} />
+                                <TableCell align="center">
+                                    <Checkbox
+                                        checked={row.selected}
+                                        style={{
+                                            color: "#023E7D",
+                                        }}
+                                        onChange={(e) => handleChangeCheckbox(e, row.id)} />
                                 </TableCell>
 
                             </TableRow>
