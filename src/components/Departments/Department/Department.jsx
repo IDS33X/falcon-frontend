@@ -53,7 +53,7 @@ const Department = ({department, currentDepartmentId, setCurrentDepartmentId, se
     return(
         <>
             <SmallCard editButton={editButton} title={department.title} description={department.description}
-                    bottomActions={[pricipalMatrixButton]} onClickCard = {onClickCard}></SmallCard>
+                    bottomTitle={'Analistas de Riesgo'} bottomCounter={department.countAnalytics} onClickCard = {onClickCard}></SmallCard>
             <ConfirmationDialog/>
             {/* <EditCardDialog currentAreaId={currentAreaId} setCurrentAreaId={setCurrentAreaId}/> */}
         </>

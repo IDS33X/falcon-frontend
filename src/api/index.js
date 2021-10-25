@@ -17,6 +17,9 @@ const options = {
 
 //export const fetchPosts = () => axios.get(url).then((res) => console.log(res.data)).catch((err) => console.log(err));
 
+// Auth
+export const signIn = (formData) => API.post(`/Session/login`, formData);
+
 // Areas
 export const fetchAreas = (page, itemsPerPage) => API.get(`/Area/GetAreas?Page=${page}&ItemsPerPage=${itemsPerPage}`);
 export const fetchAreasBySearch = (searchQuery) => API.get(`/Area/SearchAreas?Filter=${searchQuery.search || 'none'}&Page=${searchQuery.page}&ItemsPerPage=${searchQuery.itemsPerPage}`);

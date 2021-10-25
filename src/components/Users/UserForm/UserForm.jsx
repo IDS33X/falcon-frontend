@@ -33,7 +33,7 @@ const UserForm = ({ saveUser, resetRoute, title, user, departmentId }) => {
                 name: user?.name ?? '',
                 lastName: user?.lastName ?? '',
                 code: user?.code ?? '',
-                password: user?.code ?? ''
+                password: user?.password ?? ''
             }
         })
 
@@ -84,7 +84,7 @@ const UserForm = ({ saveUser, resetRoute, title, user, departmentId }) => {
 
                     <Form >
 
-                        <InputFormik type="text" name="code" label="Codigo" id="code" />
+                        <InputFormik type="text" name="code" label="Codigo" id="code" disabled={user}/>
 
                         <InputFormik type="text" name="name" label="Nombre" id="name" />
                         <InputFormik type="text" name="lastName" label="Apellido" id="lastName" />

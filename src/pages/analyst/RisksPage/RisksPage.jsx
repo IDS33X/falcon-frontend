@@ -34,6 +34,7 @@ const RisksPage = ({ match }) => {
     const selectedRisk = useSelector(state => state.risks.risk);
     const { risks, loading, error, amountOfPages, riskImpacts } = useSelector(state => state.risks);
     const selectedCategoryTitle = useSelector(state => state.controls.control)?.title;
+    const { riskCategoryTitle } = useSelector(state => state.riskCategories);
 
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -163,7 +164,10 @@ const RisksPage = ({ match }) => {
                     <AddButton title="riesgo" onClick={openFormDialog}></AddButton>
 
                 </Grid>
-
+                <Grid item xs={12} style={{marginBottom: -12, marginTop: -10, display: 'flex', alignContent: 'center', alignSelf: 'center', alignItems: 'center'}}>
+                    <h2 style={{float: "left", display: 'inline-block', fontWeight: 400, color: '#023E7D', fontSize: '16px',marginTop: '-5px'}}>
+                        <span style={{color: '#000e29', fontStyle: 'normal', fontWeight: 700}}>Home &gt; </span>{riskCategoryTitle}</h2>
+                </Grid>
 
             </Grid>
 

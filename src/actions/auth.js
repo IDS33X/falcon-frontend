@@ -1,3 +1,4 @@
+import * as api from '../api/index.js';
 import { AUTH } from '../constants/actionTypes';
 import employeesData from '../__mocks__/employeesData';
 
@@ -16,33 +17,44 @@ import employeesData from '../__mocks__/employeesData';
 
 export const signIn = (formData, history) => async (dispatch) => {
     try {
-        //API simulation
-        // const { data } = await api.signIn(formData); This will be the real call to the API.
-        const data = employeesData.find((data) => data.employee.code === formData.employeeCode)
+        const data = employeesData.find((data) => data.employee.username === formData.employeeUsername)
         console.log(data);
 
         dispatch({ type: AUTH, data });
-
-        // Logic to push to the route of role.
+        
+        //Logic to push to the route of role.
         switch (data.employee.rol) {
-            case 'admin':
-                history.push('/areas');
-                break;
-            case 'analyst':
-                history.push('/riskcategories');
-                break;
-            case 'internalcontrol':
-                history.push('/deviationmatrix');
-                break;    
-            case 'employee':
-                history.push('/mycontrols');
-                break; 
-            default:
-                break;
+                case 'admin':
+                    history.push('/areas');
+                    break;
+                case 'analyst':
+                    history.push('/riskcategories');
+                    break;
+                case 'internalcontrol':
+                    history.push('/deviationmatrix');
+                    break;    
+                case 'employee':
+                    history.push('/mycontrols');
+                    break; 
+                default:
+                    break;
+            }
+            
+            // const { data } = await api.signIn(formData); //This is  the real call to the API.
+            // dispatch({ type: AUTH, data });
+        
+            // switch (data.user.roleId) {
+            //     case '2':
+            //         history.push('/areas');
+            //         break;
+            //     case '3':
+            //         history.push('/riskcategories');
+            //         break;
+            //     default:
+            //         break;
+            // }
         }
-
+        catch (error){
+            console.log(error);
+        }
     }
-    catch (error){
-        console.log(error);
-    }
-}

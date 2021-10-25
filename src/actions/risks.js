@@ -12,7 +12,8 @@ import {
     OPEN_RISK_FORM_DIALOG,
     FETCH_RISKS_IMPACTS,
     ADD_RISK_CONTROLS,
-    REMOVE_RISK_CONTROLS
+    REMOVE_RISK_CONTROLS,
+    SET_CURRENT_RISK_TITLE
 
 } from '../constants/actionTypes'
 

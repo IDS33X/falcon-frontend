@@ -52,7 +52,7 @@ const Division = ({division, currentDivisionId, setCurrentDivisionId, setFormTyp
     return(
         <>
             <SmallCard editButton={editButton} title={division.title} description={division.description}
-                    bottomActions={[pricipalMatrixButton]} onClickCard = {onClickCard}></SmallCard>
+                    bottomTitle={'Departamentos'} bottomCounter={division.countDepartments} onClickCard = {onClickCard}></SmallCard>
             <ConfirmationDialog/>
             {/* <EditCardDialog currentAreaId={currentAreaId} setCurrentAreaId={setCurrentAreaId}/> */}
         </>

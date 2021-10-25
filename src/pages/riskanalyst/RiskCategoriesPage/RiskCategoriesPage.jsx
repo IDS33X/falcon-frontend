@@ -98,6 +98,9 @@ const RiskCategoriesPage = () => {
                     <SearchBarComponent onSearchClick={searchRiskCategory} search={search} setSearch={setSearch} history={history}/>
                 </Grid>
                     <AddButton setFormType={setFormType}/>
+                <Grid item xs={12} style={{marginBottom: -12, marginTop: -10, display: 'flex', alignContent: 'center', alignSelf: 'center', alignItems: 'center'}}>
+                    <h2 style={{float: "left", display: 'inline-block', fontWeight: 400, color: '#023E7D', fontSize: '16px',marginTop: '-5px'}}>Home</h2>
+                </Grid>
                 <Grid item xs={12}>
                     <RiskCategories currentRiskCategoryId={currentRiskCategoryId} setCurrentRiskCategoryId={setCurrentRiskCategoryId} setFormType={setFormType}/>
                     <Grid className={classes.paginationGrid}>
