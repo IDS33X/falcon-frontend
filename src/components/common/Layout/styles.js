@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { deepPurple } from '@material-ui/core/colors';
+import { deepOrange, deepPurple, red } from '@material-ui/core/colors';
 
 const drawerWidth = 240;
 
@@ -13,7 +13,7 @@ export default makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    backgroundColor: '#fff',
+    background: 'linear-gradient(to left, #0d3ca1, #023E7D 50%, #000d29 100%);',
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -72,18 +72,48 @@ export default makeStyles((theme) => ({
   userName: {
     display: 'flex',
     alignItems: 'center',
-    color: 'black'
+    color: '#85caff',
+    fontSize: '17px'
   },
   brandContainer: {
     display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 1000
+    justifyContent: 'flex-start',
+    textDecoration: 'none'
   },
   purple: {
     color: theme.palette.getContrastText(deepPurple[500]),
-    backgroundColor: deepPurple[500],
+    backgroundColor: '#0a7bd1',
+    height: '40px',
+    width: '40px',
   },
   image: {
     marginLeft: '15px',
   },
+  logoutButton:{
+    color: 'white',
+    textTransform: 'none',
+    fontSize: '14px',
+    "&:hover":{
+      color: 'yellow',
+    }
+  },
+  logoText: {
+    color: '#fff',
+    textTransform: 'uppercase',
+    fontWeight: 800,
+    textDecoration: 'none',
+    marginLeft: "1px",
+    marginBottom: '10px',
+    fontSize: '20px'
+  },
+  sectionName: {
+    fontSize: '13px',
+    fontWeight: 200,
+    color: '#85caff',
+    position:'fixed', 
+    textAlign:'center', 
+    transform: 'translate(65px, 16px)'
+  }
 }));

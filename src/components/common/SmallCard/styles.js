@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '15px',
         height: '100%',
         position: 'relative',
-        minHeight: '200px',
+        minHeight: '170px',
     },
     overlay: {
         position: 'absolute',

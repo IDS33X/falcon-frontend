@@ -24,7 +24,7 @@ const theme = createTheme({
         ].join(','),
         textTransform: 'none'
 
-    }
+    },
 
 });
 

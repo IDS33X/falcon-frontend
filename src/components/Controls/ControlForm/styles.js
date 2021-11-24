@@ -14,8 +14,6 @@ export default makeStyles(theme => ({
         height: 800
     },
 
-
-
 }));
 
 

@@ -47,12 +47,8 @@ export default function InputFormik({ label, type, ...props }) {
           )
             : null
 
-
-
       }
     </>
-
-
 
   )
 }

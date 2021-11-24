@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
     tableGrid: {
-        height: '550px',
+        height: '500px',
         width: '100%',
         '& .MuiDataGrid-iconSeparator': {
             display: 'none',
@@ -16,9 +16,42 @@ const useStyles = makeStyles(() => ({
         },
 
         '& .MuiDataGrid-columnsContainer': {
-            backgroundColor: 'rgba(189, 195, 199, 0.22)',
+            backgroundColor: '#023E7D',
+        },
+        '& .MuiDataGrid-columnHeaderTitle':{
+            color: '#fff'
+        },
+        '& .MuiButton-label':{
+            color: '#fff'
+        },
+        '& .MuiDataGrid-toolbarContainer':{
+            backgroundColor: '#00143b'
+        },
+        '& .MuiDataGrid-footerContainer':{
+            backgroundColor: '#023E7D'
+        },
+        '& .MuiTablePagination-root':{
+            backgroundColor: '#023E7D'
+        },
+        '& .MuiTypography-root':{
+            color: '#fff'
+        },
+        '& .MuiIconButton-label':{
+            color: '#fff'
+        },
+        '& .MuiSvgIcon-root':{
+            color: '#fff'
+        },
+        '& .MuiSelect-root':{
+            color: '#fff'
+        },
+        '& .MuiSvgIcon-fontSizeSmall':{
+            color: '#023E7D'
         },
 
+
+        
+        backgroundColor: '#fff',
     }
 
 }));

@@ -33,6 +33,9 @@ const RisksPage = ({ match }) => {
     const categoryId = match ? match.params.categoryId : null;
     const selectedRisk = useSelector(state => state.risks.risk);
     const { risks, loading, error, amountOfPages, riskImpacts } = useSelector(state => state.risks);
+    const selectedCategoryTitle = useSelector(state => state.controls.control)?.title;
+    const { riskCategoryTitle } = useSelector(state => state.riskCategories);
+
     const classes = useStyles();
     const dispatch = useDispatch();
     const query = useQuery();
@@ -78,6 +81,7 @@ const RisksPage = ({ match }) => {
     useEffect(() => {
         if (risks) {
             setRows(getGridRows(risks));
+
         }
     }, [risks]);
 
@@ -85,30 +89,23 @@ const RisksPage = ({ match }) => {
         if (riskQuery && selectedRisk) {
             dispatch(openFormDialog());
         }
+        dispatch(GetRiskImpacts());
         //setRiskId(selectedRisk?.id);
 
-    }, [rowsDataGrid, selectedRisk, dispatch]);
+    }, [rowsDataGrid, selectedRisk]);
 
 
     // When edit button is clicked this actions are fired
     editButton.onClick = async (rowId) => {
         history.push(`${mainRouteName}/edit?risk=${rowId}`);
         await dispatch(SetRisk(risks.find(risk => risk.id === rowId)));
-        dispatch(GetRiskImpacts());
-        dispatch(openFormDialog());
     }
-
-
     // When manage controls is clicked this actions are fired
     showControlsButton.onClick = async (rowId) => {
         setRiskId(rowId);
         history.push(`${mainRouteName}/?risk=${rowId}&/controls/`);
         await dispatch(GetControlsByRisk(rowId, 1, 20));
-        await dispatch(GetControls(1, 50));
-        setShowRiskControlsDialog(true);
-
     }
-
     const searchRisk = (search) => {
         // Filter users by search only if there's something written on search bar
         if (search?.trim()) {
@@ -144,13 +141,13 @@ const RisksPage = ({ match }) => {
                 {/* className={classes.gridContainer} */}
                 <Grid item xs={12} sm={6} md={9}>
                     <h1>
-                        Gestionar riesgos
+                        Riesgos de categoria {selectedCategoryTitle}
                     </h1>
                 </Grid>
 
             </Grid>
 
-            <Grid container justify="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
+            <Grid container justifyContent="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
                 {/* className={classes.gridContainer} */}
                 <Grid item xs={12} sm={6} md={9}>
                     <SearchBarComponent onSearchClick={searchRisk} search={search} setSearch={setSearch} history={history} />
@@ -160,7 +157,10 @@ const RisksPage = ({ match }) => {
                     <AddButton title="riesgo" onClick={openFormDialog}></AddButton>
 
                 </Grid>
-
+                <Grid item xs={12} style={{ marginBottom: -12, marginTop: -10, display: 'flex', alignContent: 'center', alignSelf: 'center', alignItems: 'center' }}>
+                    <h2 style={{ float: "left", display: 'inline-block', fontWeight: 400, color: '#023E7D', fontSize: '16px', marginTop: '-5px' }}>
+                        <span style={{ color: '#000e29', fontStyle: 'normal', fontWeight: 700 }}>Home &gt; </span>{riskCategoryTitle}</h2>
+                </Grid>
 
             </Grid>
 
@@ -204,9 +204,11 @@ const RisksPage = ({ match }) => {
 
 
 
+
         </>
 
     )
+
 }
 
 export default RisksPage;

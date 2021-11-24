@@ -21,11 +21,11 @@ const userFormValidations = Yup.object().shape({
         .required('La contraseña es requerida')
         .max(50, 'La contraseña no puede exceder los 50 caraceteres'),
 
+    passwordEditForm: Yup.string()
+        .max(50, 'La contraseña no puede exceder los 50 caraceteres'),
+
     roleId: Yup.number()
         .min(1, 'Debe seleccionar un rol')
-
-
-
 
 });
 

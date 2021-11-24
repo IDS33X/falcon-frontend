@@ -12,7 +12,7 @@ import {
     OPEN_RISK_FORM_DIALOG,
     FETCH_RISKS_IMPACTS,
     ADD_RISK_CONTROLS,
-    REMOVE_RISK_CONTROLS
+    REMOVE_RISK_CONTROLS,
 
 } from '../constants/actionTypes'
 
@@ -53,7 +53,8 @@ export const GetRiskImpacts = () => async (dispatch) => {
 
     await api.fetchRiskImpacts()
         .then(response => {
-            const { riskImpacts } = response.data
+            const { riskImpacts } = response.data;
+            console.log(riskImpacts);
             dispatch({ type: FETCH_RISKS_IMPACTS, payload: riskImpacts })
 
         })

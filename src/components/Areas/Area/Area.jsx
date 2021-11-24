@@ -5,12 +5,16 @@ import { openEditCardDialog } from "../../../actions/editCardDialogActions";
 import SmallCard from "../../common/SmallCard/SmallCard";
 import TableChartIcon from '@material-ui/icons/TableChart';
 import { useDispatch } from "react-redux";
+import { useHistory, useLocation } from 'react-router';
 import { FaRegEdit } from 'react-icons/fa';
+import { setCurrentAreaTitle } from "../../../actions/areas";
 
-const Area = ({area, currentAreaId, setCurrentAreaId}) => {
+const Area = ({area, currentAreaId, setCurrentAreaId, setFormType }) => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const openEditCard = () => {
+        setFormType('Editar');
         setCurrentAreaId(area.id);
         //console.log(area.id);
         dispatch(openEditCardDialog());
@@ -33,10 +37,13 @@ const Area = ({area, currentAreaId, setCurrentAreaId}) => {
     }
 
 
-    const onClickCard = (area) => {
+    const onClickCard = () => {
         // Use area.id and dispatch the GetDivisionsByArea
-        // use history push or dispatch
-        console.log("Opening department");
+        history.push(`/divisions?areaId=${area.id}&areaName=${area.title}`);
+        // Setting the current area name for breadcrumb
+        dispatch(setCurrentAreaTitle(area.title));
+        // use history push or dispatch.
+        console.log("Opening division");
     }
 
     //const description = "Lorem Ipsum Dolor Sit Amet, Consectetur A Ipiscing Elit, Sed Do Eiusmod Tempor Incidid Ut Labore Et Dolore."
@@ -46,9 +53,9 @@ const Area = ({area, currentAreaId, setCurrentAreaId}) => {
     return(
         <>
             <SmallCard editButton={editButton} title={area.title} description={area.description}
-                    bottomActions={[pricipalMatrixButton]} onClickCard = {onClickCard}></SmallCard>
+                    bottomTitle={'Divisiones'} bottomCounter={area.countDivisions} onClickCard = {onClickCard}></SmallCard>
             <ConfirmationDialog/>
-            <EditCardDialog currentAreaId={currentAreaId} setCurrentAreaId={setCurrentAreaId}/>
+            {/* <EditCardDialog currentAreaId={currentAreaId} setCurrentAreaId={setCurrentAreaId}/> */}
         </>
     );
 }
