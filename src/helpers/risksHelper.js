@@ -28,10 +28,10 @@ export const headers = [
     { field: 'rootCause', headerName: 'Causa raíz', width: 200 },
     { field: 'si', headerName: 'SI', width: 90 },
     { field: 'pi', headerName: 'PI', width: 90 },
-    { field: 'ri', headerName: 'RI', width: 150, hide: true },
+    { field: 'ri', headerName: 'RI', width: 150 },
     { field: 'sc', headerName: 'SC', width: 100 },
     { field: 'pc', headerName: 'PC', width: 100 },
-    { field: 'rc', headerName: 'RC', width: 150, hide: true },
+    { field: 'rc', headerName: 'RC', width: 150},
     { field: 'creator', headerName: 'Gestor de riesgo', width: 300 },
     { field: 'creationDate', headerName: 'Fecha de ingreso', width: 200 }
 ];

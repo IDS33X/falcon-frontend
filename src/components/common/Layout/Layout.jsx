@@ -4,18 +4,19 @@ import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import { Avatar, Button } from '@material-ui/core';
+import { Avatar, Button, IconButton} from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import useStyles from './styles';
-import falconLogo from '../../../images/falconLogo.png'
+import falconLogo from '../../../images/falconLogo7.png'
 import { LOGOUT } from '../../../constants/actionTypes';
+import { blue } from '@material-ui/core/colors';
 
 
-const Layout = ({ children, user, setUser }) => {
+const Layout = ({ children, user, setUser, section }) => {
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
@@ -51,27 +52,36 @@ const Layout = ({ children, user, setUser }) => {
       <CssBaseline />
       <AppBar
         position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
+        className={classes.appBar}
       >
         <Toolbar>
-        
-          <Link to="/" className={classes.brandContainer}>
-            <img className={classes.image} component={Link} to='/' src={falconLogo} alt="icon" height="40px" />
-            <Typography variant="h6" noWrap color='primary'>
+          <Link to="/" className={classes.brandContainer} style={{flexGrow: 1}}>
+            <IconButton
+                size="large"
+                disableFocusRipple='true'
+                disableRipple='true'
+                disableTouchRipple='true'
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+              >
+              <img className={classes.image} component={Link} to='/' src={falconLogo} alt="icon" height="40px" />
+            </IconButton>
+            <Typography className={classes.logoText}>
               Falcon
             </Typography>
+            <Typography className={classes.sectionName}>{section}</Typography>
           </Link>
           {user?.employee ? (
-            <div className={classes.profile}>
-              <Avatar className={classes.purple} alt={user?.employee.name}>{user?.employee.name.charAt(0)}</Avatar>
-              <Typography className={classes.userName} variant="h6">{user?.employee.name}</Typography>
-              <Button variant="contained" className={classes.logout} color="primary" onClick={logout}>Logout</Button>
+            <div className={classes.profile} style={{flexGrow: 1}} >
+              <Typography className={classes.userName} variant="h6" style={{position: 'fixed', right: 10, transform: 'translate(-70px, -23px)'}} >{user?.employee.name}</Typography>
+              <Avatar className={classes.purple} alt={user?.employee.name} style={{position: 'fixed', right: 10, transform: 'translate(-20px, -19px)'}}>{user?.employee.name.charAt(0)}</Avatar>
+              <Button variant="text" className={classes.logoutButton} color="secondary" onClick={logout} style={{position: 'fixed', right: 10, transform: 'translate(-66px, -5px)'}}>Cerrar Sesión</Button>
             </div>
           ) : (
             <Button component={Link} to="/areas" variant="contained" color="primary">Sign In</Button>
-          )}
+            )}
         </Toolbar>
       </AppBar>
 

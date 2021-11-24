@@ -101,14 +101,14 @@ const TestPage = () => {
 
     return (
         <>
-            <SmallCard onEditClick={openEditCard} title="Titulo" description={description}
-                bottomActions={[btnMatrizPrinc]}></SmallCard>
+            {/* <SmallCard onEditClick={openEditCard} title="Titulo" description={description}
+                bottomActions={[btnMatrizPrinc]}></SmallCard> */}
 
             <AddButton ></AddButton>
 
-            <TableGrid rows={rows} actions={[deleteButton, editButton]} headers={headers}></TableGrid>
+            {/* <TableGrid rows={rows} actions={[deleteButton, editButton]} headers={headers}></TableGrid> */}
 
-            <SearchBarComponent onSearchClick={() => dispatch(openConfirmationDialog())}></SearchBarComponent>
+            {/* <SearchBarComponent onSearchClick={() => dispatch(openConfirmationDialog())}></SearchBarComponent> */}
 
             <CircularButton variant="contained" color="primary" onClick={openConfirmationDialog}>Open confirmation modal</CircularButton>
 
@@ -118,9 +118,9 @@ const TestPage = () => {
 
             <SuccessDialog mensaje="Los datos fueron enviados"></SuccessDialog>
 
-            <CircularButton variant="contained" color="primary" onClick={() => dispatch(openEditCardDialog())}>Open edit card modal</CircularButton>
+            {/* <CircularButton variant="contained" color="primary" onClick={() => dispatch(openEditCardDialog())}>Open edit card modal</CircularButton> */}
 
-            <EditCardDialog title="Editar algo"></EditCardDialog>
+            {/* <EditCardDialog title="Editar algo"></EditCardDialog> */}
         </>
 
 

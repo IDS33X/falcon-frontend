@@ -11,10 +11,10 @@ import './index.css';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 // ComposewithDevTools is an extension that allows devs to see the states in Redux store. 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
+export const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
 
 
-
+// debugger; // TO INSPECT THE PAGE BEFORE 1ST RENDER
 
 ReactDOM.render(
     <Provider store = {store}>

@@ -34,10 +34,10 @@ export const SetControl = (control) => ({
     type: SET_CONTROL, payload: control
 });
 
-export const GetControls = (page, itemsPerPage) => async (dispatch) => {
+export const GetControls = (riskCategoryId, page, itemsPerPage) => async (dispatch) => {
 
     dispatch({ type: START_LOADING_CONTROL })
-    await api.fetchControls(page, itemsPerPage)
+    await api.fetchControlsByRiskCategory(riskCategoryId, page, itemsPerPage)
         .then(response => {
             const { controls, currentPage, amountOfPages, totalOfItems } = response.data
             dispatch({ type: FETCH_ALL_CONTROLS, payload: { controls, currentPage, amountOfPages, totalOfItems } })
@@ -68,16 +68,16 @@ export const GetControlsByRisk = (riskId, page, itemsPerPage) => async (dispatch
 
 
 
-export const SearchControlsByCode = (page, itemsPerPage, code) => {
+export const SearchControlsByCode = (riskCategoryId, page, itemsPerPage, filter) => {
     return async function (dispatch) {
         dispatch({ type: START_LOADING_CONTROL })
-        await api.searchControlsByCode(page, itemsPerPage, code)
+        await api.searchControlsByCode(riskCategoryId, filter, page, itemsPerPage)
             .then(response => {
-                const { controls, currentPage, amountOfPages } = response.data
+                const { controls, currentPage, amountOfPages, totalOfItems } = response.data
 
                 dispatch({
                     type: SEARCH_CONTROLS,
-                    payload: { controls, currentPage, amountOfPages }
+                    payload: { controls, currentPage, amountOfPages, totalOfItems }
                 })
             })
             .catch(error => {

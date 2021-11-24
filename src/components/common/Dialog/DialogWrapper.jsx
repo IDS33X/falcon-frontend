@@ -15,7 +15,7 @@ export default function DialogWrapper({ children, fullWidth, title, open, close,
       open={open}
       fullWidth={fullWidth}
       maxWidth={fullWidth}
-      onClose={close}
+      onClose={close} //Commented this to prevent closing the form from outside.
       keepMounted>
       {title &&
 

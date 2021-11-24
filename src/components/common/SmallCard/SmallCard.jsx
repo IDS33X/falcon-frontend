@@ -10,7 +10,7 @@ import { ButtonBase, CardActionArea, Button} from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom'
 
 // This is a general component that will render the cards shown in different lists. 
-const SmallCard = ({ bottomActions, editButton, title, description, onClickCard }) => {
+const SmallCard = ({ bottomActions, editButton, title, description, onClickCard, bottomTitle, bottomCounter }) => {
   const classes = useStyles();
 
   /* <CardActionArea classsName = {classes.cardAction} component={RouterLink} to="/questions"> */
@@ -19,7 +19,10 @@ const SmallCard = ({ bottomActions, editButton, title, description, onClickCard 
         component="span"
         name="test"
         className={classes.cardAction}
-        onClick={onClickCard}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClickCard();
+        }}
       >
       <Card className={classes.card} raised elevation = {6}>
               <div>
@@ -57,19 +60,24 @@ const SmallCard = ({ bottomActions, editButton, title, description, onClickCard 
 
             <CardActions className={classes.cardBottom}>
               {
-                bottomActions &&
-                bottomActions.map((button) =>
-                <Tooltip title={button.title} placement="bottom">
-                    <IconButton onClick={(e) => { 
-                      e.stopPropagation();
-                      button.onClick()
-                    }} 
-                    aria-label={button.title}
-                    size="small">
-                      <button.Icon className={classes.bottomButtons} fontSize="small" />
-                    </IconButton>
+                <Tooltip>
+                  <Typography variant="subtitle1" style={{color: 'white', marginRight: '10px', fontWeight: 600, fontSize: '15px'}}>
+                    {bottomTitle}: <span style={{color: 'orange', marginRight: '10px', fontWeight: 600}}>{bottomCounter}</span>
+                  </Typography>
                 </Tooltip>
-              )
+              //   bottomActions &&
+              //   bottomActions.map((button) =>
+              //   <Tooltip title={button.title} placement="bottom">
+              //       <IconButton onClick={(e) => { 
+              //         e.stopPropagation();
+              //         button.onClick()
+              //       }} 
+              //       aria-label={button.title}
+              //       size="small">
+              //         <button.Icon className={classes.bottomButtons} fontSize="small" />
+              //       </IconButton>
+              //   </Tooltip>
+              // )
             }
             </CardActions>
       </Card>

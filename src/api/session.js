@@ -1,6 +1,3 @@
-import axios from 'axios';
-
-const API = axios.create({ baseURL: 'https://localhost:44382/falconapi/session' });
 
 // import {
 //     GET_USERS_REQUEST,

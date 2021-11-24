@@ -15,15 +15,36 @@ const options = {
   }
 };
 
-
 //export const fetchPosts = () => axios.get(url).then((res) => console.log(res.data)).catch((err) => console.log(err));
+
+// Auth
+export const signIn = (formData) => API.post(`/Session/login`, formData);
 
 // Areas
 export const fetchAreas = (page, itemsPerPage) => API.get(`/Area/GetAreas?Page=${page}&ItemsPerPage=${itemsPerPage}`);
-export const fetchAreasBySearch = (searchQuery) => API.get(`/Area/SearchAreas?Filter=${searchQuery.search || 'none'}&Page=${searchQuery.page}&ItemsPerPage=${searchQuery.itemsPerPage}`)
+export const fetchAreasBySearch = (searchQuery) => API.get(`/Area/SearchAreas?Filter=${searchQuery.search || 'none'}&Page=${searchQuery.page}&ItemsPerPage=${searchQuery.itemsPerPage}`);
+export const createArea = (newArea) => API.post('/Area/Add', newArea);
+export const updateArea = (updatedArea) => API.put('/Area/Update', updatedArea);
 
-export const fetchArea = (id) => API.get(`/posts/${id}`);
+// Divisions
+export const fetchDivisionsByArea = (searchQuery) => API.get(`/Division/GetDivisionsByArea?AreaId=${searchQuery.areaId}&Page=${searchQuery.page}&ItemsPerPage=${searchQuery.itemsPerPage}`);
+export const createDivision = (newDivision) => API.post('/Division/Add', newDivision);
+export const fetchDivisionsBySearch = (searchQuery) => API.get(`/Division/SearchDivisionsByArea?AreaId=${searchQuery.areaId}&Filter=${searchQuery.search || 'none'}&Page=${searchQuery.page}&ItemsPerPage=${searchQuery.itemsPerPage}`);
+export const updateDivision = (updatedDivision) => API.put('/Division/Update', updatedDivision);
 
+// Departments
+export const fetchDepartmentsByDivision = (searchQuery) => API.get(`/Department/GetDepartmentsByDivision?DivisionId=${searchQuery.divisionId}&Page=${searchQuery.page}&ItemsPerPage=${searchQuery.itemsPerPage}`);
+export const createDepartment = (newDepartment) => API.post('/Department/Add', newDepartment);
+export const fetchDepartmentsBySearch = (searchQuery) => API.get(`/Department/SearchDepartmentsByDivision?DivisionId=${searchQuery.divisionId}&Filter=${searchQuery.search || 'none'}&Page=${searchQuery.page}&ItemsPerPage=${searchQuery.itemsPerPage}`);
+export const updateDepartment = (updatedDepartment) => API.put('/Department/Update', updatedDepartment);
+
+// Risk Categories
+export const fetchRiskCategoriesByDepartment = (searchQuery) => API.get(`/RiskCategory/GetRiskCategoriesByDepartment?DepartmentId=${searchQuery.departmentId}&Page=${searchQuery.page}&ItemsPerPage=${searchQuery.itemsPerPage}`);
+export const createRiskCategory = (newRiskCategory) => API.post('/RiskCategory/Add', newRiskCategory);
+export const fetchRiskCategoriesBySearch = (searchQuery) => API.get(`/RiskCategory/GetSearchRiskCategoriesByDepartment?DepartmentId=${searchQuery.departmentId}&Filter=${searchQuery.search || 'none'}&Page=${searchQuery.page}&ItemsPerPage=${searchQuery.itemsPerPage}`);
+export const updateRiskCategory = (updatedRiskCategory) => API.put('/RiskCategory/Update', updatedRiskCategory);
+
+//export const fetchArea = (id) => API.get(`/posts/${id}`);
 
 // Users
 
@@ -61,9 +82,11 @@ export const RemoveRangeRiskControls = (riskControls) => API.put(`/RiskControl/R
 
 // Controls
 
-export const fetchControls = (page, itemsPerPage) => API.get(`/Control/GetControls?Page=${page}&ItemsPerPage=${itemsPerPage}`);
+export const fetchControlsByRiskCategory = (riskCategoryId, page, itemsPerPage) => API.get(`/Control/GetControlsByRiskCategory?RiskCategoryId=${riskCategoryId}&Page=${page}&ItemsPerPage=${itemsPerPage}`);
+
 export const fetchControlsByRisk = (riskId, page, itemsPerPage) => API.get(`/Control/GetControlsByRisk?RiskId=${riskId}&Page=${page}&ItemsPerPage=${itemsPerPage}`);
-export const searchControlsByCode = (code) => API.get(`/Control/GetControlByCode?Code=${code}`);
+export const searchControlsByCode = (riskCategoryId, filter, page, itemsPerPage) => API.get(`/Control/SearchControlsByCode?RiskCategoryId=${riskCategoryId}&Filter=${filter}&Page=${page}&ItemsPerPage=${itemsPerPage}`);
+
 export const addControl = (control) => API.post(`/Control/Add`, control, { "headers": options.headers });
 export const updateControl = (control) => API.put(`/Control/Update`, control, { "headers": options.headers });
 

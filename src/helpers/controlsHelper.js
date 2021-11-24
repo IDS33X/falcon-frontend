@@ -14,7 +14,7 @@ export const getGridRows = (controls) => {
             automationLevel: control.automationLevel,
             controlType: control.controlType,
             frequency: control.frequency,
-            documented: control.documented,
+            documented: getLabelDocumented[control.documented],
             policy: control.policy,
             responsablePosition: control.responsablePosition,
             lastUpdateDate: control.lastUpdateDate,
@@ -27,10 +27,6 @@ export const getGridRows = (controls) => {
     });
 }
 
-export const OptionsDocumented = {
-    true: "Documentado",
-    false: "No documentado",
-}
 // Headers that will be shown in the grid 
 export const headers = [
     { field: 'id', headerName: 'Id', width: 100, hide: true },
@@ -55,7 +51,7 @@ export const headers = [
 
 
 // Maps the fetched risks to a format that can be read by the grid 
-export const getFormState = (control) => {
+export const getFormState = (control, categoryId) => {
     let objectToReturn = {
         control: {
             userId: control?.user.id ?? 5,
@@ -70,6 +66,7 @@ export const getFormState = (control) => {
             activity: control?.activity ?? '',
             objective: control?.objective ?? '',
             evidence: control?.evidence ?? '',
+            riskCategoryId: categoryId,
 
         }
     }
@@ -86,6 +83,11 @@ export const getFormState = (control) => {
     }
     return objectToReturn;
 
+}
+
+const getLabelDocumented = {
+    true: "Documentado",
+    false: "No documentado"
 }
 
 // Transforms date object to a readable format

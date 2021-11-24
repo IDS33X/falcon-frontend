@@ -20,7 +20,7 @@ const useQuery = () => {
 
 const ControlsPage = ({ match }) => {
 
-    const riskId = match ? match.params.riskId : null;
+    const riskCategoryId = match ? match.params.categoryId : null;
     const selectedControl = useSelector(state => state.controls.control);
     const { controls, loading, error, totalOfItems, amountOfPages } = useSelector(state => state.controls);
     const classes = useStyles();
@@ -35,6 +35,7 @@ const ControlsPage = ({ match }) => {
     const [currentPage, setPage] = useState(0);
     const [pageSize, setPageSize] = React.useState(10);
     const mainRouteName = `/riskcategories/${match.params.categoryId}/controls`;
+    const { riskCategoryTitle } = useSelector(state => state.riskCategories);
 
 
     useEffect(() => {
@@ -45,7 +46,7 @@ const ControlsPage = ({ match }) => {
         }
         else {
             history.push(`${mainRouteName}?page=${currentPage + 1}& rowsPerPage=${pageSize}`);
-            dispatch(GetControls(currentPage + 1, pageSize));
+            dispatch(GetControls(riskCategoryId, currentPage + 1, pageSize));
             dispatch(GetAutomationLevels());
             dispatch(GetControlTypes());
             dispatch(GetControlStates());
@@ -83,11 +84,11 @@ const ControlsPage = ({ match }) => {
     const searchRisk = (search) => {
         // Filter users by search only if there's something written on search bar
         if (search?.trim()) {
-            dispatch(SearchControlsByCode(riskId, 1, pageSize, search));
+            dispatch(SearchControlsByCode(riskCategoryId, 1, pageSize, search));
             history.push(`${mainRouteName}/search?&searchQuery=${search || 'none'}`);
         }
         else {
-            dispatch(GetControls(currentPage + 1, pageSize));
+            dispatch(GetControls(riskCategoryId, currentPage + 1, pageSize));
             resetRoute();
 
         }
@@ -97,18 +98,6 @@ const ControlsPage = ({ match }) => {
     const resetRoute = () => {
         history.push(`${mainRouteName}?page=${currentPage + 1}& rowsPerPage=${pageSize}`);
     }
-
-    const confirmElimination = () => {
-        //history.push(`${mainRouteName}?page=${currentPage + 1}& rowsPerPage=${pageSize}`);
-
-        dispatch(UpdateControl());
-
-        //selectedControl.State = false;
-        //dispatch(UpdateControl(JSON.stringify(getFormState(control, riskId))));
-
-    }
-
-
 
 
     return loading ? (
@@ -123,10 +112,13 @@ const ControlsPage = ({ match }) => {
                 {/* className={classes.gridContainer} */}
                 <Grid item xs={12} sm={6} md={9}>
                     <h1>
-                        Gestion de controles
+                        Controles
                     </h1>
                 </Grid>
-
+            </Grid>
+            <Grid item xs={12} style={{marginBottom: -12, marginTop: -10, display: 'flex', alignContent: 'center', alignSelf: 'center', alignItems: 'center'}}>
+                    <h2 style={{float: "left", display: 'inline-block', fontWeight: 400, color: '#023E7D', fontSize: '16px',marginTop: '-5px'}}>
+                    <span style={{color: '#000e29', fontStyle: 'normal', fontWeight: 700}}>Home &gt; </span>{riskCategoryTitle}</h2>
             </Grid>
 
             <Grid container justify="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
@@ -157,14 +149,13 @@ const ControlsPage = ({ match }) => {
 
             {
                 selectedControl
-                    ? <ControlForm riskId={riskId} control={selectedControl} title={"Editar control"} saveControl={UpdateControl} resetRoute={resetRoute} />
+                    ? <ControlForm categoryId={match.params.riskCategoryId} riskCategoryId={riskCategoryId} control={selectedControl} title={"Editar control"} saveControl={UpdateControl} resetRoute={resetRoute} />
 
-                    : <ControlForm resetRoute={resetRoute} riskId={riskId} control={selectedControl} title={"Agregar control"} saveControl={AddControl} />
+                    : <ControlForm categoryId={match.params.riskCategoryId} resetRoute={resetRoute} riskCategoryId={riskCategoryId} control={selectedControl} title={"Agregar control"} saveControl={AddControl} />
 
             }
 
 
-            <ConfirmationDialog confirmAction={confirmElimination} />
 
         </>
 
