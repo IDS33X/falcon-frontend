@@ -7,7 +7,8 @@ import {
   CREATE_USER,
   UPDATE_USER,
   START_LOADING_USER,
-  SET_USER
+  SET_USER,
+  UPDATE_USER_PASSWORD
 } from '../constants/actionTypes'
 
 const initialState = {
@@ -86,6 +87,12 @@ const Users = (state = initialState, { type, payload }) => {
         users: newArray,
         loading: false,
 
+      };
+
+    case UPDATE_USER_PASSWORD:
+
+      return {
+        ...state,
       };
 
     case FAILED_USER_REQUEST:

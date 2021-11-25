@@ -10,7 +10,7 @@ import SearchBarComponent from '../../../components/common/SearchBar/SearchBar';
 import UserForm from '../../../components/Users/UserForm/UserForm';
 import { openUserFormDialog } from '../../../actions/userFormDialog'
 import { useHistory, useLocation } from 'react-router';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import useStyles from './styles';
 
 const useQuery = () => {

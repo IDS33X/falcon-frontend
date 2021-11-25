@@ -116,9 +116,9 @@ const ControlsPage = ({ match }) => {
                     </h1>
                 </Grid>
             </Grid>
-            <Grid item xs={12} style={{marginBottom: -12, marginTop: -10, display: 'flex', alignContent: 'center', alignSelf: 'center', alignItems: 'center'}}>
-                    <h2 style={{float: "left", display: 'inline-block', fontWeight: 400, color: '#023E7D', fontSize: '16px',marginTop: '-5px'}}>
-                    <span style={{color: '#000e29', fontStyle: 'normal', fontWeight: 700}}>Home &gt; </span>{riskCategoryTitle}</h2>
+            <Grid item xs={12} style={{ marginBottom: -12, marginTop: -10, display: 'flex', alignContent: 'center', alignSelf: 'center', alignItems: 'center' }}>
+                <h2 style={{ float: "left", display: 'inline-block', fontWeight: 400, color: '#023E7D', fontSize: '16px', marginTop: '-5px' }}>
+                    <span style={{ color: '#000e29', fontStyle: 'normal', fontWeight: 700 }}>Home &gt; </span>{riskCategoryTitle}</h2>
             </Grid>
 
             <Grid container justify="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>

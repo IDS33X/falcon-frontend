@@ -1,12 +1,10 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState } from 'react';
 import { Container } from '@material-ui/core';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { BrowserRouter, Switch, } from 'react-router-dom';
 import TestPage from './pages/TestPage/TestPage';
 import { ThemeProvider } from '@material-ui/core';
 import theme from './theme';
 import { useStyles } from './styles';
-
 import AuthPage from './pages/common/AuthPage/AuthPage';
 import AuthRoute from './pages/common/AuthPage/AuthRoute';
 import AreasPage from './pages/admin/AreasPage/AreasPage';
@@ -15,10 +13,7 @@ import DepartmentsPage from './pages/admin/DepartmentsPage/DepartmentsPage';
 import UsersPage from './pages/admin/UsersPage/UsersPage';
 import RisksPage from './pages/analyst/RisksPage/RisksPage';
 import ControlsPage from './pages/analyst/ControlsPage/ControlsPage';
-
-
 import RiskCategoriesPage from './pages/riskanalyst/RiskCategoriesPage/RiskCategoriesPage';
-import MyControlsPage from './pages/employee/MyControlsPage/MyControlsPage';
 import PrivateRoute from './pages/PrivateRoute';
 import Layout from './components/common/Layout/Layout';
 
@@ -61,6 +56,19 @@ const App = () => {
               <PrivateRoute path="/riskcategories/:categoryId/controls/edit" exact roleWithAccess='analyst' component={ControlsPage} setSection={setSection} sectionName="Analista de Riesgo"/>
               <PrivateRoute path="/riskcategories/:categoryId/controls/search" exact roleWithAccess='analyst' component={ControlsPage} setSection={setSection} sectionName="Analista de Riesgo"/>
 
+              <PrivateRoute path="/riskcategories/:categoryId/risks" exact roleWithAccess='analyst' component={RisksPage} />
+              <PrivateRoute path="/riskcategories/:categoryId/risks/edit" exact roleWithAccess='analyst' component={RisksPage} />
+              <PrivateRoute path="/riskcategories/:categoryId/risks/search" exact roleWithAccess='analyst' component={RisksPage} />
+              <PrivateRoute path="/riskcategories/:categoryId/risks/:riskId/controls" exact roleWithAccess='analyst' component={RisksPage} />
+
+
+
+              <PrivateRoute path="/riskcategories/:categoryId/controls" exact roleWithAccess='analyst' component={ControlsPage} />
+              <PrivateRoute path="/riskcategories/:categoryId/controls/edit" exact roleWithAccess='analyst' component={ControlsPage} />
+              <PrivateRoute path="/riskcategories/:categoryId/controls/search" exact roleWithAccess='analyst' component={ControlsPage} />
+
+
+              <PrivateRoute path="/riskcategories/:categoryId/controls/delete" exact roleWithAccess='analyst' component={ControlsPage} />
 
               <PrivateRoute path="/riskcategories/:categoryId/controls/delete" exact roleWithAccess='analyst' component={ControlsPage} setSection={setSection} sectionName="Analista de Riesgo" />
 

@@ -11,7 +11,8 @@ import {
     FETCH_USER,
     CREATE_USER,
     UPDATE_USER,
-    START_LOADING_USER
+    START_LOADING_USER,
+    UPDATE_USER_PASSWORD
 } from '../constants/actionTypes'
 
 // Generic Action creators
@@ -118,17 +119,26 @@ export const UpdateProfile = (user) => {
                 dispatch(FailedRequest(error.message))
             })
 
-        // api.updateLogin(user)
-        //     .then(response => {
-        //         const user = response.data
-        //         dispatch({
-        //             type: UPDATE_USER,
-        //             payload: user
-        //         })
-        //     })
-        //     .catch(error => {
-        //         dispatch(FailedRequest(error.message))
-        //     })
+
     }
 }
+
+export const UpdatePassword = (userPassword) => {
+    return async function (dispatch) {
+        api.updatePassword(userPassword)
+            .then(response => {
+                const id = response.data
+                dispatch({
+                    type: UPDATE_USER_PASSWORD,
+                })
+            })
+            .catch(error => {
+                dispatch(FailedRequest(error.message))
+            })
+
+
+    }
+}
+
+
 

@@ -57,7 +57,7 @@ const Layout = ({ children, user, setUser, section }) => {
         <Toolbar>
           <Link to="/" className={classes.brandContainer} style={{flexGrow: 1}}>
             <IconButton
-                size="large"
+                size="medium"
                 disableFocusRipple='true'
                 disableRipple='true'
                 disableTouchRipple='true'
