@@ -13,6 +13,15 @@ Falcon permite consultar la probabilidad y severidad de los riesgos para dar seg
 - Gestionar controles de Riesgo.
 - Evaluar y dar seguimiento a los controles de riesgo aplicados.
 
+## Branch strategy:
+La estrategia de ramificación que fue utilizada en este proyecto es Gitflow, esto con el propósito de aislar y organizar el trabajo en diferentes tipos de ramas (tanto primarias como de soporte). En este caso se utilizaron los siguientes tipos de ramas: 
+- Main
+- Develop
+- Feature
+- Fix
+- Release
+
+
 ## Some Captures
 
 #### Login Page
