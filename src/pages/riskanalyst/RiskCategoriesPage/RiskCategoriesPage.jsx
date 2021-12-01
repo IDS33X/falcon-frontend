@@ -104,9 +104,9 @@ const RiskCategoriesPage = () => {
                 <Grid item xs={12}>
                     <RiskCategories currentRiskCategoryId={currentRiskCategoryId} setCurrentRiskCategoryId={setCurrentRiskCategoryId} setFormType={setFormType}/>
                     <Grid className={classes.paginationGrid}>
-                            <Paper className={classes.pagination} elevation={6}>
-                                <Pagination page={page} stateSource={stateSource} onDispatch={onDispatch} mainRouteName={mainRouteName} departmentId={departmentId}/>
-                            </Paper>
+                        <Paper className={classes.pagination} elevation={6}>
+                            <Pagination page={page} stateSource={stateSource} onDispatch={onDispatch} mainRouteName={mainRouteName} departmentId={departmentId}/>
+                        </Paper>
                     </Grid>
                 </Grid>
             </Grid>

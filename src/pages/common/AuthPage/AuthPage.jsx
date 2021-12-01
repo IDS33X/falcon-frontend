@@ -48,10 +48,10 @@ const AuthPage = ({ setUser }) => {
             <Typography variant="button" style={{fontWeight: 500, fontSize: '18px', textTransform: 'none'}}>Iniciar Sesión</Typography>
             <form className={classes.form} onSubmit={handleSubmit}>
               <Grid container spacing={2}>
-                <Input name="employeeUsername" label="Usuario" handleChange={handleChange} type="employeeUsername" />
-                <Input name="password" label="Contraseña" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
+                <Input name="employeeUsername" label="Usuario" handleChange={handleChange} type="employeeUsername"/>
+                <Input name="password" label="Contraseña" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword}/>
               </Grid>
-              <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit} style={{textTransform: 'none', borderRadius: 30}}>
+              <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit} style={{textTransform: 'none', borderRadius: 30}} testId='submitButton'>
                     <Typography style={{textTransform: 'none'}}>Ingresar</Typography>
               </Button>
               <Grid container justify="flex-end">

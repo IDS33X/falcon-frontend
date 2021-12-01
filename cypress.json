@@ -1,0 +1,17 @@
+{
+    "integrationFolder": "cypress/integration",
+    "supportFile": "cypress/support/index.js",
+    "videosFolder": "cypress/videos",
+    "screenshotsFolder": "cypress/screenshots",
+    "pluginsFile": "cypress/plugins/index.js",
+    "fixturesFolder": "cypress/fixtures",
+    "baseURL": "http://localhost:3000",
+    "experimentalStudio": true,
+    "env": {
+        "adminUsername": "adrielrosario",
+        "adminPassword": "admin123",
+        "analystUsername": "onelkyhernandez",
+        "analystPassword": "analyst123"
+    },
+    "defaulCommandTimeout": 20000
+}
