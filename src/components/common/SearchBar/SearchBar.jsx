@@ -14,7 +14,7 @@ const SearchBarComponent = ({ onSearchClick, search, setSearch, history, testId}
 
     return (  
           <SearchBar
-            testId={testId}
+            testId={testId ?? "searchBar"}
             onRequestSearch={(e) => onSearchClick(e)}
             value={search}
             onChange={value => { setSearch(value); }}

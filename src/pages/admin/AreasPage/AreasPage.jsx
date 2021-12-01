@@ -10,14 +10,14 @@ import { itemsPerPage } from '../../../components/common/Pagination/Pagination';
 import SearchBarComponent from '../../../components/common/SearchBar/SearchBar';
 import AddButton from '../../../components/common/AddButton/AddButton';
 import EditCardDialog from '../../../components/common/EditCardDialog/EditCardDialog';
-import { getAreas, getAreasBySearch, createArea, updateArea, getAmountOfAreas} from '../../../actions/areas';
+import { getAreas, getAreasBySearch, createArea, updateArea, getAmountOfAreas } from '../../../actions/areas';
 import ConfirmationDialog from '../../../components/common/ConfirmationDialog/ConfirmationDialog';
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
 }
 
-const AreasPage = ({match}) => {
+const AreasPage = ({ match }) => {
     const classes = useStyles();
     const query = useQuery();
     var page = query.get('page') || 1;
@@ -38,32 +38,32 @@ const AreasPage = ({match}) => {
     //search.trim() false/true
 
     const searchArea = (search) => {
-        if (search?.trim()){
-            dispatch(getAreasBySearch({search, page, itemsPerPage}));
+        if (search?.trim()) {
+            dispatch(getAreasBySearch({ search, page, itemsPerPage }));
             history.push(`/areas/search?searchQuery=${search || 'none'}&page=${page}`);
-        }else{
+        } else {
             dispatch(getAreas(page, itemsPerPage));
             //history.push('/');
         }
     }
-    
+
     const onDispatch = () => {
-        if(searchQuery){
+        if (searchQuery) {
             searchArea(search);
-        }else{
+        } else {
             dispatch(getAreas(page, itemsPerPage));
         }
     } // EL ON DISPATCH ES EL QUE ACTUALIZA LA PAGINACION
-    
 
-    useEffect(()=> {
-        if(page){
-             verifyAmountOfAreas(); // 8
-         }
-     }, [amountOfLastPageAreas, page])
+
+    useEffect(() => {
+        if (page) {
+            verifyAmountOfAreas(); // 8
+        }
+    }, [amountOfLastPageAreas, page])
 
     const verifyAmountOfAreas = () => {
-        if(amountOfLastPageAreas === itemsPerPage){
+        if (amountOfLastPageAreas === itemsPerPage) {
             page = amountOfPages + 1;
         }
         else {
@@ -76,39 +76,39 @@ const AreasPage = ({match}) => {
         // because areas.length its equal to the amount of areas of the current page. 
         dispatch(getAmountOfAreas(amountOfPages));
         //dispatch(getAreas(page, itemsPerPage));
-        dispatch(createArea({area: {title: areaTitle, description: areaDescription}})); // Esto basta
+        dispatch(createArea({ area: { title: areaTitle, description: areaDescription } })); // Esto basta
         onDispatch();
         history.push(`/areas?page=${amountOfPages}`);
         //verifyAmountOfAreas(areas);
         //dispatch(getAreas(verifyFullPage(areas), itemsPerPage));
     }
-    
-    const onUpdateDispatch = (areaId, areaTitle, areaDescription ) => {
+
+    const onUpdateDispatch = (areaId, areaTitle, areaDescription) => {
         //onDispatch();
-        dispatch(updateArea({area: {id: areaId, title: areaTitle, description: areaDescription}}));
+        dispatch(updateArea({ area: { id: areaId, title: areaTitle, description: areaDescription } }));
     }
 
     return (
-      <Grow in>
+        <Grow in>
             <Grid container justify="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
-                <EditCardDialog currentAreaId={currentAreaId} setCurrentAreaId={setCurrentAreaId} formType={formType} stateSource={stateSource} onCreateDispatch={onCreateDispatch} onUpdateDispatch={onUpdateDispatch} amountOfPages={amountOfPages} entityType={'area'}/>
+                <EditCardDialog currentAreaId={currentAreaId} setCurrentAreaId={setCurrentAreaId} formType={formType} stateSource={stateSource} onCreateDispatch={onCreateDispatch} onUpdateDispatch={onUpdateDispatch} amountOfPages={amountOfPages} entityType={'area'} />
                 <Grid item xs={12} sm={6} md={9}>
-                    <SearchBarComponent onSearchClick={searchArea} search={search} setSearch={setSearch} history={history}/>
+                    <SearchBarComponent testId="areaSearchBar" onSearchClick={searchArea} search={search} setSearch={setSearch} history={history} />
                 </Grid>
-                <AddButton setFormType={setFormType}/>
-                <Grid item xs={12} style={{marginBottom: -12, marginTop: -10, display: 'flex', alignContent: 'center', alignSelf: 'center', alignItems: 'center'}}>
-                    <h2 style={{float: "left", display: 'inline-block', fontWeight: 700, color: '#023E7D', fontSize: '16px',marginTop: '-5px'}}>Home</h2> 
+                <AddButton testId="addAreaButton" setFormType={setFormType} />
+                <Grid item xs={12} style={{ marginBottom: -12, marginTop: -10, display: 'flex', alignContent: 'center', alignSelf: 'center', alignItems: 'center' }}>
+                    <h2 style={{ float: "left", display: 'inline-block', fontWeight: 700, color: '#023E7D', fontSize: '16px', marginTop: '-5px' }}>Home</h2>
                 </Grid>
                 <Grid item xs={12}>
-                    <Areas currentAreaId={currentAreaId} setCurrentAreaId={setCurrentAreaId} setFormType={setFormType}/>
+                    <Areas currentAreaId={currentAreaId} setCurrentAreaId={setCurrentAreaId} setFormType={setFormType} />
                     <Grid className={classes.paginationGrid}>
-                            <Paper className={classes.pagination} elevation={6}>
-                                <Pagination page={page} stateSource={stateSource} onDispatch={onDispatch} mainRouteName={mainRouteName}/>
-                            </Paper>
+                        <Paper className={classes.pagination} elevation={6}>
+                            <Pagination page={page} stateSource={stateSource} onDispatch={onDispatch} mainRouteName={mainRouteName} />
+                        </Paper>
                     </Grid>
                 </Grid>
             </Grid>
-      </Grow>
+        </Grow>
     );
 };
 

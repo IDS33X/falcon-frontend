@@ -52,7 +52,7 @@ const Area = ({area, currentAreaId, setCurrentAreaId, setFormType }) => {
     // Card
     return(
         <>
-            <SmallCard name="areaCard" editButton={editButton} title={area.title} description={area.description}
+            <SmallCard testId="areaSmallCard" name="areaCard" editButton={editButton} title={area.title} description={area.description}
                     bottomTitle={'Divisiones'} bottomCounter={area.countDivisions} onClickCard = {onClickCard}></SmallCard>
             <ConfirmationDialog/>
             {/* <EditCardDialog currentAreaId={currentAreaId} setCurrentAreaId={setCurrentAreaId}/> */}

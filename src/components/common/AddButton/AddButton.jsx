@@ -22,7 +22,7 @@ const AddButton = ({ title, color = "primary", onClick, setFormType, testId}) =>
     }
 
     return (
-        <Tooltip testId={testId} title={titleTooltip} placement="bottom">
+        <Tooltip testId={testId ?? "addButton"} title={titleTooltip} placement="bottom">
             <IconButton  aria-label="add" variant="contained" onClick={handleOnClick} >
                 <AddCircleIcon color={color} className={classes.button} />
             </IconButton>
