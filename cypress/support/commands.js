@@ -1,4 +1,4 @@
-<reference types="cypress" />
+/// <reference types="cypress" />
 
 export const login = (username, password) => {
     cy.log('Typing Credentials');
