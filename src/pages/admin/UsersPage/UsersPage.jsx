@@ -167,7 +167,7 @@ const UsersPage = ({ match }) => {
 
             {
                     error &&
-                     <Snackbar open={open} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} autoHideDuration={8000} onClose={handleCloseSnackBar}>
+                     <Snackbar testId="userErrorMessage" open={open} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} autoHideDuration={8000} onClose={handleCloseSnackBar}>
                 <MuiAlert variant="filled" severity="error" sx={{ width: '100%' }}>
                     {error}
                 </MuiAlert>
