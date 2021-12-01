@@ -2,7 +2,7 @@ import useStyles from './styles';
 import SearchBar from "material-ui-search-bar";
 import { useState } from 'react'
 
-const SearchBarComponent = ({onSearchClick, search, setSearch, history}) => {
+const SearchBarComponent = ({ onSearchClick, search, setSearch, history, testId}) => {
   //const [searchItem, setSearchItem] = useState("");
     const classes = useStyles();
     
@@ -14,6 +14,7 @@ const SearchBarComponent = ({onSearchClick, search, setSearch, history}) => {
 
     return (  
           <SearchBar
+            testId={testId}
             onRequestSearch={(e) => onSearchClick(e)}
             value={search}
             onChange={value => { setSearch(value); }}

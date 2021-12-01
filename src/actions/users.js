@@ -11,7 +11,8 @@ import {
     FETCH_USER,
     CREATE_USER,
     UPDATE_USER,
-    START_LOADING_USER
+    START_LOADING_USER,
+    RESET_USER_ERROR_STATE
 } from '../constants/actionTypes'
 
 // Generic Action creators
@@ -27,6 +28,8 @@ export const FailedRequest = error => {
 // Set user to null 
 
 export const ResetUser = () => ({ type: SET_USER, payload: null });
+export const ResetError = () => ({ type: RESET_USER_ERROR_STATE });
+
 
 export const GetUsers = (departmentId, page, itemsPerPage) => async (dispatch) => {
 
@@ -97,7 +100,7 @@ export const AddUser = (user) => {
                 })
             })
             .catch(error => {
-                dispatch(FailedRequest(error.message))
+                dispatch(FailedRequest(error.response.data))
             })
     }
 }

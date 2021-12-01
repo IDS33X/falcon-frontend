@@ -37,6 +37,8 @@ export const START_LOADING_USER = 'START_LOADING_USER';
 export const SEND_REQUEST = 'SEND_REQUEST'
 export const FAILED_USER_REQUEST = 'FAILED_USER_REQUEST'
 export const SET_USER = 'SET_USER';
+export const RESET_USER_ERROR_STATE = 'RESET_USER_ERROR_STATE';
+
 
 // Risks page actions 
 

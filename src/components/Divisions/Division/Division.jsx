@@ -51,7 +51,7 @@ const Division = ({division, currentDivisionId, setCurrentDivisionId, setFormTyp
     // Card
     return(
         <>
-            <SmallCard editButton={editButton} title={division.title} description={division.description}
+            <SmallCard name="divisionCard"  editButton={editButton} title={division.title} description={division.description}
                     bottomTitle={'Departamentos'} bottomCounter={division.countDepartments} onClickCard = {onClickCard}></SmallCard>
             <ConfirmationDialog/>
             {/* <EditCardDialog currentAreaId={currentAreaId} setCurrentAreaId={setCurrentAreaId}/> */}

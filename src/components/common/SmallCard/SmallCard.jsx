@@ -10,7 +10,7 @@ import { ButtonBase, CardActionArea, Button} from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom'
 
 // This is a general component that will render the cards shown in different lists. 
-const SmallCard = ({ bottomActions, editButton, title, description, onClickCard, bottomTitle, bottomCounter }) => {
+const SmallCard = ({ bottomActions, editButton, title, description, onClickCard, bottomTitle, name, bottomCounter }) => {
   const classes = useStyles();
 
   /* <CardActionArea classsName = {classes.cardAction} component={RouterLink} to="/questions"> */
@@ -24,7 +24,7 @@ const SmallCard = ({ bottomActions, editButton, title, description, onClickCard,
           onClickCard();
         }}
       >
-      <Card className={classes.card} raised elevation = {6}>
+      <Card name={name} className={classes.card} raised elevation = {6}>
               <div>
               <div className={classes.topActions}>
                   <Tooltip title={editButton.title} placement="right-start">

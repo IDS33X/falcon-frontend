@@ -9,7 +9,7 @@ import { useHistory } from 'react-router';
 import { FaRegEdit } from 'react-icons/fa';
 import { setCurrentDepartmentTitle } from "../../../actions/departments";
 
-const Department = ({department, currentDepartmentId, setCurrentDepartmentId, setFormType}) => {
+const Department = ({ department, currentDepartmentId, setCurrentDepartmentId, setFormType }) => {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -48,13 +48,13 @@ const Department = ({department, currentDepartmentId, setCurrentDepartmentId, se
 
     //const description = "Lorem Ipsum Dolor Sit Amet, Consectetur A Ipiscing Elit, Sed Do Eiusmod Tempor Incidid Ut Labore Et Dolore."
 
-    
+
     // Card
-    return(
+    return (
         <>
-            <SmallCard editButton={editButton} title={department.title} description={department.description}
-                    bottomTitle={'Analistas de Riesgo'} bottomCounter={department.countAnalytics} onClickCard = {onClickCard}></SmallCard>
-            <ConfirmationDialog/>
+            <SmallCard name="departmentCard" editButton={editButton} title={department.title} description={department.description}
+                bottomTitle={'Analistas de Riesgo'} bottomCounter={department.countAnalytics} onClickCard={onClickCard}></SmallCard>
+            <ConfirmationDialog />
             {/* <EditCardDialog currentAreaId={currentAreaId} setCurrentAreaId={setCurrentAreaId}/> */}
         </>
     );

@@ -5,7 +5,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import {useDispatch } from 'react-redux'
 import { openEditCardDialog } from '../../../actions/editCardDialogActions';
 
-const AddButton = ({ title, color = "primary", onClick, setFormType}) => {
+const AddButton = ({ title, color = "primary", onClick, setFormType, testId}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
@@ -22,8 +22,8 @@ const AddButton = ({ title, color = "primary", onClick, setFormType}) => {
     }
 
     return (
-        <Tooltip title={titleTooltip} placement="bottom">
-            <IconButton aria-label="add" variant="contained" onClick={handleOnClick} >
+        <Tooltip testId={testId} title={titleTooltip} placement="bottom">
+            <IconButton  aria-label="add" variant="contained" onClick={handleOnClick} >
                 <AddCircleIcon color={color} className={classes.button} />
             </IconButton>
         </Tooltip>
