@@ -9,12 +9,18 @@ describe('Login', () => {
         cy.log('Visiting starting page');
         cy.visit('http://localhost:3000');
     })
-    it('Should not login if form is incomplete', () => {
+    it('Should not login if the form is incomplete', () => {
         cy.log('Typing just username');
         cy.get('[name=employeeUsername]').type('username');
 
         cy.log('Click Submit Button...');
         cy.get('[testId=submitButton]').should('exist').click();
+
+        cy.on('window:alert',(txt)=>{
+            expect(txt).to.equal('Completa este campo');
+        });
+
+        cy.url().should('not.includes', 'areas' || 'riskcategories')
     });
     it('Should not login if user is invalid', () => {
         Commands.login('invalidUser', 'invalidpassword');
