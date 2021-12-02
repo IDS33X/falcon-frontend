@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { signIn } from '../../../actions/auth';
 
-const initialState = { employeeUsername: '', password: '' };
+const initialState = { username: '', password: '' };
 
 
 const AuthPage = ({ setUser }) => {
@@ -48,7 +48,7 @@ const AuthPage = ({ setUser }) => {
             <Typography variant="button" style={{fontWeight: 500, fontSize: '18px', textTransform: 'none'}}>Iniciar Sesión</Typography>
             <form className={classes.form} onSubmit={handleSubmit}>
               <Grid container spacing={2}>
-                <Input name="employeeUsername" label="Usuario" handleChange={handleChange} type="employeeUsername"/>
+                <Input name="username" label="Usuario" handleChange={handleChange} type="username"/>
                 <Input name="password" label="Contraseña" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword}/>
               </Grid>
               <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit} style={{textTransform: 'none', borderRadius: 30}} testId='submitButton'>

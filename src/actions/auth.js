@@ -17,44 +17,26 @@ import employeesData from '../__mocks__/employeesData';
 
 export const signIn = (formData, history) => async (dispatch) => {
     try {
-        const data = employeesData.find((data) => data.employee.username === formData.employeeUsername)
-        console.log(data);
+        const { data } = await api.signIn(formData);
+        
+        //const data = employeesData.find((data) => data.employee.username === formData.employeeUsername)
+        console.log();
 
         dispatch({ type: AUTH, data });
         
-        //Logic to push to the route of role.
-        switch (data.employee.rol) {
-                case 'admin':
+        // Logic to push to the route of role.
+        switch (data.user.roleId) {
+                case '2':
                     history.push('/areas');
                     break;
-                case 'analyst':
+                case '3':
                     history.push('/riskcategories');
                     break;
-                case 'internalcontrol':
-                    history.push('/deviationmatrix');
-                    break;    
-                case 'employee':
-                    history.push('/mycontrols');
-                    break; 
                 default:
                     break;
             }
-            
-            // const { data } = await api.signIn(formData); //This is  the real call to the API.
-            // dispatch({ type: AUTH, data });
-        
-            // switch (data.user.roleId) {
-            //     case '2':
-            //         history.push('/areas');
-            //         break;
-            //     case '3':
-            //         history.push('/riskcategories');
-            //         break;
-            //     default:
-            //         break;
-            // }
         }
         catch (error){
-            console.log(error);
+            console.log(error.message); //Dispatch alert with message her
         }
     }
