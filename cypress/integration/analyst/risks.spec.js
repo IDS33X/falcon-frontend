@@ -45,7 +45,7 @@ describe('Risks tests', () => {
 
         cy.get('[type=submit]').should('be.enabled')
         cy.get('[type=submit]').click();
-        //cy.get('[testId=searchBar]').click().type("New description").type("{enter}");
+        cy.get('[testId=searchBar]').click().type("New description").type("{enter}");
         cy.contains('New description');
     });
 
