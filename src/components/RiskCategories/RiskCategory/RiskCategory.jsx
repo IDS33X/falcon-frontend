@@ -52,7 +52,7 @@ const RiskCategory = ({riskCategory, currentRiskCategoryId, setCurrentRiskCatego
     // Card
     return(
         <>
-            <SmallCard editButton={editButton} title={riskCategory?.title} description={riskCategory?.description}
+            <SmallCard  name="riskCard" editButton={editButton} title={riskCategory?.title} description={riskCategory?.description}
                     bottomActions={[pricipalMatrixButton]} onClickCard={onClickCard}></SmallCard>
             <ConfirmationDialog/>
             {/* <EditCardDialog currentAreaId={currentAreaId} setCurrentAreaId={setCurrentAreaId}/> */}

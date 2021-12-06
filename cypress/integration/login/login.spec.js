@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 import * as Commands from '../../support/commands';
-import {credentials} from '../../constants';
+import { credentials } from '../../constants';
 
 describe('Login', () => {
     beforeEach(() => {
@@ -16,15 +16,15 @@ describe('Login', () => {
         cy.log('Click Submit Button...');
         cy.get('[testId=submitButton]').should('exist').click();
 
-        cy.on('window:alert',(txt)=>{
+        cy.on('window:alert', (txt) => {
             expect(txt).to.equal('Completa este campo');
         });
 
         cy.url().should('not.includes', 'areas' || 'riskcategories')
     });
-    it('Should not login if user is invalid', () => {
-        Commands.login('invalidUser', 'invalidpassword');
-    });
+    // it('Should not login if user is invalid', () => {
+    //     Commands.login('invalidUser', 'invalidpassword');
+    // });
     it('Should login as administrator', () => {
         Commands.login(Cypress.env("adminUsername"), Cypress.env("adminPassword"), 'areas');
 
@@ -37,5 +37,5 @@ describe('Login', () => {
         cy.log('Verifying Risk Categories Page is open');
         cy.url().should('includes', 'riskcategories');
     });
-    
+
 });

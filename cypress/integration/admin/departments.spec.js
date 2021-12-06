@@ -3,7 +3,7 @@
 import * as Commands from '../../support/commands';
 //import {credentials} from '../../constants';
 
-describe('Divisions tests', () => {
+describe('Departments tests', () => {
     beforeEach(() => {
         cy.viewport(1920, 1080);
         cy.log('Visiting starting page');
@@ -33,7 +33,7 @@ describe('Divisions tests', () => {
         cy.contains('New department');
     });
 
-    it('Should edit a division', () => {
+    it('Should edit a departments', () => {
         cy.get('[testId=editButtonCard]').first().click();
         cy.get('#name').clear().type('Updated division');
         cy.get('#description').clear().click().type('Another division description');

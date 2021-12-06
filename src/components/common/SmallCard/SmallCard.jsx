@@ -24,7 +24,7 @@ const SmallCard = ({ bottomActions, editButton, title, description, onClickCard,
           onClickCard();
         }}
       >
-      <Card testId={testId} name={name} className={classes.card} raised elevation = {6}>
+      <Card testId={testId ?? "smallCard"} name={name} className={classes.card} raised elevation = {6}>
               <div>
               <div className={classes.topActions}>
                   <Tooltip title={editButton.title} placement="right-start">

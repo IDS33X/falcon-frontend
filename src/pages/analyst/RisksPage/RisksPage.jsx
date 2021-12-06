@@ -160,7 +160,7 @@ const RisksPage = ({ match }) => {
                     <SearchBarComponent onSearchClick={searchRisk} search={search} setSearch={setSearch} history={history} />
                 </Grid>
                 <Grid>
-                    <CircularButton variant="contained" onClick={openControlsPage} color="primary">Gestionar controles</CircularButton>
+                    <CircularButton testId="manageControlsButton" variant="contained" onClick={openControlsPage} color="primary">Gestionar controles</CircularButton>
                     <AddButton title="riesgo" onClick={openFormDialog}></AddButton>
 
                 </Grid>

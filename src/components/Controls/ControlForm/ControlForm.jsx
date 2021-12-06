@@ -86,13 +86,13 @@ const ControlForm = ({ saveControl, resetRoute, title, control, riskCategoryId }
                                 }
                                 <InputFormik name="code" type="text" label="Código" disabled={control} />
 
-                                <InputFormik name="activity" type="text" label="Actividad" multiline rows={2} />
+                                <InputFormik name="activity" id="activity" type="text" label="Actividad" multiline rows={2} />
 
                                 <InputFormik name="objective" type="text" label="Objetivo" multiline rows={1} />
 
                                 {
                                     !control && (
-                                    <InputFormik name="responsablePosition" type="text" label="Posición responsable" />
+                                        <InputFormik name="responsablePosition" type="text" label="Posición responsable" />
 
                                     )
                                 }
@@ -102,11 +102,11 @@ const ControlForm = ({ saveControl, resetRoute, title, control, riskCategoryId }
 
                             <Grid item xs={4} sm={6} md={5} className={classes.secondColumn}>
 
-                                <SelectFormik name="automationLevelId" label="Nivel de automatización" options={automationLevels.map(automationLevel => ({ id: automationLevel.id, name: automationLevel.title }))} />
+                                <SelectFormik name="automationLevelId" id="automationLevelId" label="Nivel de automatización" options={automationLevels.map(automationLevel => ({ id: automationLevel.id, name: automationLevel.title }))} />
 
-                                <SelectFormik name="controlTypeId" label="Tipo de control" options={controlTypes.map(controlType => ({ id: controlType.id, name: controlType.title }))} />
+                                <SelectFormik name="controlTypeId" id="controlTypeId"  label="Tipo de control" options={controlTypes.map(controlType => ({ id: controlType.id, name: controlType.title }))} />
 
-                                <SelectFormik name="controlStateId" label="Estado" options={controlStates.map(controlState => ({ id: controlState.id, name: controlState.title }))} />
+                                <SelectFormik name="controlStateId" id="controlStateId"  label="Estado" options={controlStates.map(controlState => ({ id: controlState.id, name: controlState.title }))} />
 
 
                                 <InputFormik name="frequency" type="text" label="Frecuencia" />
@@ -114,7 +114,7 @@ const ControlForm = ({ saveControl, resetRoute, title, control, riskCategoryId }
 
                                 {
                                     control && (
-                                    <InputFormik name="responsablePosition" type="text" label="Posición responsable" />
+                                        <InputFormik name="responsablePosition" type="text" label="Posición responsable" />
 
                                     )
                                 }
