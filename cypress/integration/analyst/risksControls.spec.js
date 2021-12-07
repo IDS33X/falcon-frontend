@@ -8,24 +8,28 @@ describe('Asociation between risks and controls', () => {
         cy.viewport(1920, 1080);
         cy.log('Visiting starting page');
         cy.visit('http://localhost:3000');
-        Commands.login(Cypress.env("adminUsername"), Cypress.env("adminPassword"), 'areas');
-        cy.get('[name=areaCard]').first().click();
-        cy.get('[name=divisionCard]').first().click();
-        cy.get('[name=departmentCard]').first().click();
-        cy.url().should('includes', 'users');
+        Commands.login(Cypress.env("analystUsername"), Cypress.env("analystPassword"), 'areas');
+        cy.get('[testId=smallCard]').first().click();
+        cy.url().should('includes', 'risks');
+
 
     })
 
-    it('Should add control to a risk', () => {
-        //cy.get('[testId=addButton]').should('be.visible');
+    it('Should add control to a risk', () => {        
+        cy.get('[data-id="93d23aaf-afbc-4de9-bffa-2fffa0edcb60"] [aria-label="Mostrar controles"] > .MuiIconButton-label').click();
+        cy.get('[testId=controlRiskSearchBar]').click();
+        cy.get('.MuiAutocomplete-popper').click();
+        cy.get('[testId=controlRiskSearchBar]').type('{enter}');
 
-        // cy.get('[testId=addUserButton]').click();
-        // cy.get('#code').click().type('code002');
-        // cy.get('#name').click().type('Nombre');
-        // cy.get('#lastName').click().type('Apellido');
-        // cy.get('[name=username]').click().type('usuarioTest');
-        // cy.get('[name=password]').click().type('password');
-        // cy.get('[testId=saveUserButton]').should('be.enabled').click();
+        let countOfElements = 0;
+        cy.get(".MuiTableBody-root > tr.MuiTableRow-root").then($elements => {
+            countOfElements= $elements.length;
+        });
+
+      
+        cy.log(countOfElements)
+       
+        cy.get('[type=submit]').should('be.enabled').click();
 
     });
 

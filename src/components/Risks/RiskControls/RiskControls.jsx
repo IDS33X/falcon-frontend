@@ -113,6 +113,7 @@ const RiskControls = ({ mainRouteName, showDialog, setShowDialog, riskId }) => {
             <Grid className={classes.searchBarContainer} container mb={2} spacing={2} alignItems="left" justify="flex-end">
                 <Grid item xs={12} sm={6} md={4}>
                     <Autocomplete
+                        testId="controlRiskSearchBar"
                         disablePortal
                         options={optionsSelect}
                         value={selectedOption}
