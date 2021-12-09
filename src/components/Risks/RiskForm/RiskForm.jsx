@@ -78,11 +78,7 @@ const RiskForm = ({ saveRisk, resetRoute, title, risk, categoryId }) => {
                                 </>
                             )
                         }
-<<<<<<< HEAD
                         <InputFormik type="text" name="code" id="codeRisk" label="Codigo" disabled={risk}/>
-=======
-                        <InputFormik type="text" name="code" label="Codigo" disabled={risk} />
->>>>>>> develop
 
                         <InputFormik type="text" name="description" id="descriptionRisk" label="Descripción" multiline rows={2} />
 
