@@ -21,7 +21,7 @@ const UserForm = ({ saveUser, resetRoute, title, user, departmentId }) => {
 
     // State management of the form
     const [userForm, setUserForm] = useState({ user: {} });
-    //const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     // When the user is fetched the values of the form are updated
     useEffect(() => {
