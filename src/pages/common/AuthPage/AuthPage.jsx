@@ -1,9 +1,11 @@
 import { React, useState, useEffect } from 'react'
-import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { Avatar, Button, Paper, Grid, Typography, Container, IconButton } from '@material-ui/core';
+import SuccessDialog from '../../../components/common/SuccessDialog/SuccessDialog';
 import useStyles from './styles';
 import Input from '../../../components/common/Input/Input';
 import falconLogo from '../../../images/falconLogo7.png';
+import { openSuccessDialog } from '../../../actions/successDialogActions';
+import Warning from '@material-ui/icons/Warning';
 
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -35,6 +37,13 @@ const AuthPage = ({ setUser }) => {
         // Maybe not necessary.
     }
 
+    const iconButton = {
+      title: "AuthenticationError",
+      Icon: Warning,
+      onClick: openSuccessDialog,
+      color: '#808080'
+    }
+
     return (
       <Container component="main" maxWidth="lg" >
           <Grid style={{position: 'fixed', marginTop: '70px'}}>
@@ -43,7 +52,7 @@ const AuthPage = ({ setUser }) => {
             <Typography style={{fontWeight: 100, fontSize: '25px', textTransform: 'none', color: 'white', opacity: '0.7',marginLeft: '12px', fontStyle: 'italic'}}>Risk Control Management System</Typography>
           </Grid>
           <Container maxWidth="xs" style={{width: '24em', marginRight: '80px', marginLeft: '50px', marginTop: '200px', padding: '30px', position: 'absolute', right: '100px', backgroundColor: '#023E7D', borderRadius: 5}}>
-          <Typography style={{fontWeight: 100, fontSize: '18px', textTransform: 'none', color: 'white',marginLeft: '60px', fontStyle: 'italic'}}>¡Bienvenid@, otra vez!</Typography>
+            <Typography style={{fontWeight: 100, fontSize: '18px', textTransform: 'none', color: 'white',marginLeft: '60px', fontStyle: 'italic'}}>¡Bienvenid@, otra vez!</Typography>
           <Paper className={classes.paper} elevation={3} style={{marginRight: '5px', borderRadius: 5}}>
             <Typography variant="button" style={{fontWeight: 500, fontSize: '18px', textTransform: 'none'}}>Iniciar Sesión</Typography>
             <form className={classes.form} onSubmit={handleSubmit}>
@@ -63,6 +72,7 @@ const AuthPage = ({ setUser }) => {
               </Grid>
             </form>
           </Paper>
+          <SuccessDialog mensaje="Credenciales Incorrectas. Por favor intente de nuevo." iconButton={iconButton}></SuccessDialog>
         </Container>
       </Container>
     );        

@@ -1,5 +1,6 @@
 import * as api from '../api/index.js';
 import { AUTH } from '../constants/actionTypes';
+import { openSuccessDialog } from '../actions/successDialogActions';
 import employeesData from '../__mocks__/employeesData';
 
 // const data = { employee: {
@@ -37,6 +38,7 @@ export const signIn = (formData, history) => async (dispatch) => {
             }
         }
         catch (error){
-            console.log(error.message); //Dispatch alert with message her
+            dispatch(openSuccessDialog());
+            console.log(error); //Dispatch alert with message her
         }
     }
