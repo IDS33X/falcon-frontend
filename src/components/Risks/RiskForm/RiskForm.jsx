@@ -78,9 +78,13 @@ const RiskForm = ({ saveRisk, resetRoute, title, risk, categoryId }) => {
                                 </>
                             )
                         }
+<<<<<<< HEAD
+                        <InputFormik type="text" name="code" id="codeRisk" label="Codigo" disabled={risk}/>
+=======
                         <InputFormik type="text" name="code" label="Codigo" disabled={risk} />
+>>>>>>> develop
 
-                        <InputFormik type="text" name="description" label="Descripción" multiline rows={2} />
+                        <InputFormik type="text" name="description" id="descriptionRisk" label="Descripción" multiline rows={2} />
 
 
                         <SelectFormik type="inherentRisk" name="inherentRiskId" id="inherentRiskId" label="Riesgo inherente" options={riskImpactOptions} />
@@ -90,7 +94,7 @@ const RiskForm = ({ saveRisk, resetRoute, title, risk, categoryId }) => {
 
 
 
-                        <InputFormik type="text" name="rootCause" label="Causa raíz" multiline rows={4} />
+                        <InputFormik type="text" name="rootCause" id="rootCause" label="Causa raíz" multiline rows={4} />
 
                         <Button variant="contained" color="secondary" onClick={closeForm}
                             className={classes.button}>Cancelar</Button>

@@ -8,6 +8,7 @@ import {
   UPDATE_USER,
   START_LOADING_USER,
   SET_USER,
+  RESET_USER_ERROR_STATE,
   UPDATE_USER_PASSWORD
 } from '../constants/actionTypes'
 
@@ -107,6 +108,13 @@ const Users = (state = initialState, { type, payload }) => {
         ...state,
         user: null,
       }
+    
+    case RESET_USER_ERROR_STATE:
+      return {
+        ...state,
+        error: null,
+      }
+
 
 
     default: return state

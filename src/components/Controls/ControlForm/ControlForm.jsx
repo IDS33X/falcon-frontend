@@ -73,27 +73,62 @@ const ControlForm = ({ saveControl, resetRoute, title, control, riskCategoryId }
                                             <>
                                                 <InputFormik name="creator" type="text" disabled label="Creador" />
 
+<<<<<<< HEAD
+                                <InputFormik name="activity" id="activity" type="text" label="Actividad" multiline rows={2} />
+=======
                                                 <InputFormik name="creationDate" type="text" disabled label="Fecha de creación" />
+>>>>>>> develop
 
                                                 <InputFormik name="lastUpdateDate" disabledtype="text" label="Fecha de modificación" />
 
+<<<<<<< HEAD
+                                {
+                                    !control && (
+                                        <InputFormik name="responsablePosition" type="text" label="Posición responsable" />
+
+                                    )
+                                }
+                                <InputFormik name="policy" type="text" label="Política" multiline rows={3} />
+
+                            </Grid>
+=======
                                             </>
                                         )
                                     }
                                     <InputFormik name="code" type="text" label="Código" disabled={control} />
+>>>>>>> develop
 
                                     <InputFormik name="activity" type="text" label="Actividad" multiline rows={2} />
 
+<<<<<<< HEAD
+                                <SelectFormik name="automationLevelId" id="automationLevelId" label="Nivel de automatización" options={automationLevels.map(automationLevel => ({ id: automationLevel.id, name: automationLevel.title }))} />
+
+                                <SelectFormik name="controlTypeId" id="controlTypeId"  label="Tipo de control" options={controlTypes.map(controlType => ({ id: controlType.id, name: controlType.title }))} />
+
+                                <SelectFormik name="controlStateId" id="controlStateId"  label="Estado" options={controlStates.map(controlState => ({ id: controlState.id, name: controlState.title }))} />
+=======
                                     <InputFormik name="objective" type="text" label="Objetivo" multiline rows={1} />
                                     <SelectFormik name="automationLevelId" label="Nivel de automatización" options={automationLevels.map(automationLevel => ({ id: automationLevel.id, name: automationLevel.title }))} />
 
 
                                     <SelectFormik name="controlStateId" label="Estado" options={controlStates.map(controlState => ({ id: controlState.id, name: controlState.title }))} />
+>>>>>>> develop
 
                                     <InputFormik name="documented" type="checkbox" label="Documentado" />
 
                                 </Grid>
 
+<<<<<<< HEAD
+                                {
+                                    control && (
+                                        <InputFormik name="responsablePosition" type="text" label="Posición responsable" />
+
+                                    )
+                                }
+
+                                <InputFormik name="documented" type="checkbox" label="Documentado" />
+=======
+>>>>>>> develop
 
                             </Grid>
 

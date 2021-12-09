@@ -10,7 +10,7 @@ import { ButtonBase, CardActionArea, Button} from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom'
 
 // This is a general component that will render the cards shown in different lists. 
-const SmallCard = ({ bottomActions, editButton, title, description, onClickCard, bottomTitle, bottomCounter }) => {
+const SmallCard = ({ bottomActions, editButton, title, description, onClickCard, bottomTitle, name,testId,  bottomCounter }) => {
   const classes = useStyles();
 
   /* <CardActionArea classsName = {classes.cardAction} component={RouterLink} to="/questions"> */
@@ -24,11 +24,12 @@ const SmallCard = ({ bottomActions, editButton, title, description, onClickCard,
           onClickCard();
         }}
       >
-      <Card className={classes.card} raised elevation = {6}>
+      <Card testId={testId ?? "smallCard"} name={name} className={classes.card} raised elevation = {6}>
               <div>
               <div className={classes.topActions}>
                   <Tooltip title={editButton.title} placement="right-start">
                       <IconButton
+                        testId="editButtonCard"
                         onClick={(e) => {
                         e.stopPropagation(); // This avoid to open the father component when clicking the button, this is how we say to the dom to stop the event propagation for calling parent events.
                           editButton.onClick();
