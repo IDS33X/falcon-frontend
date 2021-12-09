@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import React, { useState, useEffect } from 'react'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { TextField } from "@material-ui/core";
-import { Grid, IconButton, Tooltip } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
+import { Grid } from '@material-ui/core';
 import useStyles from './styles';
 
 
@@ -131,7 +130,7 @@ const RiskControls = ({ mainRouteName, showDialog, setShowDialog, riskId }) => {
                         renderInput={(params) => <TextField {...params} variant="outlined" label="Buscar controles..." />} />
                 </Grid>
 
-            </Grid>
+            </Grid >
 
 
 
@@ -141,8 +140,8 @@ const RiskControls = ({ mainRouteName, showDialog, setShowDialog, riskId }) => {
                         <TableRow>
                             <TableCell>Control</TableCell>
                             <TableCell align="center" >Asignado</TableCell>
-                        </TableRow>
-                    </TableHead>
+                        </TableRow >
+                    </TableHead >
                     <TableBody>
                         {tableData.map((row) => (
                             <TableRow
@@ -160,9 +159,9 @@ const RiskControls = ({ mainRouteName, showDialog, setShowDialog, riskId }) => {
 
                             </TableRow>
                         ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                    </TableBody >
+                </Table >
+            </TableContainer >
 
 
             <Grid className={classes.footer} container mt={12} alignItems="left" justify="flex-end">
@@ -175,7 +174,7 @@ const RiskControls = ({ mainRouteName, showDialog, setShowDialog, riskId }) => {
 
 
 
-        </DialogWrapper>
+        </DialogWrapper >
     );
 }
 

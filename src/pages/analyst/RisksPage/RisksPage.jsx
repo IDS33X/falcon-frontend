@@ -99,20 +99,13 @@ const RisksPage = ({ match }) => {
     editButton.onClick = async (rowId) => {
         history.push(`${mainRouteName}/edit?risk=${rowId}`);
         await dispatch(SetRisk(risks.find(risk => risk.id === rowId)));
-        dispatch(openFormDialog());
     }
-
-
     // When manage controls is clicked this actions are fired
     showControlsButton.onClick = async (rowId) => {
         setRiskId(rowId);
         history.push(`${mainRouteName}/?risk=${rowId}&/controls/`);
         await dispatch(GetControlsByRisk(rowId, 1, 20));
-        await dispatch(GetControls(categoryId, 1, 50));
-        setShowRiskControlsDialog(true);
-
     }
-
     const searchRisk = (search) => {
         // Filter users by search only if there's something written on search bar
         if (search?.trim()) {
@@ -154,7 +147,7 @@ const RisksPage = ({ match }) => {
 
             </Grid>
 
-            <Grid container justify="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
+            <Grid container justifyContent="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
                 {/* className={classes.gridContainer} */}
                 <Grid item xs={12} sm={6} md={9}>
                     <SearchBarComponent onSearchClick={searchRisk} search={search} setSearch={setSearch} history={history} />
@@ -164,9 +157,9 @@ const RisksPage = ({ match }) => {
                     <AddButton title="riesgo" onClick={openFormDialog}></AddButton>
 
                 </Grid>
-                <Grid item xs={12} style={{marginBottom: -12, marginTop: -10, display: 'flex', alignContent: 'center', alignSelf: 'center', alignItems: 'center'}}>
-                    <h2 style={{float: "left", display: 'inline-block', fontWeight: 400, color: '#023E7D', fontSize: '16px',marginTop: '-5px'}}>
-                        <span style={{color: '#000e29', fontStyle: 'normal', fontWeight: 700}}>Home &gt; </span>{riskCategoryTitle}</h2>
+                <Grid item xs={12} style={{ marginBottom: -12, marginTop: -10, display: 'flex', alignContent: 'center', alignSelf: 'center', alignItems: 'center' }}>
+                    <h2 style={{ float: "left", display: 'inline-block', fontWeight: 400, color: '#023E7D', fontSize: '16px', marginTop: '-5px' }}>
+                        <span style={{ color: '#000e29', fontStyle: 'normal', fontWeight: 700 }}>Home &gt; </span>{riskCategoryTitle}</h2>
                 </Grid>
 
             </Grid>
@@ -211,9 +204,11 @@ const RisksPage = ({ match }) => {
 
 
 
+
         </>
 
     )
+
 }
 
 export default RisksPage;

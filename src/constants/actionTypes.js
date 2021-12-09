@@ -33,11 +33,12 @@ export const FETCH_USER = 'FETCH_USER';
 export const CREATE_USER = 'CREATE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const START_LOADING_USER = 'START_LOADING_USER';
-
 export const SEND_REQUEST = 'SEND_REQUEST'
 export const FAILED_USER_REQUEST = 'FAILED_USER_REQUEST'
 export const SET_USER = 'SET_USER';
 export const RESET_USER_ERROR_STATE = 'RESET_USER_ERROR_STATE';
+export const UPDATE_USER_PASSWORD = 'UPDATE_USER_PASSWORD';
+
 
 
 // Risks page actions 
@@ -83,8 +84,6 @@ export const FETCH_CONTROL_TYPES = 'FETCH_CONTROL_TYPES';
 
 
 
-export const GET = 'GET'
-export const DELETE = 'DELETE'
 export const ADD = 'ADD'
 
 // Areas

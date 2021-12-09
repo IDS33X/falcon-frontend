@@ -22,7 +22,7 @@ const RiskCategoriesPage = () => {
     const classes = useStyles();
     const query = useQuery();
     var user = JSON.parse(localStorage.getItem('profile'));
-    const departmentId = query.get('department') || user.employee.departmentId; // get from local storage maybe
+    const departmentId = query.get('department') || user?.user?.departmentId; // get from local storage maybe
     //const stateSource = useSelector((state) => state.riskCategories);
     //console.log();
     var page = query.get('page') || 1;

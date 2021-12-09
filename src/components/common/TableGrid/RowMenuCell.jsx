@@ -11,7 +11,7 @@ const RowMenuCell = (props) => {
     return (
         <div >
             {actions && actions.map(action =>
-                <Tooltip title={action.title} placement="bottom">
+                <Tooltip key={action.id} title={action.title} placement="bottom">
                     <IconButton
                         color="inherit"
                         size="small"
