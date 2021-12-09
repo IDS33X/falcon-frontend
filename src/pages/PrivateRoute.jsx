@@ -6,11 +6,11 @@ const PrivateRoute = props => {
     const user = JSON.parse(localStorage.getItem('profile'));
     
     console.log(`Rol with acces ${roleWithAccess}`);
-    console.log(user?.employee?.rol);
+    console.log(user?.user?.roleId);
 
-    if(user?.employee?.rol !== roleWithAccess || !user ){
+    if((user?.user?.roleId).toString() !== roleWithAccess || !user ){
         return <Redirect to="/"/>   
-     } 
+    } 
     else {
         setSection(sectionName);
         <Redirect to={path} />

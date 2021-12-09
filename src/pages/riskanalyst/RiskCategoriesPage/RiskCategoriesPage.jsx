@@ -22,7 +22,7 @@ const RiskCategoriesPage = () => {
     const classes = useStyles();
     const query = useQuery();
     var user = JSON.parse(localStorage.getItem('profile'));
-    const departmentId = query.get('department') || user.employee.departmentId; // get from local storage maybe
+    const departmentId = query.get('department') || user?.user?.departmentId; // get from local storage maybe
     //const stateSource = useSelector((state) => state.riskCategories);
     //console.log();
     var page = query.get('page') || 1;
@@ -104,9 +104,9 @@ const RiskCategoriesPage = () => {
                 <Grid item xs={12}>
                     <RiskCategories currentRiskCategoryId={currentRiskCategoryId} setCurrentRiskCategoryId={setCurrentRiskCategoryId} setFormType={setFormType}/>
                     <Grid className={classes.paginationGrid}>
-                            <Paper className={classes.pagination} elevation={6}>
-                                <Pagination page={page} stateSource={stateSource} onDispatch={onDispatch} mainRouteName={mainRouteName} departmentId={departmentId}/>
-                            </Paper>
+                        <Paper className={classes.pagination} elevation={6}>
+                            <Pagination page={page} stateSource={stateSource} onDispatch={onDispatch} mainRouteName={mainRouteName} departmentId={departmentId}/>
+                        </Paper>
                     </Grid>
                 </Grid>
             </Grid>

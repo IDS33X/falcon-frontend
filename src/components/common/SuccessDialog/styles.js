@@ -5,31 +5,22 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(1),
         borderRadius: "5em",
         textTransform: 'none'
-
     },
-
-    successIcon: {
-        color: "#1A9445",
-        fontSize: '3em',
+    iconStyle: {
         paddingTop: '0.5rem',
-
-
+        fontSize: '2em'
     },
-    successText: {
-        fontSize: '1.3rem',
+    iconText: {
+        color: 'black',
+        fontSize: '18px',
         paddingTop: '1rem',
         paddingLeft: '1rem'
-
     },
-
-
-    textFormat: {
+    iconTextFormat: {
         display: 'flex',
         marginLeft: '1rem',
         alignItems: 'center'
     },
-
-
 }));
 
 export default useStyles;
